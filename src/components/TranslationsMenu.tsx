@@ -14,7 +14,7 @@ import {
   removeWorkingCopy,
 } from '@plone/volto/actions/workingcopy/workingcopy';
 import { getBaseUrl, flattenToAppURL } from '@plone/volto/helpers/Url/Url';
-import config from '@plone/registry';
+import config from '@plone/volto/registry';
 import { fetchTranslationInfoFor } from '../helpers/translateApi';
 import type { TranslationInfo, TranslationState } from '../types';
 

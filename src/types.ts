@@ -86,11 +86,5 @@ export interface VoltoConfig {
     [key: string]: unknown;
   };
   addonRoutes?: unknown[];
-  registerSlotComponent: (options: {
-    slot: string;
-    name: string;
-    component: unknown;
-    predicates?: unknown[];
-  }) => void;
   [key: string]: unknown;
 }

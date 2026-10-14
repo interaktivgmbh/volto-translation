@@ -5,7 +5,7 @@ import { Plug } from '@plone/volto/components/manage/Pluggable';
 import Icon from '@plone/volto/components/theme/Icon/Icon';
 import translateSVG from '@plone/volto/icons/translate.svg';
 import { getBaseUrl } from '@plone/volto/helpers/Url/Url';
-import config from '@plone/registry';
+import config from '@plone/volto/registry';
 import { fetchTranslationInfo } from '../helpers/translateApi';
 import type { TranslationState } from '../types';
 

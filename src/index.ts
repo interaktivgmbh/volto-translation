@@ -1,4 +1,4 @@
-import MachineTranslationBanner from './components/MachineTranslationBanner';
+import MachineTranslationBannerPortal from './components/MachineTranslationBannerPortal';
 import TranslateMenuItem from './components/TranslateMenuItem';
 import TranslationsMenu from './components/TranslationsMenu';
 import TranslateView from './components/TranslateView';
@@ -9,13 +9,11 @@ const applyConfig = (config: VoltoConfig): VoltoConfig => {
   config.settings.appExtras = [
     ...(config.settings.appExtras || []),
     { match: '/', component: TranslateMenuItem },
+    // The "machine translated, not reviewed yet" bar, directly over the page's
+    // content, where an editor reads before publishing. Volto 16 has no
+    // aboveContent slot; the component portals itself there.
+    { match: '/', component: MachineTranslationBannerPortal },
   ];
-
-  config.registerSlotComponent({
-    slot: 'aboveContent',
-    name: 'machineTranslationBanner',
-    component: MachineTranslationBanner,
-  });
 
   config.settings.apiExpanders = [
     ...(config.settings.apiExpanders || []),
