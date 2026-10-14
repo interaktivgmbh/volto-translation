@@ -1,0 +1,202 @@
+.pastanaga-menu:not(.translations-menu)
+  .pastanaga-menu-list:has(a[href$='/manage-translations']) {
+  display: none;
+}
+
+.pastanaga-menu:not(.translations-menu)
+  header:has(+ .pastanaga-menu-list a[href$='/manage-translations']) {
+  display: none;
+}
+
+.pastanaga-menu:not(.translations-menu)
+  .pastanaga-menu-list:has(a[href$='/create-translation']) {
+  display: none;
+}
+
+.pastanaga-menu:not(.translations-menu)
+  header:has(+ .pastanaga-menu-list a[href$='/create-translation']) {
+  display: none;
+}
+
+#page-translate .ui.segment.translation-status {
+  border-bottom: 1px solid #eae7e0;
+  background-color: #fffaf3;
+  color: #573a08;
+}
+
+#page-translate .translation-progress {
+  overflow: hidden;
+  height: 4px;
+  border-radius: 2px;
+  margin: 12px 0;
+  background-color: #edf1f2;
+}
+
+#page-translate .translation-progress-bar {
+  width: 40%;
+  height: 100%;
+  animation: translation-progress-sweep 1.4s ease-in-out infinite;
+  background-color: #007eb1;
+}
+
+@keyframes translation-progress-sweep {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(350%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #page-translate .translation-progress-bar {
+    width: 100%;
+    animation: none;
+    opacity: 0.4;
+  }
+}
+
+#page-translate .translation-running-hint {
+  color: #878f93;
+}
+
+#page-translate .translation-links-table {
+  border: 1px solid #edf1f2;
+  border-radius: 3px;
+}
+
+#page-translate .translation-links-table h4 {
+  padding: 10px 14px;
+  border-bottom: 1px solid #edf1f2;
+  margin: 0;
+  background-color: #f7f9fa;
+  color: #878f93;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+#page-translate .translation-link {
+  padding: 14px;
+  border-bottom: 1px solid #edf1f2;
+}
+
+#page-translate .translation-link:last-child {
+  border-bottom: 0;
+}
+
+#page-translate .translation-link dl {
+  display: grid;
+  margin: 6px 0 0;
+  gap: 2px 16px;
+  grid-template-columns: max-content 1fr;
+}
+
+#page-translate .translation-link dt {
+  color: #878f93;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+#page-translate .translation-link dt.rewritten {
+  color: #007eb1;
+}
+
+#page-translate .translation-link dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+#page-translate .translation-link-untouched {
+  color: #878f93;
+}
+
+#page-translate .translation-links-more {
+  padding: 0;
+  border: 0;
+  margin-top: 12px;
+  background: none;
+  color: #007eb1;
+  cursor: pointer;
+}
+
+.machine-translation-banner {
+  padding: 12px 20px;
+  border: 1px solid #e0c36b;
+  border-radius: 4px;
+  margin-top: 12px;
+  margin-bottom: 20px;
+  background: #fff8e1;
+  color: #6d4c00;
+  text-align: center;
+}
+
+.machine-translation-banner--machine_edited {
+  border-color: #7d9fd3;
+  background: #e3ecf9;
+  color: #1f3a63;
+}
+
+#page-manage-translations .machine-translation-status--manual {
+  color: #254a53 !important;
+}
+#page-manage-translations .machine-translation-status--machine_unreviewed {
+  color: #a97a00 !important;
+}
+#page-manage-translations .machine-translation-status--machine_edited {
+  color: #3667b0 !important;
+}
+#page-manage-translations .machine-translation-status--machine_reviewed {
+  color: #2c7a2c !important;
+}
+#page-manage-translations .machine-translation-status--manual svg,
+#page-manage-translations .machine-translation-status--machine_unreviewed svg,
+#page-manage-translations .machine-translation-status--machine_edited svg,
+#page-manage-translations .machine-translation-status--machine_reviewed svg {
+  fill: currentColor !important;
+}
+
+#page-manage-translations a.machine-translation-working-copy {
+  padding: 2px 8px;
+  border: 1px solid #b8c6c8;
+  border-radius: 4px;
+  background: #f3f4f5;
+}
+#page-manage-translations
+  a.machine-translation-working-copy.machine-translation-status--machine_unreviewed {
+  border-color: #e0c36b;
+  background: #fff8e1;
+}
+#page-manage-translations
+  a.machine-translation-working-copy.machine-translation-status--machine_edited {
+  border-color: #7d9fd3;
+  background: #e3ecf9;
+}
+
+.translations-menu .translations-menu-notice span {
+  display: block;
+  padding: 10px 20px;
+  background: #fff8e1;
+  color: #6d4c00;
+}
+#page-manage-translations .machine-translation-working-copy-notice {
+  background: #fff8e1;
+  color: #6d4c00;
+}
+
+#page-translate .translation-links-summary {
+  font-weight: 500;
+}
+
+#page-translate .translation-metadata-summary {
+  font-weight: 500;
+}
+
+#page-translate .translation-metadata-unmapped {
+  color: #878f93;
+}
+
+#page-translate .translation-metadata-values {
+  padding-left: 1.2em;
+  margin: 0;
+}

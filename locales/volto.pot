@@ -1,0 +1,418 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language: \n"
+"Language-Team: \n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. Default: "Translations"
+#: components/TranslateMenuItem
+msgid "volto-translation-menu-item"
+msgstr ""
+
+#. Default: "Translate"
+#: components/TranslateView
+msgid "volto-translation-title"
+msgstr ""
+
+#. Default: "Choose the language to translate this page into."
+#: components/TranslateView
+msgid "volto-translation-intro"
+msgstr ""
+
+#. Default: "Translate"
+#: components/TranslateView
+msgid "volto-translation-submit"
+msgstr ""
+
+#. Default: "Back"
+#: components/TranslateView
+msgid "volto-translation-back"
+msgstr ""
+
+#. Default: "No translation service is configured. Add a DeepL key in Site Setup → Translation."
+#: components/TranslateView
+msgid "volto-translation-not-configured"
+msgstr ""
+
+#. Default: "No target languages are configured for this site."
+#: components/TranslateView
+msgid "volto-translation-no-languages"
+msgstr ""
+
+#. Default: "This page will be translated into {language}."
+#: components/TranslateView
+msgid "volto-translation-single-target"
+msgstr ""
+
+#. Default: "A translation into this language already exists. Overwriting replaces its content; the previous state remains in the version history."
+#: components/TranslateView
+msgid "volto-translation-exists"
+msgstr ""
+
+#. Default: "Overwrite the existing translation"
+#: components/TranslateView
+msgid "volto-translation-overwrite"
+msgstr ""
+
+#. Default: "A published translation into {language} already exists. The machine translation is put in a working copy and replaces its content there. The published page stays unchanged until you apply the working copy."
+#: components/TranslateView
+msgid "volto-translation-working-copy"
+msgstr ""
+
+#. Default: "A working copy of this translation already exists. Overwriting updates that working copy."
+#: components/TranslateView
+msgid "volto-translation-working-copy-exists"
+msgstr ""
+
+#. Default: "Update the existing working copy"
+#: components/TranslateView
+msgid "volto-translation-overwrite-working-copy"
+msgstr ""
+
+#. Default: "Translations"
+#: components/TranslationsMenu
+msgid "volto-translation-menu-title"
+msgstr ""
+
+#. Default: "Translate into {language}"
+#: components/TranslationsMenu
+msgid "volto-translation-menu-translate-into"
+msgstr ""
+
+#. Default: "Manage translations"
+#: components/TranslationsMenu
+msgid "volto-translation-menu-manage"
+msgstr ""
+
+#. Default: "Create working copy"
+#: components/TranslationsMenu
+msgid "volto-translation-menu-working-copy"
+msgstr ""
+
+#. Default: "Translate into {language} by hand"
+#: components/TranslationsMenu
+msgid "volto-translation-menu-add"
+msgstr ""
+
+#. Default: "View working copy"
+#: components/TranslationsMenu
+msgid "volto-translation-menu-view-working-copy"
+msgstr ""
+
+#. Default: "Check in working copy"
+#: components/TranslationsMenu
+msgid "volto-translation-menu-apply-working-copy"
+msgstr ""
+
+#. Default: "Discard working copy"
+#: components/TranslationsMenu
+msgid "volto-translation-menu-remove-working-copy"
+msgstr ""
+
+#. Default: "The working copy was discarded"
+#: components/TranslationsMenu
+msgid "volto-translation-menu-working-copy-removed"
+msgstr ""
+
+#. Default: "The working copy is now the main content"
+#: components/TranslationsMenu
+msgid "volto-translation-menu-working-copy-applied"
+msgstr ""
+
+#. Default: "Translate {title}"
+#: components/TranslateView
+msgid "volto-translation-headline"
+msgstr ""
+
+#. Default: "Note"
+#: components/TranslateView
+msgid "volto-translation-hint"
+msgstr ""
+
+#. Default: "A working copy exists!"
+#: components/TranslateView
+msgid "volto-translation-working-copy-present"
+msgstr ""
+
+#. Default: "Cancel"
+#: components/TranslateView
+msgid "volto-translation-cancel"
+msgstr ""
+
+#. Default: "Translating into {language}…"
+#: components/TranslateView
+msgid "volto-translation-running"
+msgstr ""
+
+#. Default: "This can take a moment. Please leave the page open until it is done."
+#: components/TranslateView
+msgid "volto-translation-running-hint"
+msgstr ""
+
+#. Default: "Translation finished"
+#: components/TranslateView
+msgid "volto-translation-done-headline"
+msgstr ""
+
+#. Default: "Open the translation"
+#: components/TranslateView
+msgid "volto-translation-open-result"
+msgstr ""
+
+#. Default: "Close"
+#: components/TranslateView
+msgid "volto-translation-close"
+msgstr ""
+
+#. Default: "The {language} translation was created."
+#: components/TranslationReportView
+msgid "volto-translation-report-stored-translation"
+msgstr ""
+
+#. Default: "The {language} translation was replaced."
+#: components/TranslationReportView
+msgid "volto-translation-report-stored-updated"
+msgstr ""
+
+#. Default: "The translation was put in a working copy. The published page stays unchanged until you apply it."
+#: components/TranslationReportView
+msgid "volto-translation-report-stored-working-copy"
+msgstr ""
+
+#. Default: "The page itself now holds the {language} translation."
+#: components/TranslationReportView
+msgid "volto-translation-report-stored-in-place"
+msgstr ""
+
+#. Default: "Translated fields: {fields}"
+#: components/TranslationReportView
+msgid "volto-translation-report-fields"
+msgstr ""
+
+#. Default: "Carried over unchanged: {fields}"
+#: components/TranslationReportView
+msgid "volto-translation-report-copied-fields"
+msgstr ""
+
+#. Default: "Link text and target URL"
+#: components/TranslationReportView
+msgid "volto-translation-report-links-headline"
+msgstr ""
+
+#. Default: "Links to other pages are adjusted automatically, as far as the linked page already has a translation in the target language."
+#: components/TranslationReportView
+msgid "volto-translation-report-links-intro"
+msgstr ""
+
+#. Default: "Before"
+#: components/TranslationReportView
+msgid "volto-translation-report-before"
+msgstr ""
+
+#. Default: "After"
+#: components/TranslationReportView
+msgid "volto-translation-report-after"
+msgstr ""
+
+#. Default: "no translation available"
+#: components/TranslationReportView
+msgid "volto-translation-report-no-translation"
+msgstr ""
+
+#. Default: "Show all {count} links"
+#: components/TranslationReportView
+msgid "volto-translation-report-show-all-links"
+msgstr ""
+
+#. Default: "{rewritten} switched to the target language, {kept} kept as they were."
+#: components/TranslationReportView
+msgid "volto-translation-report-links-summary"
+msgstr ""
+
+#. Default: "The translation failed: {message}"
+#: components/TranslateView
+msgid "volto-translation-failed"
+msgstr ""
+
+#. Default: "Translation"
+#: components/TranslationControlPanel
+msgid "volto-translation-cp-title"
+msgstr ""
+
+#. Default: "Save"
+#: components/TranslationControlPanel
+msgid "volto-translation-cp-save"
+msgstr ""
+
+#. Default: "Settings saved."
+#: components/TranslationControlPanel
+msgid "volto-translation-cp-saved"
+msgstr ""
+
+#. Default: "Back"
+#: components/TranslationControlPanel
+msgid "volto-translation-cp-back"
+msgstr ""
+
+#. Default: "Saving failed: {message}"
+#: components/TranslationControlPanel
+msgid "volto-translation-cp-failed"
+msgstr ""
+
+#. Default: "Translation service"
+#: components/TranslationControlPanel
+msgid "volto-translation-cp-provider"
+msgstr ""
+
+#. Default: "Which service translates. Only DeepL ships with the add-on."
+#: components/TranslationControlPanel
+msgid "volto-translation-cp-provider-help"
+msgstr ""
+
+#. Default: "DeepL API key"
+#: components/TranslationControlPanel
+msgid "volto-translation-cp-api-key"
+msgstr ""
+
+#. Default: "The key from your DeepL account. A free key ends in ':fx' and is sent to the free endpoint; anything else goes to the pro one."
+#: components/TranslationControlPanel
+msgid "volto-translation-cp-api-key-help"
+msgstr ""
+
+#. Default: "DeepL API URL"
+#: components/TranslationControlPanel
+msgid "volto-translation-cp-api-url"
+msgstr ""
+
+#. Default: "Only for a proxy or a self-hosted endpoint. Empty means the host that matches the key."
+#: components/TranslationControlPanel
+msgid "volto-translation-cp-api-url-help"
+msgstr ""
+
+#. Default: "Source language"
+#: components/TranslationControlPanel
+msgid "volto-translation-cp-source-language"
+msgstr ""
+
+#. Default: "The language the site is written in. Empty lets DeepL detect it per text."
+#: components/TranslationControlPanel
+msgid "volto-translation-cp-source-language-help"
+msgstr ""
+
+#. Default: "Offered target languages"
+#: components/TranslationControlPanel
+msgid "volto-translation-cp-target-languages"
+msgstr ""
+
+#. Default: "One language code per line. Empty offers the site's own languages."
+#: components/TranslationControlPanel
+msgid "volto-translation-cp-target-languages-help"
+msgstr ""
+
+#. Default: "Translated fields"
+#: components/TranslationControlPanel
+msgid "volto-translation-cp-translate-fields"
+msgstr ""
+
+#. Default: "One field name per line, in the order they are translated."
+#: components/TranslationControlPanel
+msgid "volto-translation-cp-translate-fields-help"
+msgstr ""
+
+
+#. Default: "This page was machine translated ({provider}) and has not been reviewed yet."
+#: components/MachineTranslationBanner
+msgid "volto-translation-unreviewed"
+msgstr ""
+
+#. Default: "This page was machine translated ({provider}) and is being revised editorially — not yet approved."
+#: components/MachineTranslationBanner
+msgid "volto-translation-edited"
+msgstr ""
+
+#. Default: "Language"
+#: components/MachineTranslations customization
+msgid "Language"
+msgstr ""
+
+#. Default: "Path"
+#: components/MachineTranslations customization
+msgid "Path"
+msgstr ""
+
+#. Default: "Tools"
+#: components/MachineTranslations customization
+msgid "Tools"
+msgstr ""
+
+#. Default: "Working copy"
+#: customizations ManageTranslations
+msgid "volto-translation-working-copy"
+msgstr ""
+
+#. Default: "Machine translate into"
+#: customizations ManageTranslations
+msgid "volto-translation-machine-translate-into"
+msgstr ""
+
+#. Default: "no translation"
+#: customizations ManageTranslations
+msgid "volto-translation-status-none"
+msgstr ""
+
+#. Default: "created manually"
+#: customizations ManageTranslations
+msgid "volto-translation-status-manual"
+msgstr ""
+
+#. Default: "machine translated, not reviewed yet"
+#: customizations ManageTranslations
+msgid "volto-translation-status-machine_unreviewed"
+msgstr ""
+
+#. Default: "machine translated, edited editorially"
+#: customizations ManageTranslations
+msgid "volto-translation-status-machine_edited"
+msgstr ""
+
+#. Default: "machine translated, reviewed"
+#: customizations ManageTranslations
+msgid "volto-translation-status-machine_reviewed"
+msgstr ""
+
+#. Default: "This is a working copy — translations are managed on the original."
+#: TranslationsMenu / ManageTranslations customization
+msgid "volto-translation-working-copy-notice"
+msgstr ""
+
+#. Default: "Go to the original"
+#: TranslationsMenu / ManageTranslations customization
+msgid "volto-translation-go-to-original"
+msgstr ""
+
+#. Default: "{mapped} replaced by the mapping, {kept} carried over unchanged."
+#: components/TranslationReportView
+msgid "volto-translation-report-metadata-summary"
+msgstr ""
+
+#. Default: "These fields are not machine translated: their values come from the metadata mapping in the translation settings."
+#: components/TranslationReportView
+msgid "volto-translation-report-metadata-intro"
+msgstr ""
+
+#. Default: "no mapping entry"
+#: components/TranslationReportView
+msgid "volto-translation-report-no-mapping-entry"
+msgstr ""
+
+#. Default: "Machine translation is not available for this content type."
+#: components/TranslateView components/TranslationsMenu customizations/volto/components/manage/Multilingual/ManageTranslations
+msgid "volto-translation-not-translatable"
+msgstr ""

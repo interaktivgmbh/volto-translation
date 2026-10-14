@@ -1,0 +1,35 @@
+{
+  "name": "@interaktivgmbh/volto-translation",
+  "version": "1.0.0-alpha.1",
+  "description": "Volto add-on for interaktiv.translation: machine translation (DeepL) from a Translations menu in the toolbar.",
+  "main": "src/index.ts",
+  "license": "MIT",
+  "scripts": {
+    "i18n": "rm -rf build/messages && NODE_ENV=production i18n --addon",
+    "typecheck": "tsc --noEmit"
+  },
+  "addons": [],
+  "keywords": [
+    "volto-addon",
+    "volto",
+    "plone",
+    "translation",
+    "deepl"
+  ],
+  "homepage": "https://github.com/interaktivgmbh/volto-translation#readme",
+  "bugs": {
+    "url": "https://github.com/interaktivgmbh/volto-translation/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/interaktivgmbh/volto-translation.git"
+  },
+  "author": "Interaktiv GmbH <support@interaktiv.de>",
+  "devDependencies": {
+    "@plone/scripts": "^3.10.7",
+    "@types/react": "^18.3.31",
+    "@types/react-dom": "^18.3.7",
+    "@types/react-redux": "^7.1.34",
+    "typescript": "^5.9.3"
+  }
+}

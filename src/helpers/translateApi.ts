@@ -1,0 +1,62 @@
+import Api from '@plone/volto/helpers/Api/Api';
+import type { TranslationInfo, TranslationResult } from '../types';
+
+// One Api instance for the add-on; it picks the auth token off the cookie itself.
+let api: Api | null = null;
+
+function getApi(): Api {
+  if (!api) api = new Api();
+  return api;
+}
+
+// GET @translate on the site root: is a provider configured, and into which
+// languages? Cached per page load — the menu item asks on every content view.
+let cache: TranslationInfo | null = null;
+let inflight: Promise<TranslationInfo> | null = null;
+
+export function fetchTranslationInfo(): Promise<TranslationInfo> {
+  if (cache) return Promise.resolve(cache);
+  if (inflight) return inflight;
+  const request: Promise<TranslationInfo> = getApi()
+    .get('/@translate')
+    .then((data: TranslationInfo) => {
+      cache = data || { configured: false };
+      inflight = null;
+      return cache;
+    })
+    .catch((error: unknown) => {
+      inflight = null;
+      throw error;
+    });
+  inflight = request;
+  return request;
+}
+
+// GET @translate on one object — same shape as the root call, plus which
+// languages already hold a translation of it. Uncached: the answer changes
+// with every translation stored.
+export function fetchTranslationInfoFor(
+  path: string,
+): Promise<TranslationInfo> {
+  return getApi().get(`${path}/@translate`);
+}
+
+// POST @translate on one object. `save` stores the result (language sibling on a
+// multilingual site, the object itself otherwise) — the backend decides where.
+// Without `overwrite` the backend refuses to replace an existing translation.
+export function translateContent(
+  path: string,
+  targetLanguage: string,
+  save: boolean = true,
+  overwrite: boolean = false,
+): Promise<TranslationResult> {
+  return getApi().post(`${path}/@translate`, {
+    data: { target_language: targetLanguage, save, overwrite },
+  });
+}
+
+// Test-only / hot-reload helper.
+export function _resetTranslationInfoCache(): void {
+  cache = null;
+  inflight = null;
+}
