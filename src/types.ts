@@ -1,8 +1,10 @@
 // The shapes of the `@translate` REST endpoint of interaktiv.translation, and
 // the slices of Volto state this add-on reads. Only the fields we consume.
-export interface TargetLanguage {
+export interface TranslationLanguage {
   code: string;
   title?: string;
+  // offered for machine translation; the others by hand only
+  machine?: boolean;
 }
 
 export interface TranslationLanguageEntry {
@@ -14,7 +16,7 @@ export interface TranslationLanguageEntry {
 export interface TranslationInfo {
   configured: boolean;
   provider?: string | null;
-  target_languages?: TargetLanguage[];
+  languages?: TranslationLanguage[];
   working_copies_enabled?: boolean;
   translations?: Record<string, TranslationLanguageEntry>;
   is_working_copy?: boolean;

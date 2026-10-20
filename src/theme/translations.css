@@ -24,6 +24,37 @@
   color: #573a08;
 }
 
+#page-translate .translation-modes {
+  border: 1px solid #e0e3e5;
+}
+
+#page-translate .translation-mode {
+  display: flex;
+  align-items: flex-start;
+  padding: 16px 20px;
+  cursor: pointer;
+  gap: 16px;
+}
+
+#page-translate .translation-mode + .translation-mode {
+  border-top: 1px solid #e0e3e5;
+}
+
+#page-translate .translation-mode input {
+  margin-top: 3px;
+}
+
+#page-translate .translation-mode.disabled {
+  cursor: default;
+  opacity: 0.55;
+}
+
+#page-translate .translation-mode-hint {
+  display: block;
+  margin-top: 6px;
+  color: #4a5257;
+}
+
 #page-translate .translation-progress {
   overflow: hidden;
   height: 4px;
