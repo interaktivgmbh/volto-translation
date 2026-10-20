@@ -221,12 +221,8 @@
   color: #6d4c00;
 }
 
-#page-translate .translation-links-summary {
-  font-weight: 500;
-}
-
-#page-translate .translation-metadata-summary {
-  font-weight: 500;
+#page-translate .ui.segment.translation-section-title {
+  font-weight: 700;
 }
 
 #page-translate .translation-metadata-unmapped {

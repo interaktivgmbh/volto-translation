@@ -35,15 +35,14 @@ const messages = defineMessages({
     id: 'volto-translation-report-links-headline',
     defaultMessage: 'Link text and target URL',
   },
-  linksSummary: {
-    id: 'volto-translation-report-links-summary',
-    defaultMessage:
-      '{rewritten} switched to the target language, {kept} kept as they were.',
+  linksSection: {
+    id: 'volto-translation-report-links-section',
+    defaultMessage: 'Links in the text',
   },
   linksIntro: {
     id: 'volto-translation-report-links-intro',
     defaultMessage:
-      'Links to other pages are adjusted automatically, as far as the linked page already has a translation in the target language.',
+      'Links to other pages are adjusted automatically where the linked page already has a translation in the target language; otherwise the previous link to the page in the source language stays. {rewritten} of {total} links now point to {language}.',
   },
   before: {
     id: 'volto-translation-report-before',
@@ -55,11 +54,16 @@ const messages = defineMessages({
   },
   noTranslation: {
     id: 'volto-translation-report-no-translation',
-    defaultMessage: 'no translation available',
+    defaultMessage:
+      'unchanged – no translation available, the previous link stays',
   },
   showAllLinks: {
     id: 'volto-translation-report-show-all-links',
     defaultMessage: 'Show all {count} links',
+  },
+  metadataSection: {
+    id: 'volto-translation-report-metadata-section',
+    defaultMessage: 'Metadata',
   },
   metadataSummary: {
     id: 'volto-translation-report-metadata-summary',
@@ -136,14 +140,21 @@ const TranslationReportView = ({
       </Segment>
 
       {links.length > 0 && (
+        <Segment className="translation-section-title">
+          {intl.formatMessage(messages.linksSection)}
+        </Segment>
+      )}
+      {links.length > 0 && (
+        <Segment secondary className="translation-situation">
+          {intl.formatMessage(messages.linksIntro, {
+            rewritten,
+            total: links.length,
+            language,
+          })}
+        </Segment>
+      )}
+      {links.length > 0 && (
         <Segment className="translation-links">
-          <p className="translation-links-summary">
-            {intl.formatMessage(messages.linksSummary, {
-              rewritten,
-              kept: links.length - rewritten,
-            })}
-          </p>
-          <p>{intl.formatMessage(messages.linksIntro)}</p>
           <div className="translation-links-table">
             <h4>{intl.formatMessage(messages.linksHeadline)}</h4>
             {shown.map((link, index) => (
@@ -185,14 +196,21 @@ const TranslationReportView = ({
       )}
 
       {metadata.length > 0 && (
+        <Segment className="translation-section-title">
+          {intl.formatMessage(messages.metadataSection)}
+        </Segment>
+      )}
+      {metadata.length > 0 && (
+        <Segment secondary className="translation-situation">
+          {intl.formatMessage(messages.metadataIntro)}{' '}
+          {intl.formatMessage(messages.metadataSummary, {
+            mapped,
+            kept: metadata.length - mapped,
+          })}
+        </Segment>
+      )}
+      {metadata.length > 0 && (
         <Segment className="translation-metadata">
-          <p className="translation-metadata-summary">
-            {intl.formatMessage(messages.metadataSummary, {
-              mapped,
-              kept: metadata.length - mapped,
-            })}
-          </p>
-          <p>{intl.formatMessage(messages.metadataIntro)}</p>
           {metadataFields.map((field) => (
             <div className="translation-metadata-field" key={field}>
               <h4>{field}</h4>

@@ -14,6 +14,9 @@
 - The working copy hint of the translate page no longer shares its message id
   with the "Working copy" column of Manage translations, so each shows its own
   text.
+- The report shows links and metadata as sections of their own, each with a
+  title and an introduction that sums it up ("6 of 8 links now point to
+  English"); a link without a translation says that it stays as it was.
 
 ## 1.0.0-alpha.1 (2026-10-15)
 

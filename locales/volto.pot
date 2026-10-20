@@ -186,7 +186,7 @@ msgstr ""
 msgid "volto-translation-report-links-headline"
 msgstr ""
 
-#. Default: "Links to other pages are adjusted automatically, as far as the linked page already has a translation in the target language."
+#. Default: "Links to other pages are adjusted automatically where the linked page already has a translation in the target language; otherwise the previous link to the page in the source language stays. {rewritten} of {total} links now point to {language}."
 #: components/TranslationReportView
 msgid "volto-translation-report-links-intro"
 msgstr ""
@@ -201,7 +201,7 @@ msgstr ""
 msgid "volto-translation-report-after"
 msgstr ""
 
-#. Default: "no translation available"
+#. Default: "unchanged – no translation available, the previous link stays"
 #: components/TranslationReportView
 msgid "volto-translation-report-no-translation"
 msgstr ""
@@ -209,11 +209,6 @@ msgstr ""
 #. Default: "Show all {count} links"
 #: components/TranslationReportView
 msgid "volto-translation-report-show-all-links"
-msgstr ""
-
-#. Default: "{rewritten} switched to the target language, {kept} kept as they were."
-#: components/TranslationReportView
-msgid "volto-translation-report-links-summary"
 msgstr ""
 
 #. Default: "The translation failed: {message}"
@@ -450,4 +445,14 @@ msgstr ""
 #. Default: "Working copy exists!"
 #: components/TranslateView
 msgid "volto-translation-working-copy-present"
+msgstr ""
+
+#. Default: "Links in the text"
+#: components/TranslationReportView
+msgid "volto-translation-report-links-section"
+msgstr ""
+
+#. Default: "Metadata"
+#: components/TranslationReportView
+msgid "volto-translation-report-metadata-section"
 msgstr ""

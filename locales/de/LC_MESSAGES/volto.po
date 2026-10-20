@@ -186,10 +186,10 @@ msgstr "Unverändert übernommen: {fields}"
 msgid "volto-translation-report-links-headline"
 msgstr "Linktext und Ziel-URL"
 
-#. Default: "Links to other pages are adjusted automatically, as far as the linked page already has a translation in the target language."
+#. Default: "Links to other pages are adjusted automatically where the linked page already has a translation in the target language; otherwise the previous link to the page in the source language stays. {rewritten} of {total} links now point to {language}."
 #: components/TranslationReportView
 msgid "volto-translation-report-links-intro"
-msgstr "Links zu Unterseiten werden automatisch angepasst, sofern für die verlinkte Seite bereits eine Übersetzung in der Zielsprache vorliegt."
+msgstr "Links zu Unterseiten werden automatisch angepasst, sofern für die verlinkte Seite bereits eine Übersetzung in der Zielsprache vorliegt; sonst bleibt der bisherige Link auf die Seite in der Ausgangssprache bestehen. {rewritten} von {total} Links verweisen jetzt auf {language}."
 
 #. Default: "Before"
 #: components/TranslationReportView
@@ -201,20 +201,15 @@ msgstr "Vorher"
 msgid "volto-translation-report-after"
 msgstr "Nachher"
 
-#. Default: "no translation available"
+#. Default: "unchanged – no translation available, the previous link stays"
 #: components/TranslationReportView
 msgid "volto-translation-report-no-translation"
-msgstr "keine Übersetzung vorhanden"
+msgstr "unverändert – keine Übersetzung vorhanden, der bisherige Link bleibt bestehen"
 
 #. Default: "Show all {count} links"
 #: components/TranslationReportView
 msgid "volto-translation-report-show-all-links"
 msgstr "Alle {count} Links anzeigen"
-
-#. Default: "{rewritten} switched to the target language, {kept} kept as they were."
-#: components/TranslationReportView
-msgid "volto-translation-report-links-summary"
-msgstr "{rewritten} auf die Zielsprache umgestellt, {kept} beibehalten."
 
 #. Default: "The translation failed: {message}"
 #: components/TranslateView
@@ -451,3 +446,13 @@ msgstr "{language} ist für die automatisierte Übersetzung nicht freigegeben."
 #: components/TranslateView
 msgid "volto-translation-working-copy-present"
 msgstr "Arbeitskopie vorhanden!"
+
+#. Default: "Links in the text"
+#: components/TranslationReportView
+msgid "volto-translation-report-links-section"
+msgstr "Links im Text"
+
+#. Default: "Metadata"
+#: components/TranslationReportView
+msgid "volto-translation-report-metadata-section"
+msgstr "Metadaten"
