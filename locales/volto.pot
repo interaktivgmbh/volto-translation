@@ -66,14 +66,14 @@ msgstr ""
 msgid "volto-translation-working-copy"
 msgstr ""
 
-#. Default: "A working copy of this translation already exists. Overwriting updates that working copy."
+#. Default: "A working copy of this translation already exists. Edit it, check it in or discard it before translating again."
 #: components/TranslateView
 msgid "volto-translation-working-copy-exists"
 msgstr ""
 
-#. Default: "Update the existing working copy"
+#. Default: "Open the working copy"
 #: components/TranslateView
-msgid "volto-translation-overwrite-working-copy"
+msgid "volto-translation-open-working-copy"
 msgstr ""
 
 #. Default: "Translations"
@@ -134,11 +134,6 @@ msgstr ""
 #. Default: "Note"
 #: components/TranslateView
 msgid "volto-translation-hint"
-msgstr ""
-
-#. Default: "A working copy exists!"
-#: components/TranslateView
-msgid "volto-translation-working-copy-present"
 msgstr ""
 
 #. Default: "Cancel"

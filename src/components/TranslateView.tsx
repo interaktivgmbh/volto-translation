@@ -48,10 +48,6 @@ const messages = defineMessages({
     defaultMessage: 'Open the translation',
   },
   close: { id: 'volto-translation-close', defaultMessage: 'Close' },
-  workingCopyPresent: {
-    id: 'volto-translation-working-copy-present',
-    defaultMessage: 'A working copy exists!',
-  },
   cancel: { id: 'volto-translation-cancel', defaultMessage: 'Cancel' },
   intro: {
     id: 'volto-translation-intro',
@@ -97,11 +93,11 @@ const messages = defineMessages({
   workingCopyExists: {
     id: 'volto-translation-working-copy-exists',
     defaultMessage:
-      'A working copy of this translation already exists. Overwriting updates that working copy.',
+      'A working copy of this translation already exists. Edit it, check it in or discard it before translating again.',
   },
-  overwriteWorkingCopyLabel: {
-    id: 'volto-translation-overwrite-working-copy',
-    defaultMessage: 'Update the existing working copy',
+  openWorkingCopy: {
+    id: 'volto-translation-open-working-copy',
+    defaultMessage: 'Open the working copy',
   },
   failed: {
     id: 'volto-translation-failed',
@@ -185,9 +181,11 @@ const TranslateView = (props: TranslateViewProps) => {
   const workingCopiesEnabled = Boolean(info?.working_copies_enabled);
   const canTranslate =
     Boolean(info?.configured) && info?.translatable !== false;
-  const workingCopyExists = Boolean(targetEntry?.working_copy);
+  const workingCopyUrl = targetEntry?.working_copy?.url;
+  const workingCopyExists = Boolean(workingCopyUrl);
+  // A standing working copy holds somebody's work: it is never overwritten.
   const overwriteRequired =
-    targetExists && (!workingCopiesEnabled || workingCopyExists);
+    targetExists && !workingCopiesEnabled && !workingCopyExists;
   useEffect(() => {
     setOverwrite(false);
   }, [target]);
@@ -249,12 +247,6 @@ const TranslateView = (props: TranslateViewProps) => {
           </Segment>
         )}
 
-        {!result && canTranslate && workingCopyExists && (
-          <Segment className="translation-status">
-            {intl.formatMessage(messages.workingCopyPresent)}
-          </Segment>
-        )}
-
         {!result && canTranslate && languages.length === 0 && (
           <Segment>
             <Message warning>
@@ -308,6 +300,13 @@ const TranslateView = (props: TranslateViewProps) => {
                 { language: targetName },
               )}
             </p>
+            {workingCopyUrl && (
+              <p>
+                <Link to={flattenToAppURL(workingCopyUrl)}>
+                  {intl.formatMessage(messages.openWorkingCopy)}
+                </Link>
+              </p>
+            )}
             {overwriteRequired && (
               <label htmlFor="translation-overwrite">
                 <input
@@ -319,11 +318,7 @@ const TranslateView = (props: TranslateViewProps) => {
                     setOverwrite(event.target.checked)
                   }
                 />{' '}
-                {intl.formatMessage(
-                  workingCopyExists
-                    ? messages.overwriteWorkingCopyLabel
-                    : messages.overwriteLabel,
-                )}
+                {intl.formatMessage(messages.overwriteLabel)}
               </label>
             )}
           </Segment>
@@ -374,7 +369,10 @@ const TranslateView = (props: TranslateViewProps) => {
             disabled={
               result
                 ? false
-                : !target || busy || (overwriteRequired && !overwrite)
+                : !target ||
+                  busy ||
+                  workingCopyExists ||
+                  (overwriteRequired && !overwrite)
             }
             onClick={
               result

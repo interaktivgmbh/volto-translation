@@ -66,15 +66,15 @@ msgstr "Bestehende Übersetzung überschreiben"
 msgid "volto-translation-working-copy"
 msgstr "Für {language} gibt es bereits eine veröffentlichte Übersetzung. Die KI-Übersetzung wird in einer Arbeitskopie erstellt und ersetzt dort den bisherigen Inhalt. Die veröffentlichte Seite bleibt unverändert, bis Sie die Arbeitskopie übernehmen."
 
-#. Default: "A working copy of this translation already exists. Overwriting updates that working copy."
+#. Default: "A working copy of this translation already exists. Edit it, check it in or discard it before translating again."
 #: components/TranslateView
 msgid "volto-translation-working-copy-exists"
-msgstr "Es existiert bereits eine Arbeitskopie dieser Übersetzung. Beim Überschreiben wird diese Arbeitskopie aktualisiert."
+msgstr "Es existiert bereits eine Arbeitskopie dieser Übersetzung. Bearbeiten Sie sie, checken Sie sie ein oder verwerfen Sie sie, bevor Sie neu übersetzen."
 
-#. Default: "Update the existing working copy"
+#. Default: "Open the working copy"
 #: components/TranslateView
-msgid "volto-translation-overwrite-working-copy"
-msgstr "Bestehende Arbeitskopie aktualisieren"
+msgid "volto-translation-open-working-copy"
+msgstr "Arbeitskopie öffnen"
 
 #. Default: "Translations"
 #: components/TranslationsMenu
@@ -135,11 +135,6 @@ msgstr "Übersetzung für {title}"
 #: components/TranslateView
 msgid "volto-translation-hint"
 msgstr "Hinweis"
-
-#. Default: "A working copy exists!"
-#: components/TranslateView
-msgid "volto-translation-working-copy-present"
-msgstr "Arbeitskopie vorhanden!"
 
 #. Default: "Cancel"
 #: components/TranslateView
