@@ -387,6 +387,11 @@ msgstr "machine translated, edited editorially"
 msgid "volto-translation-status-machine_reviewed"
 msgstr "machine translated, reviewed"
 
+#. Default: "machine translated, no review needed"
+#: customizations ManageTranslations
+msgid "volto-translation-status-machine_without_review"
+msgstr "machine translated, no review needed"
+
 #. Default: "This is a working copy — translations are managed on the original."
 #: TranslationsMenu / ManageTranslations customization
 msgid "volto-translation-working-copy-notice"

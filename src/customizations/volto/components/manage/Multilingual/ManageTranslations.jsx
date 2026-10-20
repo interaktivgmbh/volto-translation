@@ -119,6 +119,10 @@ const messages = defineMessages({
     id: 'volto-translation-status-machine_reviewed',
     defaultMessage: 'machine translated, reviewed',
   },
+  statusWithoutReview: {
+    id: 'volto-translation-status-machine_without_review',
+    defaultMessage: 'machine translated, no review needed',
+  },
   workingCopyNotice: {
     id: 'volto-translation-working-copy-notice',
     defaultMessage:
@@ -135,6 +139,7 @@ const STATUS_MESSAGES = {
   machine_unreviewed: 'statusUnreviewed',
   machine_edited: 'statusEdited',
   machine_reviewed: 'statusReviewed',
+  machine_without_review: 'statusWithoutReview',
 };
 
 const ManageTranslations = (props) => {

@@ -149,10 +149,16 @@
 #page-manage-translations .machine-translation-status--machine_reviewed {
   color: #2c7a2c !important;
 }
+#page-manage-translations .machine-translation-status--machine_without_review {
+  color: #6b7280 !important;
+}
 #page-manage-translations .machine-translation-status--manual svg,
 #page-manage-translations .machine-translation-status--machine_unreviewed svg,
 #page-manage-translations .machine-translation-status--machine_edited svg,
-#page-manage-translations .machine-translation-status--machine_reviewed svg {
+#page-manage-translations .machine-translation-status--machine_reviewed svg,
+#page-manage-translations
+  .machine-translation-status--machine_without_review
+  svg {
   fill: currentColor !important;
 }
 
