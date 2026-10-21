@@ -26,11 +26,6 @@ msgstr "Translate"
 msgid "volto-translation-intro"
 msgstr "Choose the language to translate this page into."
 
-#. Default: "Translate"
-#: components/TranslateView
-msgid "volto-translation-submit"
-msgstr "Translate"
-
 #. Default: "Back"
 #: components/TranslateView
 msgid "volto-translation-back"
@@ -46,11 +41,6 @@ msgstr "No translation service is configured. Add a DeepL key in Site Setup → 
 msgid "volto-translation-no-languages"
 msgstr "No target languages are configured for this site."
 
-#. Default: "This page will be translated into {language}."
-#: components/TranslateView
-msgid "volto-translation-single-target"
-msgstr "This page will be translated into {language}."
-
 #. Default: "A translation into this language already exists. Overwriting replaces its content; the previous state remains in the version history."
 #: components/TranslateView
 msgid "volto-translation-exists"
@@ -61,20 +51,20 @@ msgstr "A translation into this language already exists. Overwriting replaces it
 msgid "volto-translation-overwrite"
 msgstr "Overwrite the existing translation"
 
-#. Default: "A published translation into {language} already exists. The machine translation is put in a working copy and replaces its content there. The published page stays unchanged until you apply the working copy."
+#. Default: "A published translation into {language} already exists. The automatic translation is therefore created in a new working copy. The published page stays unchanged until you apply this working copy with the new translation."
 #: components/TranslateView
-msgid "volto-translation-working-copy"
-msgstr "A published translation into {language} already exists. The machine translation is put in a working copy and replaces its content there. The published page stays unchanged until you apply the working copy."
+msgid "volto-translation-working-copy-info"
+msgstr "A published translation into {language} already exists. The automatic translation is therefore created in a new working copy. The published page stays unchanged until you apply this working copy with the new translation."
 
-#. Default: "A working copy of this translation already exists. Overwriting updates that working copy."
+#. Default: "There is already a {language} translation, and a working copy of it is being revised. A new automatic translation is possible again once this working copy has been applied or discarded. The existing translation stays unchanged until then."
 #: components/TranslateView
 msgid "volto-translation-working-copy-exists"
-msgstr "A working copy of this translation already exists. Overwriting updates that working copy."
+msgstr "There is already a {language} translation, and a working copy of it is being revised. A new automatic translation is possible again once this working copy has been applied or discarded. The existing translation stays unchanged until then."
 
-#. Default: "Update the existing working copy"
+#. Default: "Open the working copy"
 #: components/TranslateView
-msgid "volto-translation-overwrite-working-copy"
-msgstr "Update the existing working copy"
+msgid "volto-translation-open-working-copy"
+msgstr "Open the working copy"
 
 #. Default: "Translations"
 #: components/TranslationsMenu
@@ -95,11 +85,6 @@ msgstr "Manage translations"
 #: components/TranslationsMenu
 msgid "volto-translation-menu-working-copy"
 msgstr "Create working copy"
-
-#. Default: "Translate into {language} by hand"
-#: components/TranslationsMenu
-msgid "volto-translation-menu-add"
-msgstr "Translate into {language} by hand"
 
 #. Default: "View working copy"
 #: components/TranslationsMenu
@@ -135,11 +120,6 @@ msgstr "Translate {title}"
 #: components/TranslateView
 msgid "volto-translation-hint"
 msgstr "Note"
-
-#. Default: "A working copy exists!"
-#: components/TranslateView
-msgid "volto-translation-working-copy-present"
-msgstr "A working copy exists!"
 
 #. Default: "Cancel"
 #: components/TranslateView
@@ -206,10 +186,10 @@ msgstr "Carried over unchanged: {fields}"
 msgid "volto-translation-report-links-headline"
 msgstr "Link text and target URL"
 
-#. Default: "Links to other pages are adjusted automatically, as far as the linked page already has a translation in the target language."
+#. Default: "Links to other pages are adjusted automatically where the linked page already has a translation in the target language; otherwise the previous link to the page in the source language stays. {rewritten} of {total} links now point to {language}."
 #: components/TranslationReportView
 msgid "volto-translation-report-links-intro"
-msgstr "Links to other pages are adjusted automatically, as far as the linked page already has a translation in the target language."
+msgstr "Links to other pages are adjusted automatically where the linked page already has a translation in the target language; otherwise the previous link to the page in the source language stays. {rewritten} of {total} links now point to {language}."
 
 #. Default: "Before"
 #: components/TranslationReportView
@@ -221,20 +201,15 @@ msgstr "Before"
 msgid "volto-translation-report-after"
 msgstr "After"
 
-#. Default: "no translation available"
+#. Default: "unchanged – no translation available, the previous link stays"
 #: components/TranslationReportView
 msgid "volto-translation-report-no-translation"
-msgstr "no translation available"
+msgstr "unchanged – no translation available, the previous link stays"
 
 #. Default: "Show all {count} links"
 #: components/TranslationReportView
 msgid "volto-translation-report-show-all-links"
 msgstr "Show all {count} links"
-
-#. Default: "{rewritten} switched to the target language, {kept} kept as they were."
-#: components/TranslationReportView
-msgid "volto-translation-report-links-summary"
-msgstr "{rewritten} switched to the target language, {kept} kept as they were."
 
 #. Default: "The translation failed: {message}"
 #: components/TranslateView
@@ -327,16 +302,6 @@ msgid "volto-translation-cp-translate-fields-help"
 msgstr "One field name per line, in the order they are translated."
 
 
-#. Default: "This page was machine translated ({provider}) and has not been reviewed yet."
-#: components/MachineTranslationBanner
-msgid "volto-translation-unreviewed"
-msgstr "This page was machine translated ({provider}) and has not been reviewed yet."
-
-#. Default: "This page was machine translated ({provider}) and is being revised editorially — not yet approved."
-#: components/MachineTranslationBanner
-msgid "volto-translation-edited"
-msgstr "This page was machine translated ({provider}) and is being revised editorially — not yet approved."
-
 #. Default: "Language"
 #: components/MachineTranslations customization
 msgid "Language"
@@ -387,6 +352,11 @@ msgstr "machine translated, edited editorially"
 msgid "volto-translation-status-machine_reviewed"
 msgstr "machine translated, reviewed"
 
+#. Default: "machine translated, no review needed"
+#: customizations ManageTranslations
+msgid "volto-translation-status-machine_without_review"
+msgstr "machine translated, no review needed"
+
 #. Default: "This is a working copy — translations are managed on the original."
 #: TranslationsMenu / ManageTranslations customization
 msgid "volto-translation-working-copy-notice"
@@ -416,3 +386,108 @@ msgstr "no mapping entry"
 #: components/TranslateView components/TranslationsMenu customizations/volto/components/manage/Multilingual/ManageTranslations
 msgid "volto-translation-not-translatable"
 msgstr "Machine translation is not available for this content type."
+
+#. Default: "Continue"
+#: components/TranslateView
+msgid "volto-translation-next"
+msgstr "Continue"
+
+#. Default: "Translate into {language}"
+#: components/TranslateView
+msgid "volto-translation-headline-language"
+msgstr "Translate into {language}"
+
+#. Default: "There is no {language} translation yet. How should it be created?"
+#: components/TranslateView
+msgid "volto-translation-no-translation"
+msgstr "There is no {language} translation yet. How should it be created?"
+
+#. Default: "Translation exists!"
+#: components/TranslateView
+msgid "volto-translation-translation-exists"
+msgstr "Translation exists!"
+
+#. Default: "Plone standard translation"
+#: components/TranslateView
+msgid "volto-translation-mode-manual"
+msgstr "Plone standard translation"
+
+#. Default: "Opens Plone's translation form. The content is transferred by hand."
+#: components/TranslateView
+msgid "volto-translation-mode-manual-hint"
+msgstr "Opens Plone's translation form. The content is transferred by hand."
+
+#. Default: "Translate automatically"
+#: components/TranslateView
+msgid "volto-translation-mode-machine"
+msgstr "Translate automatically"
+
+#. Default: "Content and metadata are translated automatically. The result then has to be reviewed editorially."
+#: components/TranslateView
+msgid "volto-translation-mode-machine-hint"
+msgstr "Content and metadata are translated automatically. The result then has to be reviewed editorially."
+
+#. Default: "{language} is not offered for automatic translation."
+#: components/TranslateView
+msgid "volto-translation-not-offered-for-machine"
+msgstr "{language} is not offered for automatic translation."
+
+#. Default: "Working copy exists!"
+#: components/TranslateView
+msgid "volto-translation-working-copy-present"
+msgstr "Working copy exists!"
+
+#. Default: "Links in the text"
+#: components/TranslationReportView
+msgid "volto-translation-report-links-section"
+msgstr "Links in the text"
+
+#. Default: "Metadata"
+#: components/TranslationReportView
+msgid "volto-translation-report-metadata-section"
+msgstr "Metadata"
+
+#. Default: "New page created with machine translation – review pending!"
+#: components/MachineTranslationBanner
+msgid "volto-translation-banner-title-new"
+msgstr "New page created with machine translation – review pending!"
+
+#. Default: "Machine translated – review pending!"
+#: components/MachineTranslationBanner
+msgid "volto-translation-banner-title-unreviewed"
+msgstr "Machine translated – review pending!"
+
+#. Default: "Machine translated – being revised, review pending!"
+#: components/MachineTranslationBanner
+msgid "volto-translation-banner-title-edited"
+msgstr "Machine translated – being revised, review pending!"
+
+#. Default: "Working copy created with machine translation – review pending!"
+#: components/MachineTranslationBanner
+msgid "volto-translation-banner-title-working-copy"
+msgstr "Working copy created with machine translation – review pending!"
+
+#. Default: "This page was machine translated from the original{source, select, none {} other { ({source})}} and has not been reviewed yet."
+#: components/MachineTranslationBanner
+msgid "volto-translation-banner-unreviewed"
+msgstr "This page was machine translated from the original{source, select, none {} other { ({source})}} and has not been reviewed yet."
+
+#. Default: "This page was machine translated from the original{source, select, none {} other { ({source})}} and is being revised editorially, but has not been approved yet."
+#: components/MachineTranslationBanner
+msgid "volto-translation-banner-edited"
+msgstr "This page was machine translated from the original{source, select, none {} other { ({source})}} and is being revised editorially, but has not been approved yet."
+
+#. Default: "It is private and not visible to visitors."
+#: components/MachineTranslationBanner
+msgid "volto-translation-banner-private"
+msgstr "It is private and not visible to visitors."
+
+#. Default: "Before it is published, the translation has to be reviewed for content and editorially. Publishing completes the review."
+#: components/MachineTranslationBanner
+msgid "volto-translation-banner-review-before-publishing"
+msgstr "Before it is published, the translation has to be reviewed for content and editorially. Publishing completes the review."
+
+#. Default: "This working copy was machine translated from the original{source, select, none {} other { ({source})}} and replaces the previous translation. Before it is published, the translation has to be reviewed for content and editorially. Applying the working copy replaces the existing translation and completes the review."
+#: components/MachineTranslationBanner
+msgid "volto-translation-banner-working-copy"
+msgstr "This working copy was machine translated from the original{source, select, none {} other { ({source})}} and replaces the previous translation. Before it is published, the translation has to be reviewed for content and editorially. Applying the working copy replaces the existing translation and completes the review."

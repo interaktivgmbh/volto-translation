@@ -7,13 +7,18 @@ machine translation of Plone 6 content with DeepL, from the toolbar.
 ## Features
 
 - A **Translations** menu in the toolbar, next to edit, contents and add. It
-  offers one entry per target language, Plone's _Manage translations_ and,
-  where `plone.app.iterate` is active, creating, viewing, checking in and
-  discarding a working copy. The menu shows only for editors and only when a
-  translation provider is configured.
-- A translate page (`/<path>/translate`): pick the target language, see whether
-  a translation or a working copy already exists and decide whether to
-  overwrite it. A progress bar runs while the backend translates.
+  offers one entry "Translate into …" per language, Plone's _Manage
+  translations_ and, where `plone.app.iterate` is active, creating, viewing,
+  checking in and discarding a working copy. The menu shows only for editors,
+  on a multilingual site or where a translation provider is configured. The
+  languages come from the backend: every language of a multilingual site, and
+  which of them are offered for machine translation.
+- A translate page (`/<path>/translate`). While there is no translation yet,
+  the editor chooses how to create it: Plone's standard translation form, by
+  hand, or automatically. A way that is not possible is shown greyed out with
+  its reason. Where a translation exists, the page tells whether it is
+  replaced, put in a new working copy, or blocked by an existing working copy,
+  which it links. A progress bar runs while the backend translates.
 - A **report** after saving: where the translation went (new translation,
   replaced translation, working copy or the page itself), which fields were
   translated and which were carried over unchanged, how links were pointed at

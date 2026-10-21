@@ -15,6 +15,8 @@ import {
   fetchTranslationInfoFor,
   translateContent,
 } from '../helpers/translateApi';
+import config from '@plone/volto/registry';
+import { languageName } from '../helpers/languages';
 import TranslationReportView from './TranslationReportView';
 import type {
   ApiError,
@@ -48,18 +50,50 @@ const messages = defineMessages({
     defaultMessage: 'Open the translation',
   },
   close: { id: 'volto-translation-close', defaultMessage: 'Close' },
-  workingCopyPresent: {
-    id: 'volto-translation-working-copy-present',
-    defaultMessage: 'A working copy exists!',
-  },
   cancel: { id: 'volto-translation-cancel', defaultMessage: 'Cancel' },
   intro: {
     id: 'volto-translation-intro',
     defaultMessage: 'Choose the language to translate this page into.',
   },
-  translate: {
-    id: 'volto-translation-submit',
-    defaultMessage: 'Translate',
+  next: { id: 'volto-translation-next', defaultMessage: 'Continue' },
+  headlineLanguage: {
+    id: 'volto-translation-headline-language',
+    defaultMessage: 'Translate into {language}',
+  },
+  noTranslation: {
+    id: 'volto-translation-no-translation',
+    defaultMessage:
+      'There is no {language} translation yet. How should it be created?',
+  },
+  translationExists: {
+    id: 'volto-translation-translation-exists',
+    defaultMessage: 'Translation exists!',
+  },
+  workingCopyPresent: {
+    id: 'volto-translation-working-copy-present',
+    defaultMessage: 'Working copy exists!',
+  },
+  modeManual: {
+    id: 'volto-translation-mode-manual',
+    defaultMessage: 'Plone standard translation',
+  },
+  modeManualHint: {
+    id: 'volto-translation-mode-manual-hint',
+    defaultMessage:
+      "Opens Plone's translation form. The content is transferred by hand.",
+  },
+  modeMachine: {
+    id: 'volto-translation-mode-machine',
+    defaultMessage: 'Translate automatically',
+  },
+  modeMachineHint: {
+    id: 'volto-translation-mode-machine-hint',
+    defaultMessage:
+      'Content and metadata are translated automatically. The result then has to be reviewed editorially.',
+  },
+  notOfferedForMachine: {
+    id: 'volto-translation-not-offered-for-machine',
+    defaultMessage: '{language} is not offered for automatic translation.',
   },
   back: { id: 'volto-translation-back', defaultMessage: 'Back' },
   notConfigured: {
@@ -76,10 +110,6 @@ const messages = defineMessages({
     id: 'volto-translation-no-languages',
     defaultMessage: 'No target languages are configured for this site.',
   },
-  singleTarget: {
-    id: 'volto-translation-single-target',
-    defaultMessage: 'This page will be translated into {language}.',
-  },
   existsWarning: {
     id: 'volto-translation-exists',
     defaultMessage:
@@ -90,24 +120,27 @@ const messages = defineMessages({
     defaultMessage: 'Overwrite the existing translation',
   },
   workingCopyInfo: {
-    id: 'volto-translation-working-copy',
+    id: 'volto-translation-working-copy-info',
     defaultMessage:
-      'A published translation into {language} already exists. The machine translation is put in a working copy and replaces its content there. The published page stays unchanged until you apply the working copy.',
+      'A published translation into {language} already exists. The automatic translation is therefore created in a new working copy. The published page stays unchanged until you apply this working copy with the new translation.',
   },
   workingCopyExists: {
     id: 'volto-translation-working-copy-exists',
     defaultMessage:
-      'A working copy of this translation already exists. Overwriting updates that working copy.',
+      'There is already a {language} translation, and a working copy of it is being revised. A new automatic translation is possible again once this working copy has been applied or discarded. The existing translation stays unchanged until then.',
   },
-  overwriteWorkingCopyLabel: {
-    id: 'volto-translation-overwrite-working-copy',
-    defaultMessage: 'Update the existing working copy',
+  openWorkingCopy: {
+    id: 'volto-translation-open-working-copy',
+    defaultMessage: 'Open the working copy',
   },
   failed: {
     id: 'volto-translation-failed',
     defaultMessage: 'The translation failed: {message}',
   },
 });
+
+type MessageKey = keyof typeof messages;
+type Mode = '' | 'manual' | 'machine';
 
 interface TranslateViewProps {
   location: { pathname: string; search?: string };
@@ -127,6 +160,7 @@ const TranslateView = (props: TranslateViewProps) => {
   const [info, setInfo] = useState<TranslationInfo | null>(null);
   const [target, setTarget] = useState<string>('');
   const [overwrite, setOverwrite] = useState<boolean>(false);
+  const [mode, setMode] = useState<Mode>('');
   const [busy, setBusy] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   // Set once the translation ran: the view then reports instead of asking.
@@ -165,7 +199,7 @@ const TranslateView = (props: TranslateViewProps) => {
     typeof content?.language === 'string'
       ? content.language
       : content?.language?.token || '';
-  const languages = (info?.target_languages || []).filter(
+  const languages = (info?.languages || []).filter(
     (language) => language.code !== contentLanguage,
   );
 
@@ -180,16 +214,40 @@ const TranslateView = (props: TranslateViewProps) => {
     if (preselectedCode) setTarget(preselectedCode);
   }, [preselectedCode]);
 
+  const isMultilingual = Boolean(config.settings?.isMultilingual);
+  const targetLanguage = languages.find((language) => language.code === target);
   const targetEntry = target ? info?.translations?.[target] : undefined;
   const targetExists = Boolean(targetEntry?.url);
   const workingCopiesEnabled = Boolean(info?.working_copies_enabled);
-  const canTranslate =
-    Boolean(info?.configured) && info?.translatable !== false;
-  const workingCopyExists = Boolean(targetEntry?.working_copy);
+  const workingCopyUrl = targetEntry?.working_copy?.url;
+  const workingCopyExists = Boolean(workingCopyUrl);
+  // A standing working copy holds somebody's work: it is never overwritten.
   const overwriteRequired =
-    targetExists && (!workingCopiesEnabled || workingCopyExists);
+    targetExists && !workingCopiesEnabled && !workingCopyExists;
+
+  // Why a machine translation into the target is not possible, if it is not.
+  const machineRefusal = !info?.configured
+    ? messages.notConfigured
+    : info?.translatable === false
+      ? messages.notTranslatable
+      : targetLanguage && !targetLanguage.machine
+        ? messages.notOfferedForMachine
+        : null;
+  // Plone's own translation form only creates a translation that is missing,
+  // and only on a multilingual site; there the editor chooses the way.
+  const offersChoice =
+    isMultilingual && Boolean(targetLanguage) && !targetExists;
+  const chosenMode: Mode = offersChoice
+    ? machineRefusal
+      ? 'manual'
+      : mode
+    : targetLanguage
+      ? 'machine'
+      : '';
+
   useEffect(() => {
     setOverwrite(false);
+    setMode('');
   }, [target]);
 
   if (!token) return null;
@@ -197,19 +255,31 @@ const TranslateView = (props: TranslateViewProps) => {
   // createPortal needs a real node; on the server there is none.
   const toolbarNode = __CLIENT__ ? document.getElementById('toolbar') : null;
 
-  const targetName = (() => {
-    const chosen = languages.find((language) => language.code === target);
-    if (!chosen) return '';
-    try {
-      const names = new (Intl as any).DisplayNames([intl.locale], {
-        type: 'language',
-      });
+  const targetName = targetLanguage
+    ? languageName(targetLanguage.code, intl.locale, targetLanguage.title)
+    : '';
 
-      return names.of(chosen.code) || chosen.title || chosen.code;
-    } catch (error) {
-      return chosen.title || chosen.code;
-    }
-  })();
+  const createByHand = () =>
+    history.push({
+      pathname: `${path}/create-translation`,
+      state: {
+        type: content?.['@type'],
+        translationOf: flattenToAppURL(content?.['@id'] || ''),
+        language: target,
+      },
+    });
+
+  const canProceed =
+    chosenMode === 'manual' ||
+    (chosenMode === 'machine' &&
+      !machineRefusal &&
+      !workingCopyExists &&
+      !(overwriteRequired && !overwrite));
+
+  const modes: { key: Mode; label: MessageKey; hint: MessageKey }[] = [
+    { key: 'manual', label: 'modeManual', hint: 'modeManualHint' },
+    { key: 'machine', label: 'modeMachine', hint: 'modeMachineHint' },
+  ];
 
   return (
     <Container id="page-translate" className="controlpanel-translate">
@@ -218,9 +288,13 @@ const TranslateView = (props: TranslateViewProps) => {
         <Segment className="primary">
           {result
             ? intl.formatMessage(messages.doneHeadline)
-            : intl.formatMessage(messages.headline, {
-                title: <q>{content?.title || ''}</q>,
-              })}
+            : targetLanguage
+              ? intl.formatMessage(messages.headlineLanguage, {
+                  language: targetName,
+                })
+              : intl.formatMessage(messages.headline, {
+                  title: <q>{content?.title || ''}</q>,
+                })}
         </Segment>
 
         {result?.report && (
@@ -233,101 +307,141 @@ const TranslateView = (props: TranslateViewProps) => {
           </Segment>
         )}
 
-        {!result && info && !info.configured && (
+        {!result && info && languages.length === 0 && (
           <Segment>
             <Message warning>
-              {intl.formatMessage(messages.notConfigured)}
+              {intl.formatMessage(
+                info.configured ? messages.noLanguages : messages.notConfigured,
+              )}
             </Message>
           </Segment>
         )}
 
-        {!result && info?.configured && info.translatable === false && (
+        {!result && !busy && languages.length > 0 && !preselected && (
           <Segment>
-            <Message info>
-              {intl.formatMessage(messages.notTranslatable)}
-            </Message>
+            <p>{intl.formatMessage(messages.intro)}</p>
+            <select
+              id="translation-target-language"
+              aria-label={intl.formatMessage(messages.intro)}
+              value={target}
+              disabled={busy}
+              onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
+                setTarget(event.target.value)
+              }
+            >
+              <option value="">—</option>
+              {languages.map((language) => (
+                <option key={language.code} value={language.code}>
+                  {languageName(language.code, intl.locale, language.title)}
+                </option>
+              ))}
+            </select>
           </Segment>
         )}
 
-        {!result && canTranslate && workingCopyExists && (
-          <Segment className="translation-status">
-            {intl.formatMessage(messages.workingCopyPresent)}
-          </Segment>
-        )}
-
-        {!result && canTranslate && languages.length === 0 && (
-          <Segment>
-            <Message warning>
-              {intl.formatMessage(messages.noLanguages)}
-            </Message>
-          </Segment>
-        )}
-
-        {!result && !busy && canTranslate && languages.length > 0 && (
-          <Segment>
-            {preselected ? (
-              <p>
-                {intl.formatMessage(messages.singleTarget, {
-                  language: targetName,
-                })}
-              </p>
-            ) : (
-              <>
-                <p>{intl.formatMessage(messages.intro)}</p>
-                <select
-                  id="translation-target-language"
-                  aria-label={intl.formatMessage(messages.intro)}
-                  value={target}
-                  disabled={busy}
-                  onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
-                    setTarget(event.target.value)
-                  }
-                >
-                  <option value="">—</option>
-                  {languages.map((language) => (
-                    <option key={language.code} value={language.code}>
-                      {language.title || language.code}
-                    </option>
-                  ))}
-                </select>
-              </>
+        {!result && !busy && targetLanguage && isMultilingual && (
+          <Segment secondary className="translation-situation">
+            {intl.formatMessage(
+              workingCopyExists
+                ? messages.workingCopyPresent
+                : targetExists
+                  ? messages.translationExists
+                  : messages.noTranslation,
+              { language: targetName },
             )}
           </Segment>
         )}
 
-        {!result && !busy && canTranslate && targetExists && (
+        {!result && !busy && offersChoice && (
           <Segment>
-            <h3>{intl.formatMessage(messages.hint)}</h3>
-            <p>
-              {intl.formatMessage(
-                workingCopyExists
-                  ? messages.workingCopyExists
-                  : workingCopiesEnabled
-                    ? messages.workingCopyInfo
-                    : messages.existsWarning,
-                { language: targetName },
-              )}
-            </p>
-            {overwriteRequired && (
-              <label htmlFor="translation-overwrite">
-                <input
-                  type="checkbox"
-                  id="translation-overwrite"
-                  checked={overwrite}
-                  disabled={busy}
-                  onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                    setOverwrite(event.target.checked)
-                  }
-                />{' '}
+            <div className="translation-modes" role="radiogroup">
+              {modes.map(({ key, label, hint }) => {
+                const disabled = key === 'machine' && Boolean(machineRefusal);
+                return (
+                  <label
+                    key={key}
+                    htmlFor={`translation-mode-${key}`}
+                    className={`translation-mode${disabled ? ' disabled' : ''}`}
+                  >
+                    <input
+                      type="radio"
+                      id={`translation-mode-${key}`}
+                      name="translation-mode"
+                      value={key}
+                      checked={chosenMode === key}
+                      disabled={disabled}
+                      onChange={() => setMode(key)}
+                    />
+                    <span>
+                      <strong>{intl.formatMessage(messages[label])}</strong>
+                      <span className="translation-mode-hint">
+                        {intl.formatMessage(
+                          disabled && machineRefusal
+                            ? machineRefusal
+                            : messages[hint],
+                          { language: targetName },
+                        )}
+                      </span>
+                    </span>
+                  </label>
+                );
+              })}
+            </div>
+          </Segment>
+        )}
+
+        {!result &&
+          !busy &&
+          !offersChoice &&
+          targetLanguage &&
+          machineRefusal && (
+            <Segment>
+              <Message info>
+                {intl.formatMessage(machineRefusal, { language: targetName })}
+              </Message>
+            </Segment>
+          )}
+
+        {!result &&
+          !busy &&
+          !offersChoice &&
+          targetExists &&
+          !machineRefusal && (
+            <Segment>
+              <h3>{intl.formatMessage(messages.hint)}</h3>
+              <p>
                 {intl.formatMessage(
                   workingCopyExists
-                    ? messages.overwriteWorkingCopyLabel
-                    : messages.overwriteLabel,
+                    ? messages.workingCopyExists
+                    : workingCopiesEnabled
+                      ? messages.workingCopyInfo
+                      : messages.existsWarning,
+                  { language: targetName },
                 )}
-              </label>
-            )}
-          </Segment>
-        )}
+              </p>
+              {workingCopyUrl && (
+                <p>
+                  <Link to={flattenToAppURL(workingCopyUrl)}>
+                    {intl.formatMessage(messages.openWorkingCopy)}
+                  </Link>
+                </p>
+              )}
+              {overwriteRequired && (
+                <label htmlFor="translation-overwrite">
+                  <input
+                    type="checkbox"
+                    id="translation-overwrite"
+                    checked={overwrite}
+                    disabled={busy}
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                      setOverwrite(event.target.checked)
+                    }
+                  />{' '}
+                  {intl.formatMessage(messages.overwriteLabel)}
+                </label>
+              )}
+            </Segment>
+          )}
 
         {busy && (
           <Segment className="translation-running">
@@ -365,26 +479,30 @@ const TranslateView = (props: TranslateViewProps) => {
             floated="right"
             type="submit"
             aria-label={intl.formatMessage(
-              result ? messages.openResult : messages.translate,
+              result ? messages.openResult : messages.next,
             )}
             title={intl.formatMessage(
-              result ? messages.openResult : messages.translate,
+              result ? messages.openResult : messages.next,
             )}
             loading={busy}
-            disabled={
-              result
-                ? false
-                : !target || busy || (overwriteRequired && !overwrite)
-            }
+            disabled={result ? false : busy || !canProceed}
             onClick={
               result
                 ? () =>
-                    history.push(
-                      flattenToAppURL(
+                    history.push({
+                      pathname: flattenToAppURL(
                         result['@id'] || result.report?.['@id'] || path,
                       ),
-                    )
-                : submit
+                      // the banner there names a page just created
+                      state: {
+                        machineTranslationCreated: Boolean(
+                          result.report?.created,
+                        ),
+                      },
+                    })
+                : chosenMode === 'manual'
+                  ? createByHand
+                  : submit
             }
           >
             <Icon className="circled" name={aheadSVG} size="30px" />

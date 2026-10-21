@@ -16,6 +16,7 @@ import {
 import { getBaseUrl, flattenToAppURL } from '@plone/volto/helpers/Url/Url';
 import config from '@plone/volto/registry';
 import { fetchTranslationInfoFor } from '../helpers/translateApi';
+import { languageName } from '../helpers/languages';
 import type { TranslationInfo, TranslationState } from '../types';
 
 const messages = defineMessages({
@@ -23,10 +24,6 @@ const messages = defineMessages({
   translateInto: {
     id: 'volto-translation-menu-translate-into',
     defaultMessage: 'Translate into {language}',
-  },
-  addTranslation: {
-    id: 'volto-translation-menu-add',
-    defaultMessage: 'Translate into {language} by hand',
   },
   manageTranslations: {
     id: 'volto-translation-menu-manage',
@@ -78,18 +75,6 @@ interface TranslationsMenuProps {
   theToolbar?: { current?: HTMLElement | null };
 }
 
-function languageName(code: string, locale: string, fallback?: string): string {
-  try {
-    const names = new (Intl as any).DisplayNames([locale], {
-      type: 'language',
-    });
-
-    return names.of(code) || fallback || code;
-  } catch (error) {
-    return fallback || code;
-  }
-}
-
 const TranslationsMenu = (props: TranslationsMenuProps) => {
   const intl = useIntl();
   const dispatch = useDispatch();
@@ -123,23 +108,21 @@ const TranslationsMenu = (props: TranslationsMenuProps) => {
       ? content.language
       : content?.language?.token || '';
 
-  const targets = (info?.target_languages || []).filter(
-    (language) => language.code !== contentLanguage,
-  );
-
   const isMultilingual = Boolean(config.settings?.isMultilingual);
   const hasObjectButton = (id: string) =>
     (actions?.object_buttons || []).some((action) => action?.id === id);
 
-  const existingLanguages = (
-    content?.['@components']?.translations?.items || []
-  ).map((item) => item?.language);
-  const untranslated: string[] = isMultilingual
-    ? ((config.settings?.supportedLanguages as string[]) || []).filter(
-        (language) =>
-          language !== contentLanguage && !existingLanguages.includes(language),
-      )
-    : [];
+  // One entry per language there is something to do for: a machine
+  // translation, or, while there is no translation yet, Plone's own form.
+  // The translate page offers the choice.
+  const machineReady =
+    Boolean(info?.configured) && info?.translatable !== false;
+  const targets = (info?.languages || []).filter((language) => {
+    if (language.code === contentLanguage) return false;
+    const exists = Boolean(info?.translations?.[language.code]?.url);
+
+    return (language.machine && machineReady) || (isMultilingual && !exists);
+  });
 
   const canCheckOut = hasObjectButton('iterate_checkout');
   const canCheckIn = hasObjectButton('iterate_checkin');
@@ -189,8 +172,6 @@ const TranslationsMenu = (props: TranslationsMenuProps) => {
             )}
 
           {!isWorkingCopy &&
-            info?.configured &&
-            info?.translatable !== false &&
             targets.map((language) => (
               <li key={`translate-${language.code}`}>
                 <Link
@@ -205,28 +186,6 @@ const TranslationsMenu = (props: TranslationsMenuProps) => {
                       intl.locale,
                       language.title,
                     ),
-                  })}
-                  <Icon name={rightArrowSVG} size="24px" />
-                </Link>
-              </li>
-            ))}
-
-          {!isWorkingCopy &&
-            untranslated.map((language) => (
-              <li key={`add-${language}`}>
-                <Link
-                  to={{
-                    pathname: `${path}/create-translation`,
-                    state: {
-                      type: content?.['@type'],
-                      translationOf: flattenToAppURL(content?.['@id'] || ''),
-                      language,
-                    },
-                  }}
-                  onClick={close}
-                >
-                  {intl.formatMessage(messages.addTranslation, {
-                    language: languageName(language, intl.locale),
                   })}
                   <Icon name={rightArrowSVG} size="24px" />
                 </Link>

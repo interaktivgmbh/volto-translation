@@ -24,6 +24,37 @@
   color: #573a08;
 }
 
+#page-translate .translation-modes {
+  border: 1px solid #e0e3e5;
+}
+
+#page-translate .translation-mode {
+  display: flex;
+  align-items: flex-start;
+  padding: 16px 20px;
+  cursor: pointer;
+  gap: 16px;
+}
+
+#page-translate .translation-mode + .translation-mode {
+  border-top: 1px solid #e0e3e5;
+}
+
+#page-translate .translation-mode input {
+  margin-top: 3px;
+}
+
+#page-translate .translation-mode.disabled {
+  cursor: default;
+  opacity: 0.55;
+}
+
+#page-translate .translation-mode-hint {
+  display: block;
+  margin-top: 6px;
+  color: #4a5257;
+}
+
 #page-translate .translation-progress {
   overflow: hidden;
   height: 4px;
@@ -122,19 +153,21 @@
 
 .machine-translation-banner {
   padding: 12px 20px;
-  border: 1px solid #e0c36b;
-  border-radius: 4px;
+  border: 1px solid #1f7fc1;
   margin-top: 12px;
   margin-bottom: 20px;
-  background: #fff8e1;
-  color: #6d4c00;
-  text-align: center;
+  background: #e6f1f9;
+  color: #1d2a33;
 }
 
-.machine-translation-banner--machine_edited {
-  border-color: #7d9fd3;
-  background: #e3ecf9;
-  color: #1f3a63;
+.machine-translation-banner-title {
+  display: block;
+  margin-bottom: 4px;
+  color: #0b6aa8;
+}
+
+.machine-translation-banner p {
+  margin: 0;
 }
 
 #page-manage-translations .machine-translation-status--manual {
@@ -149,10 +182,16 @@
 #page-manage-translations .machine-translation-status--machine_reviewed {
   color: #2c7a2c !important;
 }
+#page-manage-translations .machine-translation-status--machine_without_review {
+  color: #6b7280 !important;
+}
 #page-manage-translations .machine-translation-status--manual svg,
 #page-manage-translations .machine-translation-status--machine_unreviewed svg,
 #page-manage-translations .machine-translation-status--machine_edited svg,
-#page-manage-translations .machine-translation-status--machine_reviewed svg {
+#page-manage-translations .machine-translation-status--machine_reviewed svg,
+#page-manage-translations
+  .machine-translation-status--machine_without_review
+  svg {
   fill: currentColor !important;
 }
 
@@ -184,12 +223,8 @@
   color: #6d4c00;
 }
 
-#page-translate .translation-links-summary {
-  font-weight: 500;
-}
-
-#page-translate .translation-metadata-summary {
-  font-weight: 500;
+#page-translate .ui.segment.translation-section-title {
+  font-weight: 700;
 }
 
 #page-translate .translation-metadata-unmapped {
