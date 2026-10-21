@@ -489,11 +489,17 @@ const TranslateView = (props: TranslateViewProps) => {
             onClick={
               result
                 ? () =>
-                    history.push(
-                      flattenToAppURL(
+                    history.push({
+                      pathname: flattenToAppURL(
                         result['@id'] || result.report?.['@id'] || path,
                       ),
-                    )
+                      // the banner there names a page just created
+                      state: {
+                        machineTranslationCreated: Boolean(
+                          result.report?.created,
+                        ),
+                      },
+                    })
                 : chosenMode === 'manual'
                   ? createByHand
                   : submit

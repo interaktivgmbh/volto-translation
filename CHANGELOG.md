@@ -17,6 +17,12 @@
 - The report shows links and metadata as sections of their own, each with a
   title and an introduction that sums it up ("6 of 8 links now point to
   English"); a link without a translation says that it stays as it was.
+- The banner above machine translated content has a title and a longer text,
+  naming the source language: one variant for a page just created, one for a
+  page not reviewed yet, one for a page being revised and one for a working
+  copy. It says that a private page is not visible to visitors, and how the
+  review is completed. Needs `source_language` from the `machine_translation`
+  expander of interaktiv.translation.
 
 ## 1.0.0-alpha.1 (2026-10-15)
 

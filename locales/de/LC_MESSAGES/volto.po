@@ -302,16 +302,6 @@ msgid "volto-translation-cp-translate-fields-help"
 msgstr "Ein Feldname pro Zeile, in der Reihenfolge der Übersetzung."
 
 
-#. Default: "This page was machine translated ({provider}) and has not been reviewed yet."
-#: components/MachineTranslationBanner
-msgid "volto-translation-unreviewed"
-msgstr "Diese Seite wurde maschinell übersetzt ({provider}) und noch nicht redaktionell geprüft."
-
-#. Default: "This page was machine translated ({provider}) and is being revised editorially — not yet approved."
-#: components/MachineTranslationBanner
-msgid "volto-translation-edited"
-msgstr "Diese Seite wurde maschinell übersetzt ({provider}) und wird redaktionell überarbeitet — noch nicht freigegeben."
-
 #. Default: "Language"
 #: components/MachineTranslations customization
 msgid "Language"
@@ -456,3 +446,48 @@ msgstr "Links im Text"
 #: components/TranslationReportView
 msgid "volto-translation-report-metadata-section"
 msgstr "Metadaten"
+
+#. Default: "New page created with machine translation – review pending!"
+#: components/MachineTranslationBanner
+msgid "volto-translation-banner-title-new"
+msgstr "Neue Seite mit maschineller Übersetzung erstellt – Prüfung ausstehend!"
+
+#. Default: "Machine translated – review pending!"
+#: components/MachineTranslationBanner
+msgid "volto-translation-banner-title-unreviewed"
+msgstr "Maschinell übersetzt – Prüfung ausstehend!"
+
+#. Default: "Machine translated – being revised, review pending!"
+#: components/MachineTranslationBanner
+msgid "volto-translation-banner-title-edited"
+msgstr "Maschinell übersetzt – in Bearbeitung, Prüfung ausstehend!"
+
+#. Default: "Working copy created with machine translation – review pending!"
+#: components/MachineTranslationBanner
+msgid "volto-translation-banner-title-working-copy"
+msgstr "Arbeitskopie mit maschineller Übersetzung erstellt – Prüfung ausstehend!"
+
+#. Default: "This page was machine translated from the original{source, select, none {} other { ({source})}} and has not been reviewed yet."
+#: components/MachineTranslationBanner
+msgid "volto-translation-banner-unreviewed"
+msgstr "Diese Seite wurde maschinell aus dem Original{source, select, none {} other { ({source})}} neu übersetzt und noch nicht redaktionell geprüft."
+
+#. Default: "This page was machine translated from the original{source, select, none {} other { ({source})}} and is being revised editorially, but has not been approved yet."
+#: components/MachineTranslationBanner
+msgid "volto-translation-banner-edited"
+msgstr "Diese Seite wurde maschinell aus dem Original{source, select, none {} other { ({source})}} übersetzt und wird redaktionell überarbeitet, ist aber noch nicht freigegeben."
+
+#. Default: "It is private and not visible to visitors."
+#: components/MachineTranslationBanner
+msgid "volto-translation-banner-private"
+msgstr "Sie ist privat und für Besucher nicht sichtbar."
+
+#. Default: "Before it is published, the translation has to be reviewed for content and editorially. Publishing completes the review."
+#: components/MachineTranslationBanner
+msgid "volto-translation-banner-review-before-publishing"
+msgstr "Vor der Veröffentlichung muss die Übersetzung fachlich und redaktionell geprüft werden. Mit dem Veröffentlichen gilt die Prüfung als abgeschlossen."
+
+#. Default: "This working copy was machine translated from the original{source, select, none {} other { ({source})}} and replaces the previous translation. Before it is published, the translation has to be reviewed for content and editorially. Applying the working copy replaces the existing translation and completes the review."
+#: components/MachineTranslationBanner
+msgid "volto-translation-banner-working-copy"
+msgstr "Diese Arbeitskopie wurde automatisiert aus dem Original{source, select, none {} other { ({source})}} neu übersetzt und ersetzt die bisherige Übersetzung. Vor der Veröffentlichung muss die Übersetzung fachlich und redaktionell geprüft werden. Mit dem Anwenden der Arbeitskopie wird die bereits bestehende Übersetzung ersetzt, und die Prüfung gilt als abgeschlossen."

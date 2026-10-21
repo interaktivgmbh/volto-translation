@@ -302,16 +302,6 @@ msgid "volto-translation-cp-translate-fields-help"
 msgstr "One field name per line, in the order they are translated."
 
 
-#. Default: "This page was machine translated ({provider}) and has not been reviewed yet."
-#: components/MachineTranslationBanner
-msgid "volto-translation-unreviewed"
-msgstr "This page was machine translated ({provider}) and has not been reviewed yet."
-
-#. Default: "This page was machine translated ({provider}) and is being revised editorially — not yet approved."
-#: components/MachineTranslationBanner
-msgid "volto-translation-edited"
-msgstr "This page was machine translated ({provider}) and is being revised editorially — not yet approved."
-
 #. Default: "Language"
 #: components/MachineTranslations customization
 msgid "Language"
@@ -456,3 +446,48 @@ msgstr "Links in the text"
 #: components/TranslationReportView
 msgid "volto-translation-report-metadata-section"
 msgstr "Metadata"
+
+#. Default: "New page created with machine translation – review pending!"
+#: components/MachineTranslationBanner
+msgid "volto-translation-banner-title-new"
+msgstr "New page created with machine translation – review pending!"
+
+#. Default: "Machine translated – review pending!"
+#: components/MachineTranslationBanner
+msgid "volto-translation-banner-title-unreviewed"
+msgstr "Machine translated – review pending!"
+
+#. Default: "Machine translated – being revised, review pending!"
+#: components/MachineTranslationBanner
+msgid "volto-translation-banner-title-edited"
+msgstr "Machine translated – being revised, review pending!"
+
+#. Default: "Working copy created with machine translation – review pending!"
+#: components/MachineTranslationBanner
+msgid "volto-translation-banner-title-working-copy"
+msgstr "Working copy created with machine translation – review pending!"
+
+#. Default: "This page was machine translated from the original{source, select, none {} other { ({source})}} and has not been reviewed yet."
+#: components/MachineTranslationBanner
+msgid "volto-translation-banner-unreviewed"
+msgstr "This page was machine translated from the original{source, select, none {} other { ({source})}} and has not been reviewed yet."
+
+#. Default: "This page was machine translated from the original{source, select, none {} other { ({source})}} and is being revised editorially, but has not been approved yet."
+#: components/MachineTranslationBanner
+msgid "volto-translation-banner-edited"
+msgstr "This page was machine translated from the original{source, select, none {} other { ({source})}} and is being revised editorially, but has not been approved yet."
+
+#. Default: "It is private and not visible to visitors."
+#: components/MachineTranslationBanner
+msgid "volto-translation-banner-private"
+msgstr "It is private and not visible to visitors."
+
+#. Default: "Before it is published, the translation has to be reviewed for content and editorially. Publishing completes the review."
+#: components/MachineTranslationBanner
+msgid "volto-translation-banner-review-before-publishing"
+msgstr "Before it is published, the translation has to be reviewed for content and editorially. Publishing completes the review."
+
+#. Default: "This working copy was machine translated from the original{source, select, none {} other { ({source})}} and replaces the previous translation. Before it is published, the translation has to be reviewed for content and editorially. Applying the working copy replaces the existing translation and completes the review."
+#: components/MachineTranslationBanner
+msgid "volto-translation-banner-working-copy"
+msgstr "This working copy was machine translated from the original{source, select, none {} other { ({source})}} and replaces the previous translation. Before it is published, the translation has to be reviewed for content and editorially. Applying the working copy replaces the existing translation and completes the review."
