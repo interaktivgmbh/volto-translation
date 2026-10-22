@@ -307,6 +307,11 @@ msgstr ""
 msgid "Language"
 msgstr ""
 
+#. Default: "Manage translations for {title}"
+#: components/MachineTranslations customization
+msgid "volto-translation-manage-translations-title"
+msgstr ""
+
 #. Default: "Path"
 #: components/MachineTranslations customization
 msgid "Path"
