@@ -6,7 +6,9 @@
  * - a machine-translate button per language row, coloured by the row's
  *   translation status (read from GET @translate's `translations`),
  * - a "Working copy" column linking the open copy of each translation,
- *   its badge coloured by the copy's status.
+ *   its badge coloured by the copy's status,
+ * - the title uses an own message id (Volto's German text drops {title}),
+ * - the add button gets a boolean `disabled` (upstream passes an object).
  *
  * Everything else — linking, unlinking, manual creation — is stock.
  */
@@ -66,8 +68,10 @@ const messages = defineMessages({
     id: 'Manage Translations',
     defaultMessage: 'Manage Translations',
   },
+  // Own id: Volto's German text for its id drops the {title} placeholder,
+  // and an add-on cannot override a core translation.
   ManageTranslationsTitle: {
-    id: 'Manage translations for {title}',
+    id: 'volto-translation-manage-translations-title',
     defaultMessage: 'Manage translations for {title}',
   },
   back: {
@@ -93,6 +97,11 @@ const messages = defineMessages({
   machineTranslate: {
     id: 'volto-translation-machine-translate-into',
     defaultMessage: 'Machine translate into',
+  },
+  notConfigured: {
+    id: 'volto-translation-not-configured',
+    defaultMessage:
+      'No translation service is configured. Add a DeepL key in Site Setup → Translation.',
   },
   notTranslatable: {
     id: 'volto-translation-not-translatable',
@@ -263,6 +272,14 @@ const ManageTranslations = (props) => {
       });
   }
 
+  // Why the machine-translate buttons are disabled, if they are.
+  const machineRefusal =
+    translationInfo && !translationInfo.configured
+      ? messages.notConfigured
+      : translationInfo?.translatable === false
+        ? messages.notTranslatable
+        : null;
+
   function statusLabel(status) {
     const message = STATUS_MESSAGES[status];
 
@@ -277,8 +294,7 @@ const ManageTranslations = (props) => {
       <Segment.Group raised>
         <Segment className="primary">
           <FormattedMessage
-            id="Manage translations for {title}"
-            defaultMessage="Manage translations for {title}"
+            {...messages.ManageTranslationsTitle}
             values={{ title: <q>{content.title}</q> }}
           />
         </Segment>
@@ -349,8 +365,8 @@ const ManageTranslations = (props) => {
                           would never show. */}
                       <Button.Group
                         title={
-                          translationInfo?.translatable === false
-                            ? intl.formatMessage(messages.notTranslatable)
+                          machineRefusal && lang !== content.language.token
+                            ? intl.formatMessage(machineRefusal)
                             : undefined
                         }
                       >
@@ -365,7 +381,7 @@ const ManageTranslations = (props) => {
                           disabled={
                             lang === content.language.token ||
                             !translationInfo?.configured ||
-                            translationInfo?.translatable === false
+                            Boolean(machineRefusal)
                           }
                           as={Link}
                           to={`${getBaseUrl(pathname)}/translate?target=${encodeURIComponent(lang)}`}
@@ -379,7 +395,7 @@ const ManageTranslations = (props) => {
                           icon
                           disabled={
                             lang === content.language.token ||
-                            translations?.[lang]
+                            Boolean(translations?.[lang])
                           }
                           as={Link}
                           to={{

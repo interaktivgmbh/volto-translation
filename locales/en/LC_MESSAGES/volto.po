@@ -307,6 +307,11 @@ msgstr "One field name per line, in the order they are translated."
 msgid "Language"
 msgstr "Language"
 
+#. Default: "Manage translations for {title}"
+#: components/MachineTranslations customization
+msgid "volto-translation-manage-translations-title"
+msgstr "Manage translations for {title}"
+
 #. Default: "Path"
 #: components/MachineTranslations customization
 msgid "Path"
