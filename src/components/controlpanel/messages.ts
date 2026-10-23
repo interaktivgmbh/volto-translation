@@ -114,6 +114,33 @@ const messages = defineMessages({
     defaultMessage:
       'The field {field} cannot name an Excel sheet: at most 31 characters, none of [ ] : * ? / \\.',
   },
+  exportHeader: {
+    id: 'volto-translation-mapping-export-header',
+    defaultMessage: 'Export the mapping to Excel',
+  },
+  exportScopeField: {
+    id: 'volto-translation-mapping-export-scope-field',
+    defaultMessage:
+      'Only the selected field {field} ({count, plural, one {# value} other {# values}})',
+  },
+  exportScopeAll: {
+    id: 'volto-translation-mapping-export-scope-all',
+    defaultMessage:
+      'All fields ({fields, plural, one {# field} other {# fields}}, {count, plural, one {# value} other {# values}}), one sheet per field',
+  },
+  exportIntro: {
+    id: 'volto-translation-mapping-export-intro',
+    defaultMessage:
+      'The first row names the languages as "German (de)": the source language first, then the other site languages, then languages the site does not have. An empty cell stays empty.',
+  },
+  exportFile: {
+    id: 'volto-translation-mapping-export-file',
+    defaultMessage: 'File: {fileName}',
+  },
+  exportButton: {
+    id: 'volto-translation-mapping-export-button',
+    defaultMessage: 'Export',
+  },
   exportError: {
     id: 'volto-translation-mapping-export-error',
     defaultMessage: 'The file could not be written: {error}',

@@ -81,7 +81,9 @@ const MappingImportModal = (props: MappingImportModalProps) => {
         setError(intl.formatMessage(messages.importNoSheets));
       }
       setSheets(withValues);
-      setSheetName(withValues[0]?.name || '');
+      // a file of all fields has a sheet named like the target field
+      const named = withValues.find((sheet) => sheet.name === fieldId.trim());
+      setSheetName((named || withValues[0])?.name || '');
     } catch (readError) {
       setError(
         intl.formatMessage(messages.importReadError, {
@@ -111,7 +113,7 @@ const MappingImportModal = (props: MappingImportModalProps) => {
   };
 
   return (
-    <Modal open={open} onClose={onClose} className="metadata-mapping-import">
+    <Modal open={open} onClose={onClose} className="metadata-mapping-modal">
       <Modal.Header>{intl.formatMessage(messages.importHeader)}</Modal.Header>
       <Modal.Content>
         <div className="metadata-mapping-import-row">
@@ -142,7 +144,7 @@ const MappingImportModal = (props: MappingImportModalProps) => {
           </Label>
         )}
 
-        <p className="metadata-mapping-import-intro">
+        <p className="metadata-mapping-modal-intro">
           {intl.formatMessage(messages.importIntro)}
         </p>
 

@@ -43,7 +43,7 @@
 /* field tabs and secondary actions: outlined, as in the layout */
 .metadata-mapping-widget .ui.button.metadata-mapping-tab,
 .metadata-mapping-widget .ui.button.metadata-mapping-secondary,
-.metadata-mapping-import .ui.button.metadata-mapping-secondary {
+.metadata-mapping-modal .ui.button.metadata-mapping-secondary {
   padding: 0.6em 1em;
   border: 1px solid #c7d5d8;
   border-radius: 1px;
@@ -56,7 +56,7 @@
 
 .metadata-mapping-widget .ui.button.metadata-mapping-tab:hover,
 .metadata-mapping-widget .ui.button.metadata-mapping-secondary:hover,
-.metadata-mapping-import .ui.button.metadata-mapping-secondary:hover {
+.metadata-mapping-modal .ui.button.metadata-mapping-secondary:hover {
   border-color: #007eb1;
   color: #007eb1;
 }
@@ -168,8 +168,8 @@
   color: #9f3a38;
 }
 
-/* import modal: it renders outside the widget */
-.metadata-mapping-import .metadata-mapping-import-row {
+/* import and export modal: they render outside the widget */
+.metadata-mapping-modal .metadata-mapping-import-row {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -177,26 +177,32 @@
   gap: 0.5em 1em;
 }
 
-.metadata-mapping-import .metadata-mapping-import-row > label {
+.metadata-mapping-modal .metadata-mapping-import-row > label {
   min-width: 8em;
   font-weight: bold;
 }
 
-.metadata-mapping-import .metadata-mapping-import-effect,
-.metadata-mapping-import .file-name {
+.metadata-mapping-modal .metadata-mapping-import-effect,
+.metadata-mapping-modal .file-name {
   color: #555;
 }
 
-.metadata-mapping-import .metadata-mapping-import-intro {
+.metadata-mapping-modal .metadata-mapping-modal-intro {
   margin-top: 1.5em;
   color: #555;
 }
 
-.metadata-mapping-import .metadata-mapping-import-summary {
+.metadata-mapping-modal .metadata-mapping-export-scope {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8em;
+}
+
+.metadata-mapping-modal .metadata-mapping-import-summary {
   margin: 1em 0;
 }
 
-.metadata-mapping-import .metadata-mapping-import-warning {
+.metadata-mapping-modal .metadata-mapping-import-warning {
   margin-top: 0.3em;
   color: #9f3a38;
   font-size: 0.9em;

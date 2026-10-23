@@ -731,3 +731,33 @@ msgstr ""
 #: components/controlpanel/messages
 msgid "volto-translation-mapping-import-not-site-language"
 msgstr ""
+
+#. Default: "Export the mapping to Excel"
+#: components/controlpanel/messages
+msgid "volto-translation-mapping-export-header"
+msgstr ""
+
+#. Default: "Only the selected field {field} ({count, plural, one {# value} other {# values}})"
+#: components/controlpanel/messages
+msgid "volto-translation-mapping-export-scope-field"
+msgstr ""
+
+#. Default: "All fields ({fields, plural, one {# field} other {# fields}}, {count, plural, one {# value} other {# values}}), one sheet per field"
+#: components/controlpanel/messages
+msgid "volto-translation-mapping-export-scope-all"
+msgstr ""
+
+#. Default: "The first row names the languages as \"German (de)\": the source language first, then the other site languages, then languages the site does not have. An empty cell stays empty."
+#: components/controlpanel/messages
+msgid "volto-translation-mapping-export-intro"
+msgstr ""
+
+#. Default: "File: {fileName}"
+#: components/controlpanel/messages
+msgid "volto-translation-mapping-export-file"
+msgstr ""
+
+#. Default: "Export"
+#: components/controlpanel/messages
+msgid "volto-translation-mapping-export-button"
+msgstr ""

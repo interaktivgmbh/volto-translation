@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { useIntl } from 'react-intl';
 import { Button, Confirm, Message } from 'semantic-ui-react';
 import FormFieldWrapper from '@plone/volto/components/manage/Widgets/FormFieldWrapper';
-import { writeWorkbook } from '../../helpers/excelFile';
 import { languageName } from '../../helpers/languages';
 import {
   duplicateValues,
@@ -12,16 +11,12 @@ import {
   normalisedMapping,
   withoutLanguage,
 } from '../../helpers/metadataMapping';
-import {
-  exportFileName,
-  isSheetName,
-  mappingToSheets,
-} from '../../helpers/metadataMappingExcel';
 import type {
   MetadataMapping,
   MetadataMappingRow,
   TranslationState,
 } from '../../types';
+import MappingExportModal from './MappingExportModal';
 import MappingFieldBar from './MappingFieldBar';
 import MappingImportModal from './MappingImportModal';
 import MappingTable from './MappingTable';
@@ -56,7 +51,7 @@ const MetadataMappingWidget = (props: MetadataMappingWidgetProps) => {
   const [selected, setSelected] = useState<string | undefined>(fieldIds[0]);
   const [pending, setPending] = useState<Pending>(null);
   const [importing, setImporting] = useState(false);
-  const [exchangeError, setExchangeError] = useState<string | null>(null);
+  const [exporting, setExporting] = useState(false);
 
   const current = selected && selected in mapping ? selected : fieldIds[0];
   const rows: MetadataMappingRow[] = current ? mapping[current] || [] : [];
@@ -98,29 +93,6 @@ const MetadataMappingWidget = (props: MetadataMappingWidgetProps) => {
     setSelected(Object.keys(fields)[0]);
   };
 
-  const exportMapping = async () => {
-    setExchangeError(null);
-    const badField = fieldIds.find((fieldId) => !isSheetName(fieldId));
-    if (badField) {
-      setExchangeError(
-        intl.formatMessage(messages.exportSheetName, { field: badField }),
-      );
-      return;
-    }
-    try {
-      await writeWorkbook(
-        mappingToSheets(mapping, siteLanguages, sourceLanguage, intl.locale),
-        exportFileName(),
-      );
-    } catch (error) {
-      setExchangeError(
-        intl.formatMessage(messages.exportError, {
-          error: String((error as Error)?.message || error),
-        }),
-      );
-    }
-  };
-
   const confirmPending = () => {
     if (pending?.kind === 'field') {
       const { [pending.field]: _removed, ...rest } = mapping;
@@ -144,7 +116,7 @@ const MetadataMappingWidget = (props: MetadataMappingWidgetProps) => {
           basic
           className="metadata-mapping-link"
           disabled={!fieldIds.length}
-          onClick={exportMapping}
+          onClick={() => setExporting(true)}
         >
           {intl.formatMessage(messages.exportExcel)}
         </Button>
@@ -152,15 +124,11 @@ const MetadataMappingWidget = (props: MetadataMappingWidgetProps) => {
           type="button"
           basic
           className="metadata-mapping-link"
-          onClick={() => {
-            setExchangeError(null);
-            setImporting(true);
-          }}
+          onClick={() => setImporting(true)}
         >
           {intl.formatMessage(messages.importExcel)}
         </Button>
       </div>
-      {exchangeError && <Message negative>{exchangeError}</Message>}
 
       <MappingFieldBar
         fieldIds={fieldIds}
@@ -201,6 +169,15 @@ const MetadataMappingWidget = (props: MetadataMappingWidgetProps) => {
         siteLanguages={siteLanguages}
         onImport={importFields}
         onClose={() => setImporting(false)}
+      />
+
+      <MappingExportModal
+        open={exporting}
+        mapping={mapping}
+        currentField={current}
+        siteLanguages={siteLanguages}
+        sourceLanguage={sourceLanguage}
+        onClose={() => setExporting(false)}
       />
 
       <Confirm

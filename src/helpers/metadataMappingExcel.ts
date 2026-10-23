@@ -172,6 +172,13 @@ export function mappingToSheets(
   });
 }
 
-export function exportFileName(date: Date = new Date()): string {
-  return `metadata-mapping-${date.toISOString().slice(0, 10)}.xlsx`;
+// metadata-mapping-subjects-2026-10-23.xlsx, or without the field for all
+export function exportFileName(
+  fieldId?: string,
+  date: Date = new Date(),
+): string {
+  const day = date.toISOString().slice(0, 10);
+  const field = fieldId ? `${fieldId.replace(/[^\w.-]+/g, '-')}-` : '';
+
+  return `metadata-mapping-${field}${day}.xlsx`;
 }

@@ -731,3 +731,33 @@ msgstr "{sheet}: {count, plural, one {# value} other {# values}}"
 #: components/controlpanel/messages
 msgid "volto-translation-mapping-import-not-site-language"
 msgstr "Column \"{header}\" is no language of the site; it is taken over but not used."
+
+#. Default: "Export the mapping to Excel"
+#: components/controlpanel/messages
+msgid "volto-translation-mapping-export-header"
+msgstr "Export the mapping to Excel"
+
+#. Default: "Only the selected field {field} ({count, plural, one {# value} other {# values}})"
+#: components/controlpanel/messages
+msgid "volto-translation-mapping-export-scope-field"
+msgstr "Only the selected field {field} ({count, plural, one {# value} other {# values}})"
+
+#. Default: "All fields ({fields, plural, one {# field} other {# fields}}, {count, plural, one {# value} other {# values}}), one sheet per field"
+#: components/controlpanel/messages
+msgid "volto-translation-mapping-export-scope-all"
+msgstr "All fields ({fields, plural, one {# field} other {# fields}}, {count, plural, one {# value} other {# values}}), one sheet per field"
+
+#. Default: "The first row names the languages as \"German (de)\": the source language first, then the other site languages, then languages the site does not have. An empty cell stays empty."
+#: components/controlpanel/messages
+msgid "volto-translation-mapping-export-intro"
+msgstr "The first row names the languages as \"German (de)\": the source language first, then the other site languages, then languages the site does not have. An empty cell stays empty."
+
+#. Default: "File: {fileName}"
+#: components/controlpanel/messages
+msgid "volto-translation-mapping-export-file"
+msgstr "File: {fileName}"
+
+#. Default: "Export"
+#: components/controlpanel/messages
+msgid "volto-translation-mapping-export-button"
+msgstr "Export"
