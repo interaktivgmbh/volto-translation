@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { Button, Checkbox, Message, Modal } from 'semantic-ui-react';
-import { writeWorkbook } from '../../helpers/excelFile';
+import { writeWorkbook } from '../../../helpers/excelFile';
 import {
   exportFileName,
   isSheetName,
   mappingToSheets,
-} from '../../helpers/metadataMappingExcel';
-import type { MetadataMapping } from '../../types';
+} from '../../../helpers/metadataMappingExcel';
+import type { MetadataMapping } from '../../../types';
 import messages from './messages';
 
 interface MappingExportModalProps {

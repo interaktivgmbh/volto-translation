@@ -8,15 +8,15 @@ import {
   Message,
   Modal,
 } from 'semantic-ui-react';
-import { readWorkbook } from '../../helpers/excelFile';
-import { sheetToRows } from '../../helpers/metadataMappingExcel';
+import { readWorkbook } from '../../../helpers/excelFile';
+import { sheetToRows } from '../../../helpers/metadataMappingExcel';
 import type {
   ImportedSheet,
   SheetWarning,
-} from '../../helpers/metadataMappingExcel';
-import type { MetadataMapping } from '../../types';
+} from '../../../helpers/metadataMappingExcel';
+import type { MetadataMapping } from '../../../types';
 import messages from './messages';
-import type { InputData } from './messages';
+import type { InputData } from './utils';
 
 interface MappingImportModalProps {
   open: boolean;

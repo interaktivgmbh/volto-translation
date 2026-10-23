@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useIntl } from 'react-intl';
 import { Button, Confirm, Message } from 'semantic-ui-react';
 import FormFieldWrapper from '@plone/volto/components/manage/Widgets/FormFieldWrapper';
-import { languageName } from '../../helpers/languages';
+import { languageName } from '../../../helpers/languages';
 import {
   duplicateValues,
   isIncomplete,
@@ -13,12 +13,12 @@ import {
   normalisedMapping,
   pageSlice,
   withoutLanguage,
-} from '../../helpers/metadataMapping';
+} from '../../../helpers/metadataMapping';
 import type {
   MetadataMapping,
   MetadataMappingRow,
   TranslationState,
-} from '../../types';
+} from '../../../types';
 import MappingExportModal from './MappingExportModal';
 import MappingFieldBar from './MappingFieldBar';
 import MappingFilterBar from './MappingFilterBar';

@@ -1,8 +1,9 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 import { Checkbox, Input } from 'semantic-ui-react';
-import messages, { onEnter } from './messages';
-import type { InputData } from './messages';
+import messages from './messages';
+import { onEnter } from './utils';
+import type { InputData } from './utils';
 
 interface MappingFilterBarProps {
   search: string;

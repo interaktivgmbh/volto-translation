@@ -1,5 +1,5 @@
 import MachineTranslationBanner from './components/MachineTranslationBanner';
-import MetadataMappingWidget from './components/controlpanel/MetadataMappingWidget';
+import MetadataMappingWidget from './components/controlpanel/MetadataMapping/MetadataMappingWidget';
 import TranslateMenuItem from './components/TranslateMenuItem';
 import TranslationsMenu from './components/TranslationsMenu';
 import TranslateView from './components/TranslateView';

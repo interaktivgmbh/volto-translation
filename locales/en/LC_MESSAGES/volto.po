@@ -498,311 +498,311 @@ msgid "volto-translation-banner-working-copy"
 msgstr "This working copy was machine translated from the original{source, select, none {} other { ({source})}} and replaces the previous translation. Before it is published, the translation has to be reviewed for content and editorially. Applying the working copy replaces the existing translation and completes the review."
 
 #. Default: "Add field"
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-add-field"
 msgstr "Add field"
 
 #. Default: "Field id, e.g. subject"
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-field-id-placeholder"
 msgstr "Field id, e.g. subject"
 
 #. Default: "Remove field"
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-remove-field"
 msgstr "Remove field"
 
 #. Default: "Remove the mapping of {field}?"
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-remove-field-header"
 msgstr "Remove the mapping of {field}?"
 
 #. Default: "Its {count} values are removed with it. They take effect once the settings are saved."
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-remove-field-content"
 msgstr "Its {count} values are removed with it. They take effect once the settings are saved."
 
 #. Default: "Enter a field id."
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-empty-field-id"
 msgstr "Enter a field id."
 
 #. Default: "A field id has no spaces."
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-space-in-field-id"
 msgstr "A field id has no spaces."
 
 #. Default: "This field is mapped already."
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-existing-field-id"
 msgstr "This field is mapped already."
 
 #. Default: "No field is mapped yet. Add the field whose values have fixed translations, e.g. subject."
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-no-fields"
 msgstr "No field is mapped yet. Add the field whose values have fixed translations, e.g. subject."
 
 #. Default: "The site has no languages to map between."
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-no-languages"
 msgstr "The site has no languages to map between."
 
 #. Default: "New value in {language}"
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-new-value-placeholder"
 msgstr "New value in {language}"
 
 #. Default: "Add"
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-add-value"
 msgstr "Add"
 
 #. Default: "This field has no values yet."
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-no-values"
 msgstr "This field has no values yet."
 
 #. Default: "Action"
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-action"
 msgstr "Action"
 
 #. Default: "Remove row"
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-remove-row"
 msgstr "Remove row"
 
 #. Default: "as source language"
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-same-as-source"
 msgstr "as source language"
 
 #. Default: "Appears in more than one row; the last row wins."
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-duplicate"
 msgstr "Appears in more than one row; the last row wins."
 
 #. Default: "Source language"
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-role-source"
 msgstr "Source language"
 
 #. Default: "Target language"
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-role-target"
 msgstr "Target language"
 
 #. Default: "Not offered"
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-role-unoffered"
 msgstr "Not offered"
 
 #. Default: "No site language"
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-role-orphan"
 msgstr "No site language"
 
 #. Default: "Remove column"
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-remove-column"
 msgstr "Remove column"
 
 #. Default: "Remove the values in {language}?"
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-remove-column-header"
 msgstr "Remove the values in {language}?"
 
 #. Default: "{language} is no site language; its values are never used."
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-remove-column-content"
 msgstr "{language} is no site language; its values are never used."
 
 #. Default: "Remove"
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-remove"
 msgstr "Remove"
 
 #. Default: "Cancel"
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-cancel"
 msgstr "Cancel"
 
 #. Default: "Export (Excel)"
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-export-excel"
 msgstr "Export (Excel)"
 
 #. Default: "Import (Excel)"
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-import-excel"
 msgstr "Import (Excel)"
 
 #. Default: "The field {field} cannot name an Excel sheet: at most 31 characters, none of [ ] : * ? / \\."
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-export-sheet-name"
 msgstr "The field {field} cannot name an Excel sheet: at most 31 characters, none of [ ] : * ? / \\."
 
 #. Default: "The file could not be written: {error}"
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-export-error"
 msgstr "The file could not be written: {error}"
 
 #. Default: "Import the mapping from Excel"
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-import-header"
 msgstr "Import the mapping from Excel"
 
 #. Default: "Choose an .xlsx file"
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-import-choose-file"
 msgstr "Choose an .xlsx file"
 
 #. Default: "The file could not be read: {error}"
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-import-read-error"
 msgstr "The file could not be read: {error}"
 
 #. Default: "No sheet of the file holds values."
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-import-no-sheets"
 msgstr "No sheet of the file holds values."
 
 #. Default: "Sheet"
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-import-sheet"
 msgstr "Sheet"
 
 #. Default: "Into field"
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-import-field"
 msgstr "Into field"
 
 #. Default: "Replaces {count, plural, one {# value} other {# values}}"
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-import-replaces"
 msgstr "Replaces {count, plural, one {# value} other {# values}}"
 
 #. Default: "New field"
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-import-new-field"
 msgstr "New field"
 
 #. Default: "Column \"{header}\" names no language and is left out."
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-import-unknown-column"
 msgstr "Column \"{header}\" names no language and is left out."
 
 #. Default: "Column \"{header}\" repeats a language and is left out."
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-import-duplicate-language"
 msgstr "Column \"{header}\" repeats a language and is left out."
 
 #. Default: "No column names a language."
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-import-no-language-columns"
 msgstr "No column names a language."
 
 #. Default: "Import"
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-import-button"
 msgstr "Import"
 
 #. Default: "Column {column} has no header; {count, plural, one {# value is} other {# values are}} left out."
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-import-headerless-values"
 msgstr "Column {column} has no header; {count, plural, one {# value is} other {# values are}} left out."
 
 #. Default: "One column per language, one row per value. The first row names the languages, by code (\"de\") or name (\"German\"). An empty cell keeps the value of the source language. A file with several sheets asks which one to take."
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-import-intro"
 msgstr "One column per language, one row per value. The first row names the languages, by code (\"de\") or name (\"German\"). An empty cell keeps the value of the source language. A file with several sheets asks which one to take."
 
 #. Default: "The import replaces the values of {field} completely; the other fields stay as they are. It takes effect once the settings are saved."
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-import-note"
 msgstr "The import replaces the values of {field} completely; the other fields stay as they are. It takes effect once the settings are saved."
 
 #. Default: "{sheet}: {count, plural, one {# value} other {# values}}"
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-import-sheet-values"
 msgstr "{sheet}: {count, plural, one {# value} other {# values}}"
 
 #. Default: "Column \"{header}\" is no language of the site; it is taken over but not used."
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-import-not-site-language"
 msgstr "Column \"{header}\" is no language of the site; it is taken over but not used."
 
 #. Default: "Export the mapping to Excel"
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-export-header"
 msgstr "Export the mapping to Excel"
 
 #. Default: "Only the selected field {field} ({count, plural, one {# value} other {# values}})"
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-export-scope-field"
 msgstr "Only the selected field {field} ({count, plural, one {# value} other {# values}})"
 
 #. Default: "All fields ({fields, plural, one {# field} other {# fields}}, {count, plural, one {# value} other {# values}}), one sheet per field"
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-export-scope-all"
 msgstr "All fields ({fields, plural, one {# field} other {# fields}}, {count, plural, one {# value} other {# values}}), one sheet per field"
 
 #. Default: "The first row names the languages as \"German (de)\": the source language first, then the other site languages, then languages the site does not have. An empty cell stays empty."
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-export-intro"
 msgstr "The first row names the languages as \"German (de)\": the source language first, then the other site languages, then languages the site does not have. An empty cell stays empty."
 
 #. Default: "File: {fileName}"
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-export-file"
 msgstr "File: {fileName}"
 
 #. Default: "Export"
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-export-button"
 msgstr "Export"
 
 #. Default: "Search values …"
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-search-placeholder"
 msgstr "Search values …"
 
 #. Default: "Only incomplete ({count})"
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-incomplete-only"
 msgstr "Only incomplete ({count})"
 
 #. Default: "No values found."
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-no-matches"
 msgstr "No values found."
 
 #. Default: "{start}–{end} of {total, plural, one {# value} other {# values}}"
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-page-range"
 msgstr "{start}–{end} of {total, plural, one {# value} other {# values}}"
 
 #. Default: "{start}–{end} of {total, plural, one {# match} other {# matches}} ({all} values)"
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-page-range-filtered"
 msgstr "{start}–{end} of {total, plural, one {# match} other {# matches}} ({all} values)"
 
 #. Default: "per page"
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-per-page"
 msgstr "per page"
 
 #. Default: "Page {page}"
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-page"
 msgstr "Page {page}"
 
 #. Default: "Previous page"
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-previous-page"
 msgstr "Previous page"
 
 #. Default: "Next page"
-#: components/controlpanel/messages
+#: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-next-page"
 msgstr "Next page"

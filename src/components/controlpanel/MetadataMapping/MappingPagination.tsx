@@ -1,8 +1,8 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 import { Button } from 'semantic-ui-react';
-import { pageNumbers } from '../../helpers/metadataMapping';
-import type { PageSlice } from '../../helpers/metadataMapping';
+import { pageNumbers } from '../../../helpers/metadataMapping';
+import type { PageSlice } from '../../../helpers/metadataMapping';
 import messages from './messages';
 
 export const PAGE_SIZES = [25, 50, 100];

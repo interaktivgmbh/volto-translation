@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useIntl } from 'react-intl';
 import { Button, Input } from 'semantic-ui-react';
-import messages, { onEnter } from './messages';
-import type { InputData } from './messages';
+import messages from './messages';
+import { onEnter } from './utils';
+import type { InputData } from './utils';
 
 interface MappingToolbarProps {
   sourceLanguageName: string;

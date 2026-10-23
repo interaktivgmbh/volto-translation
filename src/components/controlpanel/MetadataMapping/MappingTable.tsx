@@ -3,11 +3,11 @@ import { useIntl } from 'react-intl';
 import { Button, Input, Label, Table } from 'semantic-ui-react';
 import Icon from '@plone/volto/components/theme/Icon/Icon';
 import clearSVG from '@plone/volto/icons/clear.svg';
-import { cellValue, withCell } from '../../helpers/metadataMapping';
-import type { MappingColumn } from '../../helpers/metadataMapping';
-import type { MetadataMappingRow } from '../../types';
+import { cellValue, withCell } from '../../../helpers/metadataMapping';
+import type { MappingColumn } from '../../../helpers/metadataMapping';
+import type { MetadataMappingRow } from '../../../types';
 import messages, { ROLE_MESSAGES } from './messages';
-import type { InputData } from './messages';
+import type { InputData } from './utils';
 
 // A shown row and its position among all rows of the field.
 export interface MappingEntry {
