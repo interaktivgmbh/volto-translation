@@ -30,6 +30,7 @@ const MappingFilterBar = (props: MappingFilterBarProps) => {
           <Input
             value={search}
             placeholder={intl.formatMessage(messages.searchPlaceholder)}
+            aria-label={intl.formatMessage(messages.searchLabel)}
             onChange={(_event: React.SyntheticEvent, data: InputData) =>
               onSearch(String(data.value))
             }
@@ -37,6 +38,7 @@ const MappingFilterBar = (props: MappingFilterBarProps) => {
             onKeyDown={onEnter(() => {})}
           />
           <Checkbox
+            id="metadata-mapping-incomplete-only"
             checked={incompleteOnly}
             label={intl.formatMessage(messages.incompleteOnly, {
               count: incompleteCount,

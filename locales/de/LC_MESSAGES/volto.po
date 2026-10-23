@@ -567,10 +567,10 @@ msgstr "Dieses Feld hat noch keine Werte."
 msgid "volto-translation-mapping-action"
 msgstr "Aktion"
 
-#. Default: "Remove row"
+#. Default: "Remove row {row}"
 #: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-remove-row"
-msgstr "Zeile entfernen"
+msgstr "Zeile {row} entfernen"
 
 #. Default: "as source language"
 #: components/controlpanel/MetadataMapping/messages
@@ -782,10 +782,10 @@ msgstr "Keine Einträge gefunden."
 msgid "volto-translation-mapping-page-range"
 msgstr "{start}–{end} von {total, plural, one {# Eintrag} other {# Einträgen}}"
 
-#. Default: "{start}–{end} of {total, plural, one {# match} other {# matches}} ({all} values)"
+#. Default: "{start}–{end} of {total, plural, one {# match} other {# matches}} ({all, plural, one {# value} other {# values}})"
 #: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-page-range-filtered"
-msgstr "{start}–{end} von {total, plural, one {# Treffer} other {# Treffern}} ({all} Einträge)"
+msgstr "{start}–{end} von {total, plural, one {# Treffer} other {# Treffern}} ({all, plural, one {# Eintrag} other {# Einträgen}})"
 
 #. Default: "per page"
 #: components/controlpanel/MetadataMapping/messages
@@ -806,3 +806,63 @@ msgstr "Vorherige Seite"
 #: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-next-page"
 msgstr "Nächste Seite"
+
+#. Default: "Remove \"{value}\""
+#: components/controlpanel/MetadataMapping/messages
+msgid "volto-translation-mapping-remove-value"
+msgstr "„{value}“ entfernen"
+
+#. Default: "Remove column {language}"
+#: components/controlpanel/MetadataMapping/messages
+msgid "volto-translation-mapping-remove-column-label"
+msgstr "Spalte {language} entfernen"
+
+#. Default: "Remove field {field}"
+#: components/controlpanel/MetadataMapping/messages
+msgid "volto-translation-mapping-remove-field-label"
+msgstr "Feld {field} entfernen"
+
+#. Default: "Mapped fields"
+#: components/controlpanel/MetadataMapping/messages
+msgid "volto-translation-mapping-fields-label"
+msgstr "Gemappte Felder"
+
+#. Default: "Id of a new field"
+#: components/controlpanel/MetadataMapping/messages
+msgid "volto-translation-mapping-field-id-label"
+msgstr "ID eines neuen Felds"
+
+#. Default: "Search values"
+#: components/controlpanel/MetadataMapping/messages
+msgid "volto-translation-mapping-search-label"
+msgstr "Begriff suchen"
+
+#. Default: "Mapping of the field {field}"
+#: components/controlpanel/MetadataMapping/messages
+msgid "volto-translation-mapping-table-caption"
+msgstr "Mapping des Felds {field}"
+
+#. Default: "{language} for \"{source}\""
+#: components/controlpanel/MetadataMapping/messages
+msgid "volto-translation-mapping-cell-label"
+msgstr "{language} zu „{source}“"
+
+#. Default: "{language}, row {row}"
+#: components/controlpanel/MetadataMapping/messages
+msgid "volto-translation-mapping-cell-label-row"
+msgstr "{language}, Zeile {row}"
+
+#. Default: "Pages"
+#: components/controlpanel/MetadataMapping/messages
+msgid "volto-translation-mapping-pages-label"
+msgstr "Seiten"
+
+#. Default: "Values per page"
+#: components/controlpanel/MetadataMapping/messages
+msgid "volto-translation-mapping-page-size-label"
+msgstr "Einträge je Seite"
+
+#. Default: "What to export?"
+#: components/controlpanel/MetadataMapping/messages
+msgid "volto-translation-mapping-export-scope-legend"
+msgstr "Was exportieren?"

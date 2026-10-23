@@ -9,6 +9,7 @@ import {
 } from '../../../helpers/metadataMappingExcel';
 import type { MetadataMapping } from '../../../types';
 import messages from './messages';
+import { dialogProps, useDialogFocus } from './utils';
 
 interface MappingExportModalProps {
   open: boolean;
@@ -31,6 +32,8 @@ const MappingExportModal = (props: MappingExportModalProps) => {
   const [scope, setScope] = useState<Scope>('field');
   const [writing, setWriting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  useDialogFocus(open, '.metadata-mapping-export-modal');
 
   // each opening starts with the selected field, if there is one
   useEffect(() => {
@@ -75,13 +78,18 @@ const MappingExportModal = (props: MappingExportModalProps) => {
     <Modal
       open={open}
       onClose={props.onClose}
-      className="metadata-mapping-modal"
+      className="metadata-mapping-modal metadata-mapping-export-modal"
+      {...dialogProps('metadata-mapping-export-title')}
     >
-      <Modal.Header>{intl.formatMessage(messages.exportHeader)}</Modal.Header>
+      <Modal.Header id="metadata-mapping-export-title">
+        {intl.formatMessage(messages.exportHeader)}
+      </Modal.Header>
       <Modal.Content>
-        <div className="metadata-mapping-export-scope">
+        <fieldset className="metadata-mapping-export-scope">
+          <legend>{intl.formatMessage(messages.exportScopeLegend)}</legend>
           <Checkbox
             radio
+            id="metadata-mapping-export-field"
             name="metadata-mapping-export-scope"
             checked={scope === 'field'}
             disabled={!currentField}
@@ -93,6 +101,7 @@ const MappingExportModal = (props: MappingExportModalProps) => {
           />
           <Checkbox
             radio
+            id="metadata-mapping-export-all"
             name="metadata-mapping-export-scope"
             checked={scope === 'all'}
             label={intl.formatMessage(messages.exportScopeAll, {
@@ -101,7 +110,7 @@ const MappingExportModal = (props: MappingExportModalProps) => {
             })}
             onChange={() => setScope('all')}
           />
-        </div>
+        </fieldset>
 
         <p className="metadata-mapping-modal-intro">
           {intl.formatMessage(messages.exportIntro)}
@@ -111,11 +120,15 @@ const MappingExportModal = (props: MappingExportModalProps) => {
         </p>
 
         {badField && (
-          <Message negative>
+          <Message negative role="alert">
             {intl.formatMessage(messages.exportSheetName, { field: badField })}
           </Message>
         )}
-        {error && <Message negative>{error}</Message>}
+        {error && (
+          <Message negative role="alert">
+            {error}
+          </Message>
+        )}
       </Modal.Content>
       <Modal.Actions>
         <Button type="button" onClick={props.onClose}>

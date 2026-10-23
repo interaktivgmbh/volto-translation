@@ -5,6 +5,8 @@ import messages from './messages';
 import { onEnter } from './utils';
 import type { InputData } from './utils';
 
+const FIELD_ID_ERROR = 'metadata-mapping-field-id-error';
+
 interface MappingFieldBarProps {
   fieldIds: string[];
   current?: string;
@@ -38,26 +40,37 @@ const MappingFieldBar = (props: MappingFieldBarProps) => {
   return (
     <>
       <div className="metadata-mapping-fields">
-        {fieldIds.map((fieldId) => (
-          <Button
-            key={fieldId}
-            type="button"
-            active={fieldId === current}
-            className={
-              fieldId === current
-                ? 'metadata-mapping-tab selected'
-                : 'metadata-mapping-tab'
-            }
-            onClick={() => onSelect(fieldId)}
-          >
-            {fieldId}
-          </Button>
-        ))}
+        {/* toggle buttons: aria-pressed tells which field is shown */}
+        <div
+          role="group"
+          aria-label={intl.formatMessage(messages.fieldsLabel)}
+          className="metadata-mapping-tabs"
+        >
+          {fieldIds.map((fieldId) => (
+            // a plain button: semantic-ui's Button overwrites aria-pressed
+            <button
+              key={fieldId}
+              type="button"
+              aria-pressed={fieldId === current}
+              className={
+                fieldId === current
+                  ? 'ui button metadata-mapping-tab selected'
+                  : 'ui button metadata-mapping-tab'
+              }
+              onClick={() => onSelect(fieldId)}
+            >
+              {fieldId}
+            </button>
+          ))}
+        </div>
         <span className="metadata-mapping-add-field">
           <Input
             value={newFieldId}
             placeholder={intl.formatMessage(messages.fieldIdPlaceholder)}
+            aria-label={intl.formatMessage(messages.fieldIdLabel)}
             error={!!error}
+            aria-invalid={!!error || undefined}
+            aria-describedby={error ? FIELD_ID_ERROR : undefined}
             onChange={(_event: React.SyntheticEvent, data: InputData) => {
               setNewFieldId(String(data.value));
               setError(null);
@@ -76,6 +89,9 @@ const MappingFieldBar = (props: MappingFieldBarProps) => {
           <Button
             type="button"
             className="metadata-mapping-secondary negative"
+            aria-label={intl.formatMessage(messages.removeFieldLabel, {
+              field: current,
+            })}
             onClick={props.onRemove}
           >
             {intl.formatMessage(messages.removeField)}
@@ -83,7 +99,7 @@ const MappingFieldBar = (props: MappingFieldBarProps) => {
         )}
       </div>
       {error && (
-        <Label basic color="red" pointing>
+        <Label id={FIELD_ID_ERROR} role="alert" basic color="red" pointing>
           {error}
         </Label>
       )}

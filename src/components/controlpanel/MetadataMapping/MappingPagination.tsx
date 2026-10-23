@@ -30,7 +30,8 @@ const MappingPagination = (props: MappingPaginationProps) => {
 
   return (
     <div className="metadata-mapping-pagination">
-      <span className="metadata-mapping-range">
+      {/* read out when a search or filter changes the number of rows */}
+      <span className="metadata-mapping-range" aria-live="polite" aria-atomic>
         {intl.formatMessage(
           total === all ? messages.pageRange : messages.pageRangeFiltered,
           range,
@@ -38,7 +39,10 @@ const MappingPagination = (props: MappingPaginationProps) => {
       </span>
 
       {slice.pageCount > 1 && (
-        <span className="metadata-mapping-pages">
+        <nav
+          className="metadata-mapping-pages"
+          aria-label={intl.formatMessage(messages.pagesLabel)}
+        >
           <Button
             type="button"
             basic
@@ -51,7 +55,7 @@ const MappingPagination = (props: MappingPaginationProps) => {
           {pageNumbers(slice.page, slice.pageCount).map((number, position) =>
             number === null ? (
               // eslint-disable-next-line react/no-array-index-key
-              <span key={`gap-${position}`} className="gap">
+              <span key={`gap-${position}`} className="gap" aria-hidden>
                 …
               </span>
             ) : (
@@ -79,22 +83,28 @@ const MappingPagination = (props: MappingPaginationProps) => {
           >
             ›
           </Button>
-        </span>
+        </nav>
       )}
 
-      <span className="metadata-mapping-page-size">
+      <span
+        className="metadata-mapping-page-size"
+        role="group"
+        aria-label={intl.formatMessage(messages.pageSizeLabel)}
+      >
         {intl.formatMessage(messages.perPage)}
         {PAGE_SIZES.map((size) => (
-          <Button
+          // a plain button: semantic-ui's Button overwrites aria-pressed
+          <button
             key={size}
             type="button"
-            basic
-            className={size === pageSize ? 'selected' : undefined}
+            className={
+              size === pageSize ? 'ui basic button selected' : 'ui basic button'
+            }
             aria-pressed={size === pageSize}
             onClick={() => onPageSize(size)}
           >
             {size}
-          </Button>
+          </button>
         ))}
       </span>
     </div>

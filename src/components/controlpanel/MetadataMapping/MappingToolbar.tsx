@@ -24,13 +24,16 @@ const MappingToolbar = (props: MappingToolbarProps) => {
     }
   };
 
+  const label = intl.formatMessage(messages.newValuePlaceholder, {
+    language: sourceLanguageName,
+  });
+
   return (
     <div className="metadata-mapping-toolbar">
       <Input
         value={newValue}
-        placeholder={intl.formatMessage(messages.newValuePlaceholder, {
-          language: sourceLanguageName,
-        })}
+        placeholder={label}
+        aria-label={label}
         onChange={(_event: React.SyntheticEvent, data: InputData) =>
           setNewValue(String(data.value))
         }

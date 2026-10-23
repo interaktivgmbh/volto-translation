@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 import { Button, Input, Label, Table } from 'semantic-ui-react';
 import Icon from '@plone/volto/components/theme/Icon/Icon';
@@ -19,39 +19,25 @@ interface MappingTableProps {
   entries: MappingEntry[];
   columns: MappingColumn[];
   duplicates: Set<string>;
+  caption: string;
   emptyText: string;
-  // the row whose first target cell takes the cursor, e.g. a new one
-  focus?: { index: number } | null;
   languageName: (code: string) => string;
   onChangeRow: (index: number, row: MetadataMappingRow) => void;
   onRemoveRow: (index: number) => void;
   onRemoveColumn: (code: string) => void;
 }
 
-// One row per value, one column per language; the header shows each language's role.
+// One row per value, one column per language; the header shows each language's
+// role. The source value heads its row, so a screen reader names the row with it.
 const MappingTable = (props: MappingTableProps) => {
-  const {
-    entries,
-    columns,
-    duplicates,
-    focus,
-    languageName,
-    onChangeRow,
-    onRemoveColumn,
-  } = props;
+  const { entries, columns, duplicates, languageName, onChangeRow } = props;
   const intl = useIntl();
-  const focusInput = useRef<{ focus: () => void } | null>(null);
+  const source = columns.find((column) => column.role === 'source')?.code;
+  // the cell a new row's cursor goes to, see the widget
   const focusCode = (
     columns.find((column) => column.role === 'target') ||
     columns.find((column) => column.role !== 'source')
   )?.code;
-
-  // a new request each time, so the same row may take the cursor again
-  useEffect(() => {
-    if (focus) {
-      focusInput.current?.focus();
-    }
-  }, [focus]);
 
   return (
     <div className="metadata-mapping-table-wrapper">
@@ -61,18 +47,20 @@ const MappingTable = (props: MappingTableProps) => {
         // fixed layout gives every language the same width; many scroll sideways
         style={{ minWidth: `${columns.length * 12 + 5}em` }}
       >
+        <caption className="metadata-mapping-sr-only">{props.caption}</caption>
         <Table.Header>
           <Table.Row>
             {columns.map((column) => (
               <Table.HeaderCell
                 key={column.code}
+                scope="col"
                 className={`role-${column.role}`}
               >
                 <div className="metadata-mapping-language">
                   {languageName(column.code)}
                 </div>
                 <Label
-                  size="mini"
+                  size="tiny"
                   className={`metadata-mapping-role role-${column.role}`}
                 >
                   {intl.formatMessage(ROLE_MESSAGES[column.role])}
@@ -82,14 +70,17 @@ const MappingTable = (props: MappingTableProps) => {
                     type="button"
                     className="metadata-mapping-secondary negative"
                     size="mini"
-                    onClick={() => onRemoveColumn(column.code)}
+                    aria-label={intl.formatMessage(messages.removeColumnLabel, {
+                      language: languageName(column.code),
+                    })}
+                    onClick={() => props.onRemoveColumn(column.code)}
                   >
                     {intl.formatMessage(messages.removeColumn)}
                   </Button>
                 )}
               </Table.HeaderCell>
             ))}
-            <Table.HeaderCell className="metadata-mapping-action">
+            <Table.HeaderCell scope="col" className="metadata-mapping-action">
               {intl.formatMessage(messages.action)}
             </Table.HeaderCell>
           </Table.Row>
@@ -105,68 +96,100 @@ const MappingTable = (props: MappingTableProps) => {
               </Table.Cell>
             </Table.Row>
           )}
-          {entries.map(({ row, index }) => (
-            // rows have no id of their own; their position is their identity
-            // eslint-disable-next-line react/no-array-index-key
-            <Table.Row key={index}>
-              {columns.map((column) => {
-                const cell = cellValue(row, column.code);
-                const duplicate =
-                  column.role === 'source' && duplicates.has(cell.trim());
+          {entries.map(({ row, index }) => {
+            const sourceValue = source ? cellValue(row, source).trim() : '';
+            const duplicateId = `metadata-mapping-duplicate-${index}`;
+            const removeLabel = sourceValue
+              ? intl.formatMessage(messages.removeValue, { value: sourceValue })
+              : intl.formatMessage(messages.removeRow, { row: index + 1 });
 
-                return (
-                  <Table.Cell
-                    key={column.code}
-                    className={`role-${column.role}`}
+            return (
+              // rows have no id of their own; their position is their identity
+              // eslint-disable-next-line react/no-array-index-key
+              <Table.Row key={index} data-row={index}>
+                {columns.map((column) => {
+                  const cell = cellValue(row, column.code);
+                  const isSource = column.code === source;
+                  const duplicate = isSource && duplicates.has(cell.trim());
+                  const label =
+                    isSource || !sourceValue
+                      ? intl.formatMessage(messages.cellLabelRow, {
+                          language: languageName(column.code),
+                          row: index + 1,
+                        })
+                      : intl.formatMessage(messages.cellLabel, {
+                          language: languageName(column.code),
+                          source: sourceValue,
+                        });
+
+                  return (
+                    <Table.Cell
+                      key={column.code}
+                      as={isSource ? 'th' : 'td'}
+                      scope={isSource ? 'row' : undefined}
+                      className={[
+                        `role-${column.role}`,
+                        column.code === focusCode
+                          ? 'metadata-mapping-focus'
+                          : '',
+                      ].join(' ')}
+                    >
+                      <Input
+                        className={cell ? 'filled' : 'empty'}
+                        fluid
+                        value={cell}
+                        lang={column.code}
+                        aria-label={label}
+                        error={duplicate}
+                        aria-invalid={duplicate || undefined}
+                        aria-describedby={duplicate ? duplicateId : undefined}
+                        title={
+                          duplicate
+                            ? intl.formatMessage(messages.duplicate)
+                            : undefined
+                        }
+                        placeholder={
+                          isSource
+                            ? undefined
+                            : intl.formatMessage(messages.sameAsSource)
+                        }
+                        onChange={(
+                          _event: React.SyntheticEvent,
+                          data: InputData,
+                        ) =>
+                          onChangeRow(
+                            index,
+                            withCell(row, column.code, String(data.value)),
+                          )
+                        }
+                      />
+                      {duplicate && (
+                        <span
+                          id={duplicateId}
+                          className="metadata-mapping-sr-only"
+                        >
+                          {intl.formatMessage(messages.duplicate)}
+                        </span>
+                      )}
+                    </Table.Cell>
+                  );
+                })}
+                <Table.Cell className="metadata-mapping-action">
+                  <Button
+                    type="button"
+                    basic
+                    icon
+                    className="metadata-mapping-remove-row"
+                    aria-label={removeLabel}
+                    title={removeLabel}
+                    onClick={() => props.onRemoveRow(index)}
                   >
-                    <Input
-                      className={cell ? 'filled' : 'empty'}
-                      ref={
-                        index === focus?.index && column.code === focusCode
-                          ? focusInput
-                          : undefined
-                      }
-                      fluid
-                      value={cell}
-                      error={duplicate}
-                      title={
-                        duplicate
-                          ? intl.formatMessage(messages.duplicate)
-                          : undefined
-                      }
-                      placeholder={
-                        column.role === 'source'
-                          ? undefined
-                          : intl.formatMessage(messages.sameAsSource)
-                      }
-                      onChange={(
-                        _event: React.SyntheticEvent,
-                        data: InputData,
-                      ) =>
-                        onChangeRow(
-                          index,
-                          withCell(row, column.code, String(data.value)),
-                        )
-                      }
-                    />
-                  </Table.Cell>
-                );
-              })}
-              <Table.Cell className="metadata-mapping-action">
-                <Button
-                  type="button"
-                  basic
-                  icon
-                  className="metadata-mapping-remove-row"
-                  aria-label={intl.formatMessage(messages.removeRow)}
-                  title={intl.formatMessage(messages.removeRow)}
-                  onClick={() => props.onRemoveRow(index)}
-                >
-                  <Icon name={clearSVG} size="18px" />
-                </Button>
-              </Table.Cell>
-            </Table.Row>
-          ))}
+                    <Icon name={clearSVG} size="18px" ariaHidden />
+                  </Button>
+                </Table.Cell>
+              </Table.Row>
+            );
+          })}
         </Table.Body>
       </Table>
     </div>

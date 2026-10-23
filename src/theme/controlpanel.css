@@ -77,9 +77,9 @@
 }
 
 .metadata-mapping-widget .ui.button.metadata-mapping-tab.selected {
-  border-color: #007eb1;
+  border-color: #006a96;
   background: #e8f4fa;
-  color: #007eb1;
+  color: #006a96;
 }
 
 .metadata-mapping-widget .ui.button.metadata-mapping-secondary.negative {
@@ -124,7 +124,7 @@
   text-align: center;
 }
 
-.metadata-mapping-widget .ui.table.metadata-mapping-table th {
+.metadata-mapping-widget .ui.table.metadata-mapping-table thead th {
   padding: 0.9em 0.6em;
   background: #f3f5f6;
   font-size: 0.85em;
@@ -152,13 +152,13 @@
 }
 
 .metadata-mapping-widget .ui.label.metadata-mapping-role.role-source {
-  background-color: #007eb1;
+  background-color: #006a96;
   color: #fff;
 }
 
 .metadata-mapping-widget .ui.label.metadata-mapping-role.role-target {
   background-color: #e8f4fa;
-  color: #007eb1;
+  color: #006a96;
 }
 
 .metadata-mapping-widget .ui.label.metadata-mapping-role.role-orphan {
@@ -166,7 +166,15 @@
   color: #9f3a38;
 }
 
-.metadata-mapping-widget .ui.table td {
+/* the source value heads its row, but looks like any other cell */
+.metadata-mapping-widget .ui.table.metadata-mapping-table tbody th {
+  background: transparent;
+  font-weight: normal;
+  text-align: left;
+}
+
+.metadata-mapping-widget .ui.table td,
+.metadata-mapping-widget .ui.table tbody th {
   padding: 0.5em 0.6em;
   vertical-align: middle;
 }
@@ -174,18 +182,18 @@
 /* "no values yet" or "none found" */
 .metadata-mapping-widget .ui.table td.metadata-mapping-empty {
   padding: 1.25em 0.6em;
-  color: #878f93;
+  color: #646c70;
   font-style: italic;
 }
 
 /* filled cells stand out; empty ones keep the source value */
 .ui.form .metadata-mapping-widget .ui.input.filled input[type='text'] {
-  border-bottom: 1px solid #c9c38a;
+  border-bottom: 1px solid #948d4a;
   background: #fffde8;
 }
 
 .ui.form .metadata-mapping-widget .ui.input.empty input[type='text'] {
-  border-bottom: 1px solid #d6dde0;
+  border-bottom: 1px solid #8a979b;
   background: transparent;
 }
 
@@ -193,13 +201,13 @@
   .metadata-mapping-widget
   .ui.input.empty
   input[type='text']::placeholder {
-  color: #a5adb0;
+  color: #646c70;
   font-style: italic;
 }
 
 .metadata-mapping-widget td.role-unoffered .ui.input input,
 .metadata-mapping-widget th.role-unoffered .metadata-mapping-language {
-  color: #878f93;
+  color: #646c70;
 }
 
 .metadata-mapping-widget td.role-orphan {
@@ -210,7 +218,7 @@
   padding: 0.3em;
   background: none;
   box-shadow: none;
-  color: #878f93;
+  color: #646c70;
 }
 
 .metadata-mapping-widget .ui.button.metadata-mapping-remove-row:hover {
@@ -239,7 +247,7 @@
   .metadata-mapping-filter
   .ui.input
   input[type='text'] {
-  border: 1px solid #c7d5d8;
+  border: 1px solid #8a979b;
 }
 
 .metadata-mapping-widget .metadata-mapping-actions {
@@ -297,11 +305,45 @@
   .ui.basic.button.selected {
   border-color: #007eb1;
   background: #e8f4fa !important;
-  color: #007eb1 !important;
+  color: #006a96 !important;
 }
 
 .metadata-mapping-widget .metadata-mapping-pagination .gap {
   padding: 0 0.3em;
+}
+
+/* the placeholders are the only visible label: AA contrast */
+.ui.form .metadata-mapping-widget .ui.input input[type='text']::placeholder,
+.metadata-mapping-modal .ui.input input[type='text']::placeholder {
+  color: #646c70;
+}
+
+/* the field tabs, a group of toggle buttons */
+.metadata-mapping-widget .metadata-mapping-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+}
+
+/* read by screen readers only */
+.metadata-mapping-sr-only {
+  position: absolute;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  border: 0;
+  margin: -1px;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* the button styles above hide semantic-ui's focus: a visible ring instead */
+.metadata-mapping-widget .ui.button:focus-visible,
+.metadata-mapping-modal .ui.button:focus-visible,
+.metadata-mapping-confirm .ui.button:focus-visible {
+  outline: 2px solid #006a96;
+  outline-offset: 2px;
 }
 
 /* import and export modal: they render outside the widget */
@@ -313,7 +355,8 @@
   gap: 0.5em 1em;
 }
 
-.metadata-mapping-modal .metadata-mapping-import-row > label {
+.metadata-mapping-modal .metadata-mapping-import-row > label,
+.metadata-mapping-modal .metadata-mapping-import-label {
   min-width: 8em;
   font-weight: bold;
 }
@@ -342,4 +385,15 @@
   margin-top: 0.3em;
   color: #9f3a38;
   font-size: 0.9em;
+}
+
+.metadata-mapping-modal fieldset.metadata-mapping-export-scope {
+  padding: 0;
+  border: 0;
+  margin: 0;
+}
+
+.metadata-mapping-modal .metadata-mapping-export-scope legend {
+  margin-bottom: 0.5em;
+  font-weight: bold;
 }

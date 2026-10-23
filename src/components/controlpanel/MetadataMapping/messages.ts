@@ -14,6 +14,46 @@ const messages = defineMessages({
     id: 'volto-translation-mapping-remove-field',
     defaultMessage: 'Remove field',
   },
+  removeFieldLabel: {
+    id: 'volto-translation-mapping-remove-field-label',
+    defaultMessage: 'Remove field {field}',
+  },
+  fieldsLabel: {
+    id: 'volto-translation-mapping-fields-label',
+    defaultMessage: 'Mapped fields',
+  },
+  fieldIdLabel: {
+    id: 'volto-translation-mapping-field-id-label',
+    defaultMessage: 'Id of a new field',
+  },
+  searchLabel: {
+    id: 'volto-translation-mapping-search-label',
+    defaultMessage: 'Search values',
+  },
+  tableCaption: {
+    id: 'volto-translation-mapping-table-caption',
+    defaultMessage: 'Mapping of the field {field}',
+  },
+  cellLabel: {
+    id: 'volto-translation-mapping-cell-label',
+    defaultMessage: '{language} for "{source}"',
+  },
+  cellLabelRow: {
+    id: 'volto-translation-mapping-cell-label-row',
+    defaultMessage: '{language}, row {row}',
+  },
+  pagesLabel: {
+    id: 'volto-translation-mapping-pages-label',
+    defaultMessage: 'Pages',
+  },
+  pageSizeLabel: {
+    id: 'volto-translation-mapping-page-size-label',
+    defaultMessage: 'Values per page',
+  },
+  exportScopeLegend: {
+    id: 'volto-translation-mapping-export-scope-legend',
+    defaultMessage: 'What to export?',
+  },
   removeFieldHeader: {
     id: 'volto-translation-mapping-remove-field-header',
     defaultMessage: 'Remove the mapping of {field}?',
@@ -59,7 +99,11 @@ const messages = defineMessages({
   action: { id: 'volto-translation-mapping-action', defaultMessage: 'Action' },
   removeRow: {
     id: 'volto-translation-mapping-remove-row',
-    defaultMessage: 'Remove row',
+    defaultMessage: 'Remove row {row}',
+  },
+  removeValue: {
+    id: 'volto-translation-mapping-remove-value',
+    defaultMessage: 'Remove "{value}"',
   },
   sameAsSource: {
     id: 'volto-translation-mapping-same-as-source',
@@ -88,6 +132,10 @@ const messages = defineMessages({
   removeColumn: {
     id: 'volto-translation-mapping-remove-column',
     defaultMessage: 'Remove column',
+  },
+  removeColumnLabel: {
+    id: 'volto-translation-mapping-remove-column-label',
+    defaultMessage: 'Remove column {language}',
   },
   removeColumnHeader: {
     id: 'volto-translation-mapping-remove-column-header',
@@ -120,7 +168,7 @@ const messages = defineMessages({
   pageRangeFiltered: {
     id: 'volto-translation-mapping-page-range-filtered',
     defaultMessage:
-      '{start}–{end} of {total, plural, one {# match} other {# matches}} ({all} values)',
+      '{start}–{end} of {total, plural, one {# match} other {# matches}} ({all, plural, one {# value} other {# values}})',
   },
   perPage: {
     id: 'volto-translation-mapping-per-page',
