@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useIntl } from 'react-intl';
 import { Button, Confirm, Message } from 'semantic-ui-react';
@@ -6,9 +6,12 @@ import FormFieldWrapper from '@plone/volto/components/manage/Widgets/FormFieldWr
 import { languageName } from '../../helpers/languages';
 import {
   duplicateValues,
+  isIncomplete,
   languageCodes,
   mappingColumns,
+  matchesSearch,
   normalisedMapping,
+  pageSlice,
   withoutLanguage,
 } from '../../helpers/metadataMapping';
 import type {
@@ -18,7 +21,9 @@ import type {
 } from '../../types';
 import MappingExportModal from './MappingExportModal';
 import MappingFieldBar from './MappingFieldBar';
+import MappingFilterBar from './MappingFilterBar';
 import MappingImportModal from './MappingImportModal';
+import MappingPagination, { PAGE_SIZES } from './MappingPagination';
 import MappingTable from './MappingTable';
 import MappingToolbar from './MappingToolbar';
 import messages from './messages';
@@ -33,6 +38,19 @@ interface MetadataMappingWidgetProps {
   error?: string[];
   fieldSet?: string;
   required?: boolean;
+}
+
+// the page size is a convenience of this browser only
+const PAGE_SIZE_KEY = 'volto-translation-mapping-page-size';
+const DEFAULT_PAGE_SIZE = 50;
+
+function storedPageSize(): number {
+  try {
+    const stored = Number(window.localStorage.getItem(PAGE_SIZE_KEY));
+    return PAGE_SIZES.includes(stored) ? stored : DEFAULT_PAGE_SIZE;
+  } catch (error) {
+    return DEFAULT_PAGE_SIZE;
+  }
 }
 
 type Pending =
@@ -52,6 +70,16 @@ const MetadataMappingWidget = (props: MetadataMappingWidgetProps) => {
   const [pending, setPending] = useState<Pending>(null);
   const [importing, setImporting] = useState(false);
   const [exporting, setExporting] = useState(false);
+  const [search, setSearch] = useState('');
+  const [incompleteOnly, setIncompleteOnly] = useState(false);
+  // rows edited under a search or filter stay shown until it changes
+  const [kept, setKept] = useState<Set<number>>(new Set());
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(DEFAULT_PAGE_SIZE);
+  const [focus, setFocus] = useState<{ index: number } | null>(null);
+
+  // the browser's storage is unknown on the server: read it once mounted
+  useEffect(() => setPageSize(storedPageSize()), []);
 
   const current = selected && selected in mapping ? selected : fieldIds[0];
   const rows: MetadataMappingRow[] = current ? mapping[current] || [] : [];
@@ -69,6 +97,48 @@ const MetadataMappingWidget = (props: MetadataMappingWidgetProps) => {
     : new Set<string>();
   const name = (code: string) => languageName(code, intl.locale);
 
+  const targetCodes = columns
+    .filter((column) => column.role === 'target')
+    .map((column) => column.code);
+  const filtering = !!search.trim() || incompleteOnly;
+  const entries = rows
+    .map((row, index) => ({ row, index }))
+    .filter(
+      ({ row, index }) =>
+        !filtering ||
+        kept.has(index) ||
+        (matchesSearch(row, search) &&
+          (!incompleteOnly || isIncomplete(row, targetCodes))),
+    );
+  const incompleteCount = rows.filter((row) =>
+    isIncomplete(row, targetCodes),
+  ).length;
+  const slice = pageSlice(entries.length, page, pageSize);
+
+  // a new field, search or filter starts on the first page
+  const resetView = (nextSearch = '', nextIncompleteOnly = false) => {
+    setSearch(nextSearch);
+    setIncompleteOnly(nextIncompleteOnly);
+    setKept(new Set());
+    setPage(1);
+    setFocus(null);
+  };
+
+  const selectField = (fieldId: string) => {
+    setSelected(fieldId);
+    resetView(search, incompleteOnly);
+  };
+
+  const changePageSize = (size: number) => {
+    setPageSize(size);
+    setPage(1);
+    try {
+      window.localStorage.setItem(PAGE_SIZE_KEY, String(size));
+    } catch (error) {
+      // without storage the size holds until the page is left
+    }
+  };
+
   const change = (next: MetadataMapping) => onChange(id, next);
   const changeRows = (nextRows: MetadataMappingRow[]) => {
     if (current) {
@@ -76,14 +146,41 @@ const MetadataMappingWidget = (props: MetadataMappingWidgetProps) => {
     }
   };
 
+  const changeRow = (index: number, row: MetadataMappingRow) => {
+    const next = [...rows];
+    next[index] = row;
+    changeRows(next);
+    if (filtering) {
+      setKept(new Set(kept).add(index));
+    }
+  };
+
+  const removeRow = (index: number) => {
+    changeRows(rows.filter((_row, position) => position !== index));
+    // the rows after it move up by one
+    setKept(
+      new Set(
+        Array.from(kept)
+          .filter((position) => position !== index)
+          .map((position) => (position > index ? position - 1 : position)),
+      ),
+    );
+    setFocus(null);
+  };
+
   const addField = (fieldId: string) => {
     change({ ...mapping, [fieldId]: [] });
     setSelected(fieldId);
+    resetView();
   };
 
+  // a new value is shown at the end, with the cursor in its first target cell
   const addValue = (text: string) => {
     if (sourceLanguage) {
       changeRows([...rows, { [sourceLanguage]: text }]);
+      resetView();
+      setPage(Math.ceil((rows.length + 1) / pageSize));
+      setFocus({ index: rows.length });
     }
   };
 
@@ -91,6 +188,7 @@ const MetadataMappingWidget = (props: MetadataMappingWidgetProps) => {
   const importFields = (fields: MetadataMapping) => {
     change({ ...mapping, ...fields });
     setSelected(Object.keys(fields)[0]);
+    resetView();
   };
 
   const confirmPending = () => {
@@ -133,7 +231,7 @@ const MetadataMappingWidget = (props: MetadataMappingWidgetProps) => {
       <MappingFieldBar
         fieldIds={fieldIds}
         current={current}
-        onSelect={setSelected}
+        onSelect={selectField}
         onAdd={addField}
       />
 
@@ -146,19 +244,43 @@ const MetadataMappingWidget = (props: MetadataMappingWidgetProps) => {
 
       {current && siteLanguages.length > 0 && (
         <>
+          <MappingFilterBar
+            search={search}
+            incompleteOnly={incompleteOnly}
+            incompleteCount={incompleteCount}
+            onSearch={(nextSearch) => resetView(nextSearch, incompleteOnly)}
+            onIncompleteOnly={(nextIncompleteOnly) =>
+              resetView(search, nextIncompleteOnly)
+            }
+          />
           <MappingToolbar
             sourceLanguageName={name(sourceLanguage || '')}
             onAdd={addValue}
             onRemoveField={() => setPending({ kind: 'field', field: current })}
           />
           <MappingTable
-            rows={rows}
+            entries={entries.slice(slice.start, slice.end)}
             columns={columns}
             duplicates={duplicates}
+            emptyText={intl.formatMessage(
+              rows.length ? messages.noMatches : messages.noValues,
+            )}
+            focus={focus}
             languageName={name}
-            onChangeRows={changeRows}
+            onChangeRow={changeRow}
+            onRemoveRow={removeRow}
             onRemoveColumn={(code) => setPending({ kind: 'column', code })}
           />
+          {rows.length > 0 && (
+            <MappingPagination
+              slice={slice}
+              total={entries.length}
+              all={rows.length}
+              pageSize={pageSize}
+              onPage={setPage}
+              onPageSize={changePageSize}
+            />
+          )}
         </>
       )}
 

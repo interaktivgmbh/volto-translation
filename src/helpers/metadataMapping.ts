@@ -125,3 +125,75 @@ export function normalisedMapping(value: unknown): MetadataMapping {
     ? (value as MetadataMapping)
     : {};
 }
+
+// A row is incomplete when an offered target language has no value.
+export function isIncomplete(
+  row: MetadataMappingRow,
+  targetCodes: string[],
+): boolean {
+  return targetCodes.some((code) => !cellValue(row, code).trim());
+}
+
+// A search finds a row by any of its values, in any language.
+export function matchesSearch(
+  row: MetadataMappingRow,
+  search: string,
+): boolean {
+  const query = search.trim().toLowerCase();
+
+  return (
+    !query ||
+    Object.values(row).some((value) =>
+      (value || '').toLowerCase().includes(query),
+    )
+  );
+}
+
+export interface PageSlice {
+  page: number;
+  pageCount: number;
+  start: number;
+  end: number;
+}
+
+// The rows of one page; a page beyond the last, e.g. after a removal, shows the last.
+export function pageSlice(
+  total: number,
+  page: number,
+  pageSize: number,
+): PageSlice {
+  const pageCount = Math.max(1, Math.ceil(total / pageSize));
+  const current = Math.min(Math.max(1, page), pageCount);
+  const start = (current - 1) * pageSize;
+
+  return {
+    page: current,
+    pageCount,
+    start,
+    end: Math.min(start + pageSize, total),
+  };
+}
+
+// The page links to show: first, last and the neighbours of the current page;
+// null stands for the pages left out in between.
+export function pageNumbers(
+  page: number,
+  pageCount: number,
+): (number | null)[] {
+  const shown = new Set(
+    [1, pageCount, page - 1, page, page + 1].filter(
+      (number) => number >= 1 && number <= pageCount,
+    ),
+  );
+  const numbers: (number | null)[] = [];
+  Array.from(shown)
+    .sort((a, b) => a - b)
+    .forEach((number, position, sorted) => {
+      if (position && number - sorted[position - 1] > 1) {
+        numbers.push(null);
+      }
+      numbers.push(number);
+    });
+
+  return numbers;
+}

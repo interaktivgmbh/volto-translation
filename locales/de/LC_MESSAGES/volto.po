@@ -761,3 +761,48 @@ msgstr "Datei: {fileName}"
 #: components/controlpanel/messages
 msgid "volto-translation-mapping-export-button"
 msgstr "Exportieren"
+
+#. Default: "Search values …"
+#: components/controlpanel/messages
+msgid "volto-translation-mapping-search-placeholder"
+msgstr "Begriff suchen …"
+
+#. Default: "Only incomplete ({count})"
+#: components/controlpanel/messages
+msgid "volto-translation-mapping-incomplete-only"
+msgstr "Nur unvollständige ({count})"
+
+#. Default: "No values found."
+#: components/controlpanel/messages
+msgid "volto-translation-mapping-no-matches"
+msgstr "Keine Einträge gefunden."
+
+#. Default: "{start}–{end} of {total, plural, one {# value} other {# values}}"
+#: components/controlpanel/messages
+msgid "volto-translation-mapping-page-range"
+msgstr "{start}–{end} von {total, plural, one {# Eintrag} other {# Einträgen}}"
+
+#. Default: "{start}–{end} of {total, plural, one {# match} other {# matches}} ({all} values)"
+#: components/controlpanel/messages
+msgid "volto-translation-mapping-page-range-filtered"
+msgstr "{start}–{end} von {total, plural, one {# Treffer} other {# Treffern}} ({all} Einträge)"
+
+#. Default: "per page"
+#: components/controlpanel/messages
+msgid "volto-translation-mapping-per-page"
+msgstr "je Seite"
+
+#. Default: "Page {page}"
+#: components/controlpanel/messages
+msgid "volto-translation-mapping-page"
+msgstr "Seite {page}"
+
+#. Default: "Previous page"
+#: components/controlpanel/messages
+msgid "volto-translation-mapping-previous-page"
+msgstr "Vorherige Seite"
+
+#. Default: "Next page"
+#: components/controlpanel/messages
+msgid "volto-translation-mapping-next-page"
+msgstr "Nächste Seite"

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useIntl } from 'react-intl';
 import { Button, Input, Label, Table } from 'semantic-ui-react';
 import Icon from '@plone/volto/components/theme/Icon/Icon';
@@ -9,35 +9,49 @@ import type { MetadataMappingRow } from '../../types';
 import messages, { ROLE_MESSAGES } from './messages';
 import type { InputData } from './messages';
 
+// A shown row and its position among all rows of the field.
+export interface MappingEntry {
+  row: MetadataMappingRow;
+  index: number;
+}
+
 interface MappingTableProps {
-  rows: MetadataMappingRow[];
+  entries: MappingEntry[];
   columns: MappingColumn[];
   duplicates: Set<string>;
+  emptyText: string;
+  // the row whose first target cell takes the cursor, e.g. a new one
+  focus?: { index: number } | null;
   languageName: (code: string) => string;
-  onChangeRows: (rows: MetadataMappingRow[]) => void;
+  onChangeRow: (index: number, row: MetadataMappingRow) => void;
+  onRemoveRow: (index: number) => void;
   onRemoveColumn: (code: string) => void;
 }
 
 // One row per value, one column per language; the header shows each language's role.
 const MappingTable = (props: MappingTableProps) => {
   const {
-    rows,
+    entries,
     columns,
     duplicates,
+    focus,
     languageName,
-    onChangeRows,
+    onChangeRow,
     onRemoveColumn,
   } = props;
   const intl = useIntl();
+  const focusInput = useRef<{ focus: () => void } | null>(null);
+  const focusCode = (
+    columns.find((column) => column.role === 'target') ||
+    columns.find((column) => column.role !== 'source')
+  )?.code;
 
-  const changeCell = (index: number, code: string, value: string) => {
-    const next = [...rows];
-    next[index] = withCell(rows[index], code, value);
-    onChangeRows(next);
-  };
-
-  const removeRow = (index: number) =>
-    onChangeRows(rows.filter((_row, position) => position !== index));
+  // a new request each time, so the same row may take the cursor again
+  useEffect(() => {
+    if (focus) {
+      focusInput.current?.focus();
+    }
+  }, [focus]);
 
   return (
     <div className="metadata-mapping-table-wrapper">
@@ -76,14 +90,14 @@ const MappingTable = (props: MappingTableProps) => {
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {rows.length === 0 && (
+          {entries.length === 0 && (
             <Table.Row>
               <Table.Cell colSpan={columns.length + 1}>
-                {intl.formatMessage(messages.noValues)}
+                {props.emptyText}
               </Table.Cell>
             </Table.Row>
           )}
-          {rows.map((row, index) => (
+          {entries.map(({ row, index }) => (
             // rows have no id of their own; their position is their identity
             // eslint-disable-next-line react/no-array-index-key
             <Table.Row key={index}>
@@ -98,6 +112,11 @@ const MappingTable = (props: MappingTableProps) => {
                     className={`role-${column.role}`}
                   >
                     <Input
+                      ref={
+                        index === focus?.index && column.code === focusCode
+                          ? focusInput
+                          : undefined
+                      }
                       fluid
                       value={cell}
                       error={duplicate}
@@ -114,7 +133,12 @@ const MappingTable = (props: MappingTableProps) => {
                       onChange={(
                         _event: React.SyntheticEvent,
                         data: InputData,
-                      ) => changeCell(index, column.code, String(data.value))}
+                      ) =>
+                        onChangeRow(
+                          index,
+                          withCell(row, column.code, String(data.value)),
+                        )
+                      }
                     />
                   </Table.Cell>
                 );
@@ -127,7 +151,7 @@ const MappingTable = (props: MappingTableProps) => {
                   className="metadata-mapping-remove-row"
                   aria-label={intl.formatMessage(messages.removeRow)}
                   title={intl.formatMessage(messages.removeRow)}
-                  onClick={() => removeRow(index)}
+                  onClick={() => props.onRemoveRow(index)}
                 >
                   <Icon name={clearSVG} size="18px" />
                 </Button>

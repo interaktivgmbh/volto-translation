@@ -761,3 +761,48 @@ msgstr ""
 #: components/controlpanel/messages
 msgid "volto-translation-mapping-export-button"
 msgstr ""
+
+#. Default: "Search values …"
+#: components/controlpanel/messages
+msgid "volto-translation-mapping-search-placeholder"
+msgstr ""
+
+#. Default: "Only incomplete ({count})"
+#: components/controlpanel/messages
+msgid "volto-translation-mapping-incomplete-only"
+msgstr ""
+
+#. Default: "No values found."
+#: components/controlpanel/messages
+msgid "volto-translation-mapping-no-matches"
+msgstr ""
+
+#. Default: "{start}–{end} of {total, plural, one {# value} other {# values}}"
+#: components/controlpanel/messages
+msgid "volto-translation-mapping-page-range"
+msgstr ""
+
+#. Default: "{start}–{end} of {total, plural, one {# match} other {# matches}} ({all} values)"
+#: components/controlpanel/messages
+msgid "volto-translation-mapping-page-range-filtered"
+msgstr ""
+
+#. Default: "per page"
+#: components/controlpanel/messages
+msgid "volto-translation-mapping-per-page"
+msgstr ""
+
+#. Default: "Page {page}"
+#: components/controlpanel/messages
+msgid "volto-translation-mapping-page"
+msgstr ""
+
+#. Default: "Previous page"
+#: components/controlpanel/messages
+msgid "volto-translation-mapping-previous-page"
+msgstr ""
+
+#. Default: "Next page"
+#: components/controlpanel/messages
+msgid "volto-translation-mapping-next-page"
+msgstr ""

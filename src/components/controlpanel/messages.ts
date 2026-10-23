@@ -101,6 +101,41 @@ const messages = defineMessages({
   },
   remove: { id: 'volto-translation-mapping-remove', defaultMessage: 'Remove' },
   cancel: { id: 'volto-translation-mapping-cancel', defaultMessage: 'Cancel' },
+  searchPlaceholder: {
+    id: 'volto-translation-mapping-search-placeholder',
+    defaultMessage: 'Search values …',
+  },
+  incompleteOnly: {
+    id: 'volto-translation-mapping-incomplete-only',
+    defaultMessage: 'Only incomplete ({count})',
+  },
+  noMatches: {
+    id: 'volto-translation-mapping-no-matches',
+    defaultMessage: 'No values found.',
+  },
+  pageRange: {
+    id: 'volto-translation-mapping-page-range',
+    defaultMessage:
+      '{start}–{end} of {total, plural, one {# value} other {# values}}',
+  },
+  pageRangeFiltered: {
+    id: 'volto-translation-mapping-page-range-filtered',
+    defaultMessage:
+      '{start}–{end} of {total, plural, one {# match} other {# matches}} ({all} values)',
+  },
+  perPage: {
+    id: 'volto-translation-mapping-per-page',
+    defaultMessage: 'per page',
+  },
+  page: { id: 'volto-translation-mapping-page', defaultMessage: 'Page {page}' },
+  previousPage: {
+    id: 'volto-translation-mapping-previous-page',
+    defaultMessage: 'Previous page',
+  },
+  nextPage: {
+    id: 'volto-translation-mapping-next-page',
+    defaultMessage: 'Next page',
+  },
   exportExcel: {
     id: 'volto-translation-mapping-export-excel',
     defaultMessage: 'Export (Excel)',

@@ -168,6 +168,69 @@
   color: #9f3a38;
 }
 
+/* search and filter above the table */
+.metadata-mapping-widget .metadata-mapping-filter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 1em;
+  gap: 0.5em 1.5em;
+}
+
+.metadata-mapping-widget .metadata-mapping-filter > .ui.input {
+  flex: 0 1 20em;
+}
+
+/* below the table: range, pages and page size, as in the layout */
+.metadata-mapping-widget .metadata-mapping-pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 0.8em 0;
+  border-bottom: 1px solid #edf1f2;
+  color: #555;
+  font-size: 0.9em;
+  gap: 0.5em 2em;
+}
+
+.metadata-mapping-widget .metadata-mapping-pages,
+.metadata-mapping-widget .metadata-mapping-page-size {
+  display: flex;
+  align-items: center;
+  gap: 0.25em;
+}
+
+.metadata-mapping-widget .metadata-mapping-page-size {
+  margin-left: auto;
+  gap: 0.5em;
+}
+
+.metadata-mapping-widget .metadata-mapping-pagination .ui.basic.button {
+  min-width: 2.2em;
+  padding: 0.4em 0.6em;
+  border: 1px solid transparent;
+  margin: 0;
+  box-shadow: none;
+  color: #555 !important;
+  font-weight: normal;
+}
+
+.metadata-mapping-widget .metadata-mapping-pagination .ui.basic.button:hover {
+  border-color: #c7d5d8;
+}
+
+.metadata-mapping-widget
+  .metadata-mapping-pagination
+  .ui.basic.button.selected {
+  border-color: #007eb1;
+  background: #e8f4fa !important;
+  color: #007eb1 !important;
+}
+
+.metadata-mapping-widget .metadata-mapping-pagination .gap {
+  padding: 0 0.3em;
+}
+
 /* import and export modal: they render outside the widget */
 .metadata-mapping-modal .metadata-mapping-import-row {
   display: flex;
