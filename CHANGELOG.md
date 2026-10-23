@@ -19,6 +19,8 @@
   translations no longer share a message id.
 - Disabled machine translate buttons in Manage translations show the reason
   on hover.
+- Added widget for editing metadata-mapping in controlpanel providing xlsx
+  import/export based on read-excel-file/write-excel-file
 
 ## 1.0.0-alpha.1 (2026-10-15)
 
