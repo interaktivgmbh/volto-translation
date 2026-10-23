@@ -10,9 +10,10 @@ interface MappingFieldBarProps {
   current?: string;
   onSelect: (fieldId: string) => void;
   onAdd: (fieldId: string) => void;
+  onRemove: () => void;
 }
 
-// The mapped fields as tabs, and the input for a new field.
+// The mapped fields as tabs, the input for a new field and removing the selected one.
 const MappingFieldBar = (props: MappingFieldBarProps) => {
   const { fieldIds, current, onSelect, onAdd } = props;
   const intl = useIntl();
@@ -71,6 +72,15 @@ const MappingFieldBar = (props: MappingFieldBarProps) => {
             {intl.formatMessage(messages.addField)}
           </Button>
         </span>
+        {current && (
+          <Button
+            type="button"
+            className="metadata-mapping-secondary negative"
+            onClick={props.onRemove}
+          >
+            {intl.formatMessage(messages.removeField)}
+          </Button>
+        )}
       </div>
       {error && (
         <Label basic color="red" pointing>

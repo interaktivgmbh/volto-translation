@@ -55,7 +55,12 @@ const MappingTable = (props: MappingTableProps) => {
 
   return (
     <div className="metadata-mapping-table-wrapper">
-      <Table compact className="metadata-mapping-table">
+      <Table
+        compact
+        className="metadata-mapping-table"
+        // fixed layout gives every language the same width; many scroll sideways
+        style={{ minWidth: `${columns.length * 12 + 5}em` }}
+      >
         <Table.Header>
           <Table.Row>
             {columns.map((column) => (
@@ -84,7 +89,7 @@ const MappingTable = (props: MappingTableProps) => {
                 )}
               </Table.HeaderCell>
             ))}
-            <Table.HeaderCell collapsing>
+            <Table.HeaderCell className="metadata-mapping-action">
               {intl.formatMessage(messages.action)}
             </Table.HeaderCell>
           </Table.Row>
@@ -92,7 +97,10 @@ const MappingTable = (props: MappingTableProps) => {
         <Table.Body>
           {entries.length === 0 && (
             <Table.Row>
-              <Table.Cell colSpan={columns.length + 1}>
+              <Table.Cell
+                colSpan={columns.length + 1}
+                className="metadata-mapping-empty"
+              >
                 {props.emptyText}
               </Table.Cell>
             </Table.Row>
@@ -112,6 +120,7 @@ const MappingTable = (props: MappingTableProps) => {
                     className={`role-${column.role}`}
                   >
                     <Input
+                      className={cell ? 'filled' : 'empty'}
                       ref={
                         index === focus?.index && column.code === focusCode
                           ? focusInput
@@ -143,7 +152,7 @@ const MappingTable = (props: MappingTableProps) => {
                   </Table.Cell>
                 );
               })}
-              <Table.Cell collapsing>
+              <Table.Cell className="metadata-mapping-action">
                 <Button
                   type="button"
                   basic

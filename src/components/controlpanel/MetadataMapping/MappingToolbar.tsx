@@ -8,12 +8,11 @@ import type { InputData } from './utils';
 interface MappingToolbarProps {
   sourceLanguageName: string;
   onAdd: (value: string) => void;
-  onRemoveField: () => void;
 }
 
-// Actions on the selected field: a new value in the source language, removing the field.
+// A new value of the selected field, in the source language.
 const MappingToolbar = (props: MappingToolbarProps) => {
-  const { sourceLanguageName, onAdd, onRemoveField } = props;
+  const { sourceLanguageName, onAdd } = props;
   const intl = useIntl();
   const [newValue, setNewValue] = useState('');
 
@@ -39,13 +38,6 @@ const MappingToolbar = (props: MappingToolbarProps) => {
       />
       <Button type="button" primary disabled={!newValue.trim()} onClick={add}>
         {intl.formatMessage(messages.addValue)}
-      </Button>
-      <Button
-        type="button"
-        className="metadata-mapping-secondary negative metadata-mapping-remove-field"
-        onClick={onRemoveField}
-      >
-        {intl.formatMessage(messages.removeField)}
       </Button>
     </div>
   );

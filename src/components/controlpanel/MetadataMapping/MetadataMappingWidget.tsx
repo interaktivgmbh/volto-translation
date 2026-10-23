@@ -60,7 +60,7 @@ type Pending =
 
 // Holds the mapping and the selected field; the parts below only show and report changes.
 const MetadataMappingWidget = (props: MetadataMappingWidgetProps) => {
-  const { id, title, value, onChange, formData } = props;
+  const { id, title, description, value, onChange, formData } = props;
   const intl = useIntl();
   const site = useSelector((state: TranslationState) => state.site?.data) || {};
 
@@ -204,35 +204,56 @@ const MetadataMappingWidget = (props: MetadataMappingWidgetProps) => {
   return (
     <FormFieldWrapper
       {...props}
+      // shown on top, as in the layout, rather than below the widget
+      description={undefined}
       columns={1}
       className="metadata-mapping-widget"
     >
-      <div className="metadata-mapping-header">
-        <div className="metadata-mapping-title">{title}</div>
-        <Button
-          type="button"
-          basic
-          className="metadata-mapping-link"
-          disabled={!fieldIds.length}
-          onClick={() => setExporting(true)}
-        >
-          {intl.formatMessage(messages.exportExcel)}
-        </Button>
-        <Button
-          type="button"
-          basic
-          className="metadata-mapping-link"
-          onClick={() => setImporting(true)}
-        >
-          {intl.formatMessage(messages.importExcel)}
-        </Button>
-      </div>
+      <div className="metadata-mapping-title">{title}</div>
+      {description && (
+        <div className="metadata-mapping-description">{description}</div>
+      )}
 
       <MappingFieldBar
         fieldIds={fieldIds}
         current={current}
         onSelect={selectField}
         onAdd={addField}
+        onRemove={() =>
+          current && setPending({ kind: 'field', field: current })
+        }
+      />
+
+      <MappingFilterBar
+        filterable={!!current && siteLanguages.length > 0}
+        search={search}
+        incompleteOnly={incompleteOnly}
+        incompleteCount={incompleteCount}
+        onSearch={(nextSearch) => resetView(nextSearch, incompleteOnly)}
+        onIncompleteOnly={(nextIncompleteOnly) =>
+          resetView(search, nextIncompleteOnly)
+        }
+        actions={
+          <>
+            <Button
+              type="button"
+              basic
+              className="metadata-mapping-link"
+              disabled={!fieldIds.length}
+              onClick={() => setExporting(true)}
+            >
+              {intl.formatMessage(messages.exportExcel)}
+            </Button>
+            <Button
+              type="button"
+              basic
+              className="metadata-mapping-link"
+              onClick={() => setImporting(true)}
+            >
+              {intl.formatMessage(messages.importExcel)}
+            </Button>
+          </>
+        }
       />
 
       {!current && (
@@ -244,19 +265,9 @@ const MetadataMappingWidget = (props: MetadataMappingWidgetProps) => {
 
       {current && siteLanguages.length > 0 && (
         <>
-          <MappingFilterBar
-            search={search}
-            incompleteOnly={incompleteOnly}
-            incompleteCount={incompleteCount}
-            onSearch={(nextSearch) => resetView(nextSearch, incompleteOnly)}
-            onIncompleteOnly={(nextIncompleteOnly) =>
-              resetView(search, nextIncompleteOnly)
-            }
-          />
           <MappingToolbar
             sourceLanguageName={name(sourceLanguage || '')}
             onAdd={addValue}
-            onRemoveField={() => setPending({ kind: 'field', field: current })}
           />
           <MappingTable
             entries={entries.slice(slice.start, slice.end)}

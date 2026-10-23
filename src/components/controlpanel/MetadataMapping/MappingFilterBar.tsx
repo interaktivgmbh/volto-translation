@@ -6,6 +6,9 @@ import { onEnter } from './utils';
 import type { InputData } from './utils';
 
 interface MappingFilterBarProps {
+  // without a selected field there is nothing to filter, only the actions
+  filterable: boolean;
+  actions: React.ReactNode;
   search: string;
   incompleteOnly: boolean;
   incompleteCount: number;
@@ -13,29 +16,36 @@ interface MappingFilterBarProps {
   onIncompleteOnly: (incompleteOnly: boolean) => void;
 }
 
-// Narrows the rows of the selected field: by a search and to the incomplete ones.
+// Narrows the rows of the selected field, by a search and to the incomplete
+// ones; export and import sit at its end, as in the layout.
 const MappingFilterBar = (props: MappingFilterBarProps) => {
-  const { search, incompleteOnly, incompleteCount, onSearch } = props;
+  const { filterable, search, incompleteOnly, incompleteCount, onSearch } =
+    props;
   const intl = useIntl();
 
   return (
     <div className="metadata-mapping-filter">
-      <Input
-        value={search}
-        placeholder={intl.formatMessage(messages.searchPlaceholder)}
-        onChange={(_event: React.SyntheticEvent, data: InputData) =>
-          onSearch(String(data.value))
-        }
-        // the search filters as one types; Enter must not submit the form
-        onKeyDown={onEnter(() => {})}
-      />
-      <Checkbox
-        checked={incompleteOnly}
-        label={intl.formatMessage(messages.incompleteOnly, {
-          count: incompleteCount,
-        })}
-        onChange={() => props.onIncompleteOnly(!incompleteOnly)}
-      />
+      {filterable && (
+        <>
+          <Input
+            value={search}
+            placeholder={intl.formatMessage(messages.searchPlaceholder)}
+            onChange={(_event: React.SyntheticEvent, data: InputData) =>
+              onSearch(String(data.value))
+            }
+            // the search filters as one types; Enter must not submit the form
+            onKeyDown={onEnter(() => {})}
+          />
+          <Checkbox
+            checked={incompleteOnly}
+            label={intl.formatMessage(messages.incompleteOnly, {
+              count: incompleteCount,
+            })}
+            onChange={() => props.onIncompleteOnly(!incompleteOnly)}
+          />
+        </>
+      )}
+      <span className="metadata-mapping-actions">{props.actions}</span>
     </div>
   );
 };

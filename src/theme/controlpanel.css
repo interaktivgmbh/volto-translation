@@ -1,15 +1,30 @@
 /* metadata mapping widget of the control panel */
-.metadata-mapping-widget .metadata-mapping-header {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  margin-bottom: 1em;
-  gap: 0.5em 1.5em;
+.ui.form .field.metadata-mapping-widget {
+  padding-bottom: 1.5em;
 }
 
+/* room above, so the title does not stick to the band of the fieldset */
 .metadata-mapping-widget .metadata-mapping-title {
-  margin-right: auto;
+  padding-top: 1.25em;
+  margin-bottom: 0.75em;
+  font-size: 1.1em;
   font-weight: bold;
+}
+
+/* the description as a grey band below the title, as in the layout */
+.metadata-mapping-widget .metadata-mapping-description {
+  padding: 0.9em 1em;
+  margin-bottom: 1.25em;
+  background: #edf1f2;
+  color: #555;
+  font-size: 0.9em;
+  line-height: 1.5;
+}
+
+/* Pastanaga makes every text input of a form 60px high: compact here */
+.ui.form .metadata-mapping-widget .ui.input input[type='text'] {
+  height: 2.6em;
+  padding: 0.4em 0.6em;
 }
 
 /* export and import: plain links, as in the layout */
@@ -101,9 +116,16 @@
 .metadata-mapping-widget .ui.table.metadata-mapping-table {
   width: 100%;
   border-radius: 0;
+  table-layout: fixed;
+}
+
+.metadata-mapping-widget .ui.table .metadata-mapping-action {
+  width: 5.5em;
+  text-align: center;
 }
 
 .metadata-mapping-widget .ui.table.metadata-mapping-table th {
+  padding: 0.9em 0.6em;
   background: #f3f5f6;
   font-size: 0.85em;
   font-weight: normal;
@@ -145,7 +167,34 @@
 }
 
 .metadata-mapping-widget .ui.table td {
+  padding: 0.5em 0.6em;
   vertical-align: middle;
+}
+
+/* "no values yet" or "none found" */
+.metadata-mapping-widget .ui.table td.metadata-mapping-empty {
+  padding: 1.25em 0.6em;
+  color: #878f93;
+  font-style: italic;
+}
+
+/* filled cells stand out; empty ones keep the source value */
+.ui.form .metadata-mapping-widget .ui.input.filled input[type='text'] {
+  border-bottom: 1px solid #c9c38a;
+  background: #fffde8;
+}
+
+.ui.form .metadata-mapping-widget .ui.input.empty input[type='text'] {
+  border-bottom: 1px solid #d6dde0;
+  background: transparent;
+}
+
+.ui.form
+  .metadata-mapping-widget
+  .ui.input.empty
+  input[type='text']::placeholder {
+  color: #a5adb0;
+  font-style: italic;
 }
 
 .metadata-mapping-widget td.role-unoffered .ui.input input,
@@ -169,16 +218,34 @@
 }
 
 /* search and filter above the table */
+/* a line between finding values and adding them */
 .metadata-mapping-widget .metadata-mapping-filter {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  padding-bottom: 1em;
+  border-bottom: 1px solid #edf1f2;
   margin-bottom: 1em;
   gap: 0.5em 1.5em;
 }
 
 .metadata-mapping-widget .metadata-mapping-filter > .ui.input {
-  flex: 0 1 20em;
+  flex: 0 1 18em;
+}
+
+/* the search is a box, as in the layout; .ui.input outweighs Pastanaga's rule */
+.ui.form
+  .metadata-mapping-widget
+  .metadata-mapping-filter
+  .ui.input
+  input[type='text'] {
+  border: 1px solid #c7d5d8;
+}
+
+.metadata-mapping-widget .metadata-mapping-actions {
+  display: flex;
+  margin-left: auto;
+  gap: 1.5em;
 }
 
 /* below the table: range, pages and page size, as in the layout */
@@ -205,14 +272,20 @@
   gap: 0.5em;
 }
 
+/* the number centred in its box */
 .metadata-mapping-widget .metadata-mapping-pagination .ui.basic.button {
+  display: inline-flex;
   min-width: 2.2em;
-  padding: 0.4em 0.6em;
+  height: 2.2em;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.5em;
   border: 1px solid transparent;
   margin: 0;
   box-shadow: none;
   color: #555 !important;
   font-weight: normal;
+  line-height: 1;
 }
 
 .metadata-mapping-widget .metadata-mapping-pagination .ui.basic.button:hover {
