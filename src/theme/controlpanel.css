@@ -1,7 +1,29 @@
 /* metadata mapping widget of the control panel */
-.metadata-mapping-widget .metadata-mapping-title {
+.metadata-mapping-widget .metadata-mapping-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
   margin-bottom: 1em;
+  gap: 0.5em 1.5em;
+}
+
+.metadata-mapping-widget .metadata-mapping-title {
+  margin-right: auto;
   font-weight: bold;
+}
+
+/* export and import: plain links, as in the layout */
+.metadata-mapping-widget .ui.basic.button.metadata-mapping-link {
+  padding: 0;
+  margin: 0;
+  box-shadow: none;
+  color: #007eb1 !important;
+  font-weight: normal;
+}
+
+.metadata-mapping-widget .ui.basic.button.metadata-mapping-link:hover {
+  background: none !important;
+  text-decoration: underline;
 }
 
 .metadata-mapping-widget .metadata-mapping-fields,
@@ -20,7 +42,8 @@
 
 /* field tabs and secondary actions: outlined, as in the layout */
 .metadata-mapping-widget .ui.button.metadata-mapping-tab,
-.metadata-mapping-widget .ui.button.metadata-mapping-secondary {
+.metadata-mapping-widget .ui.button.metadata-mapping-secondary,
+.metadata-mapping-import .ui.button.metadata-mapping-secondary {
   padding: 0.6em 1em;
   border: 1px solid #c7d5d8;
   border-radius: 1px;
@@ -32,7 +55,8 @@
 }
 
 .metadata-mapping-widget .ui.button.metadata-mapping-tab:hover,
-.metadata-mapping-widget .ui.button.metadata-mapping-secondary:hover {
+.metadata-mapping-widget .ui.button.metadata-mapping-secondary:hover,
+.metadata-mapping-import .ui.button.metadata-mapping-secondary:hover {
   border-color: #007eb1;
   color: #007eb1;
 }
@@ -142,4 +166,38 @@
 
 .metadata-mapping-widget .ui.button.metadata-mapping-remove-row:hover {
   color: #9f3a38;
+}
+
+/* import modal: it renders outside the widget */
+.metadata-mapping-import .metadata-mapping-import-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 1em 0;
+  gap: 0.5em 1em;
+}
+
+.metadata-mapping-import .metadata-mapping-import-row > label {
+  min-width: 8em;
+  font-weight: bold;
+}
+
+.metadata-mapping-import .metadata-mapping-import-effect,
+.metadata-mapping-import .file-name {
+  color: #555;
+}
+
+.metadata-mapping-import .metadata-mapping-import-intro {
+  margin-top: 1.5em;
+  color: #555;
+}
+
+.metadata-mapping-import .metadata-mapping-import-summary {
+  margin: 1em 0;
+}
+
+.metadata-mapping-import .metadata-mapping-import-warning {
+  margin-top: 0.3em;
+  color: #9f3a38;
+  font-size: 0.9em;
 }

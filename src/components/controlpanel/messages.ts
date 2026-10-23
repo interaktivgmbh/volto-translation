@@ -101,6 +101,95 @@ const messages = defineMessages({
   },
   remove: { id: 'volto-translation-mapping-remove', defaultMessage: 'Remove' },
   cancel: { id: 'volto-translation-mapping-cancel', defaultMessage: 'Cancel' },
+  exportExcel: {
+    id: 'volto-translation-mapping-export-excel',
+    defaultMessage: 'Export (Excel)',
+  },
+  importExcel: {
+    id: 'volto-translation-mapping-import-excel',
+    defaultMessage: 'Import (Excel)',
+  },
+  exportSheetName: {
+    id: 'volto-translation-mapping-export-sheet-name',
+    defaultMessage:
+      'The field {field} cannot name an Excel sheet: at most 31 characters, none of [ ] : * ? / \\.',
+  },
+  exportError: {
+    id: 'volto-translation-mapping-export-error',
+    defaultMessage: 'The file could not be written: {error}',
+  },
+  importHeader: {
+    id: 'volto-translation-mapping-import-header',
+    defaultMessage: 'Import the mapping from Excel',
+  },
+  importIntro: {
+    id: 'volto-translation-mapping-import-intro',
+    defaultMessage:
+      'One column per language, one row per value. The first row names the languages, by code ("de") or name ("German"). An empty cell keeps the value of the source language. A file with several sheets asks which one to take.',
+  },
+  importChooseFile: {
+    id: 'volto-translation-mapping-import-choose-file',
+    defaultMessage: 'Choose an .xlsx file',
+  },
+  importReadError: {
+    id: 'volto-translation-mapping-import-read-error',
+    defaultMessage: 'The file could not be read: {error}',
+  },
+  importNoSheets: {
+    id: 'volto-translation-mapping-import-no-sheets',
+    defaultMessage: 'No sheet of the file holds values.',
+  },
+  importSheet: {
+    id: 'volto-translation-mapping-import-sheet',
+    defaultMessage: 'Sheet',
+  },
+  importField: {
+    id: 'volto-translation-mapping-import-field',
+    defaultMessage: 'Into field',
+  },
+  importReplaces: {
+    id: 'volto-translation-mapping-import-replaces',
+    defaultMessage: 'Replaces {count, plural, one {# value} other {# values}}',
+  },
+  importSheetValues: {
+    id: 'volto-translation-mapping-import-sheet-values',
+    defaultMessage: '{sheet}: {count, plural, one {# value} other {# values}}',
+  },
+  importNewField: {
+    id: 'volto-translation-mapping-import-new-field',
+    defaultMessage: 'New field',
+  },
+  importUnknownColumn: {
+    id: 'volto-translation-mapping-import-unknown-column',
+    defaultMessage: 'Column "{header}" names no language and is left out.',
+  },
+  importDuplicateLanguage: {
+    id: 'volto-translation-mapping-import-duplicate-language',
+    defaultMessage: 'Column "{header}" repeats a language and is left out.',
+  },
+  importNotSiteLanguage: {
+    id: 'volto-translation-mapping-import-not-site-language',
+    defaultMessage:
+      'Column "{header}" is no language of the site; it is taken over but not used.',
+  },
+  importHeaderlessValues: {
+    id: 'volto-translation-mapping-import-headerless-values',
+    defaultMessage:
+      'Column {column} has no header; {count, plural, one {# value is} other {# values are}} left out.',
+  },
+  importNoLanguageColumns: {
+    id: 'volto-translation-mapping-import-no-language-columns',
+    defaultMessage: 'No column names a language.',
+  },
+  importNote: {
+    id: 'volto-translation-mapping-import-note',
+    defaultMessage:
+      'The import replaces the values of {field} completely; the other fields stay as they are. It takes effect once the settings are saved.',
+  },
+  importButton: {
+    id: 'volto-translation-mapping-import-button',
+    defaultMessage: 'Import',
+  },
 });
 
 export const ROLE_MESSAGES: Record<
