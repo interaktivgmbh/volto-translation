@@ -1,0 +1,145 @@
+/* metadata mapping widget of the control panel */
+.metadata-mapping-widget .metadata-mapping-title {
+  margin-bottom: 1em;
+  font-weight: bold;
+}
+
+.metadata-mapping-widget .metadata-mapping-fields,
+.metadata-mapping-widget .metadata-mapping-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 1em;
+  gap: 0.5em;
+}
+
+.metadata-mapping-widget .metadata-mapping-fields {
+  padding-bottom: 1em;
+  border-bottom: 1px solid #edf1f2;
+}
+
+/* field tabs and secondary actions: outlined, as in the layout */
+.metadata-mapping-widget .ui.button.metadata-mapping-tab,
+.metadata-mapping-widget .ui.button.metadata-mapping-secondary {
+  padding: 0.6em 1em;
+  border: 1px solid #c7d5d8;
+  border-radius: 1px;
+  margin: 0;
+  background: #fff;
+  box-shadow: none;
+  color: #333;
+  font-weight: normal;
+}
+
+.metadata-mapping-widget .ui.button.metadata-mapping-tab:hover,
+.metadata-mapping-widget .ui.button.metadata-mapping-secondary:hover {
+  border-color: #007eb1;
+  color: #007eb1;
+}
+
+.metadata-mapping-widget .ui.button.metadata-mapping-tab.selected {
+  border-color: #007eb1;
+  background: #e8f4fa;
+  color: #007eb1;
+}
+
+.metadata-mapping-widget .ui.button.metadata-mapping-secondary.negative {
+  border-color: #e7c5c4;
+  color: #9f3a38;
+}
+
+.metadata-mapping-widget .ui.button.metadata-mapping-secondary.negative:hover {
+  border-color: #9f3a38;
+  background: #fff6f6;
+}
+
+.metadata-mapping-widget .metadata-mapping-add-field {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  gap: 0.5em;
+}
+
+.metadata-mapping-widget .metadata-mapping-toolbar > .ui.input {
+  flex: 1 1 20em;
+}
+
+.metadata-mapping-widget .metadata-mapping-toolbar > .ui.button {
+  margin: 0;
+}
+
+/* the table takes the full width and scrolls sideways with many languages */
+.metadata-mapping-widget .metadata-mapping-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.metadata-mapping-widget .ui.table.metadata-mapping-table {
+  width: 100%;
+  border-radius: 0;
+}
+
+.metadata-mapping-widget .ui.table.metadata-mapping-table th {
+  background: #f3f5f6;
+  font-size: 0.85em;
+  font-weight: normal;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+.metadata-mapping-widget .metadata-mapping-language {
+  margin-bottom: 0.35em;
+}
+
+.metadata-mapping-widget .ui.table th .ui.button {
+  display: block;
+  margin-top: 0.5em;
+  text-transform: none;
+}
+
+.metadata-mapping-widget .ui.label.metadata-mapping-role {
+  margin: 0;
+  font-weight: normal;
+  text-transform: none;
+}
+
+.metadata-mapping-widget .ui.label.metadata-mapping-role.role-source {
+  background-color: #007eb1;
+  color: #fff;
+}
+
+.metadata-mapping-widget .ui.label.metadata-mapping-role.role-target {
+  background-color: #e8f4fa;
+  color: #007eb1;
+}
+
+.metadata-mapping-widget .ui.label.metadata-mapping-role.role-orphan {
+  background-color: #fff6f6;
+  color: #9f3a38;
+}
+
+.metadata-mapping-widget .ui.table td {
+  vertical-align: middle;
+}
+
+.metadata-mapping-widget td.role-unoffered .ui.input input,
+.metadata-mapping-widget th.role-unoffered .metadata-mapping-language {
+  color: #878f93;
+}
+
+.metadata-mapping-widget td.role-orphan {
+  background-color: #fff6f6;
+}
+
+.metadata-mapping-widget .ui.button.metadata-mapping-remove-row {
+  padding: 0.3em;
+  background: none;
+  box-shadow: none;
+  color: #878f93;
+}
+
+.metadata-mapping-widget .ui.button.metadata-mapping-remove-row:hover {
+  color: #9f3a38;
+}

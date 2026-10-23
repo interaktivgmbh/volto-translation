@@ -1,10 +1,11 @@
 import MachineTranslationBanner from './components/MachineTranslationBanner';
-import MetadataMappingWidget from './components/MetadataMappingWidget';
+import MetadataMappingWidget from './components/controlpanel/MetadataMappingWidget';
 import TranslateMenuItem from './components/TranslateMenuItem';
 import TranslationsMenu from './components/TranslationsMenu';
 import TranslateView from './components/TranslateView';
 import type { VoltoConfig } from './types';
 import './theme/translations.css';
+import './theme/controlpanel.css';
 
 const applyConfig = (config: VoltoConfig): VoltoConfig => {
   config.settings.appExtras = [
