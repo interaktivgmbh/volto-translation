@@ -69,8 +69,19 @@ export interface TranslationContent {
   working_copy_of?: { '@id'?: string };
 }
 
+// The metadata mapping of the control panel: per field one row per value,
+// with one entry per language. A missing language keeps the source value.
+export type MetadataMappingRow = Record<string, string>;
+export type MetadataMapping = Record<string, MetadataMappingRow[]>;
+
+export interface SiteData {
+  'plone.default_language'?: string;
+  'plone.available_languages'?: string[];
+}
+
 export interface TranslationState {
   content?: { data?: TranslationContent };
+  site?: { data?: SiteData };
   userSession?: { token?: string };
   actions?: { actions?: { object_buttons?: Array<{ id?: string }> } };
 }

@@ -496,3 +496,133 @@ msgstr ""
 #: components/MachineTranslationBanner
 msgid "volto-translation-banner-working-copy"
 msgstr ""
+
+#. Default: "Add field"
+#: components/MetadataMappingWidget
+msgid "volto-translation-mapping-add-field"
+msgstr ""
+
+#. Default: "Field id, e.g. subject"
+#: components/MetadataMappingWidget
+msgid "volto-translation-mapping-field-id-placeholder"
+msgstr ""
+
+#. Default: "Remove field"
+#: components/MetadataMappingWidget
+msgid "volto-translation-mapping-remove-field"
+msgstr ""
+
+#. Default: "Remove the mapping of {field}?"
+#: components/MetadataMappingWidget
+msgid "volto-translation-mapping-remove-field-header"
+msgstr ""
+
+#. Default: "Its {count} values are removed with it. They take effect once the settings are saved."
+#: components/MetadataMappingWidget
+msgid "volto-translation-mapping-remove-field-content"
+msgstr ""
+
+#. Default: "Enter a field id."
+#: components/MetadataMappingWidget
+msgid "volto-translation-mapping-empty-field-id"
+msgstr ""
+
+#. Default: "A field id has no spaces."
+#: components/MetadataMappingWidget
+msgid "volto-translation-mapping-space-in-field-id"
+msgstr ""
+
+#. Default: "This field is mapped already."
+#: components/MetadataMappingWidget
+msgid "volto-translation-mapping-existing-field-id"
+msgstr ""
+
+#. Default: "No field is mapped yet. Add the field whose values have fixed translations, e.g. subject."
+#: components/MetadataMappingWidget
+msgid "volto-translation-mapping-no-fields"
+msgstr ""
+
+#. Default: "The site has no languages to map between."
+#: components/MetadataMappingWidget
+msgid "volto-translation-mapping-no-languages"
+msgstr ""
+
+#. Default: "New value in {language}"
+#: components/MetadataMappingWidget
+msgid "volto-translation-mapping-new-value-placeholder"
+msgstr ""
+
+#. Default: "Add"
+#: components/MetadataMappingWidget
+msgid "volto-translation-mapping-add-value"
+msgstr ""
+
+#. Default: "This field has no values yet."
+#: components/MetadataMappingWidget
+msgid "volto-translation-mapping-no-values"
+msgstr ""
+
+#. Default: "Action"
+#: components/MetadataMappingWidget
+msgid "volto-translation-mapping-action"
+msgstr ""
+
+#. Default: "Remove row"
+#: components/MetadataMappingWidget
+msgid "volto-translation-mapping-remove-row"
+msgstr ""
+
+#. Default: "as source language"
+#: components/MetadataMappingWidget
+msgid "volto-translation-mapping-same-as-source"
+msgstr ""
+
+#. Default: "Appears in more than one row; the last row wins."
+#: components/MetadataMappingWidget
+msgid "volto-translation-mapping-duplicate"
+msgstr ""
+
+#. Default: "Source language"
+#: components/MetadataMappingWidget
+msgid "volto-translation-mapping-role-source"
+msgstr ""
+
+#. Default: "Target language"
+#: components/MetadataMappingWidget
+msgid "volto-translation-mapping-role-target"
+msgstr ""
+
+#. Default: "Not offered"
+#: components/MetadataMappingWidget
+msgid "volto-translation-mapping-role-unoffered"
+msgstr ""
+
+#. Default: "No site language"
+#: components/MetadataMappingWidget
+msgid "volto-translation-mapping-role-orphan"
+msgstr ""
+
+#. Default: "Remove column"
+#: components/MetadataMappingWidget
+msgid "volto-translation-mapping-remove-column"
+msgstr ""
+
+#. Default: "Remove the values in {language}?"
+#: components/MetadataMappingWidget
+msgid "volto-translation-mapping-remove-column-header"
+msgstr ""
+
+#. Default: "{language} is no site language; its values are never used."
+#: components/MetadataMappingWidget
+msgid "volto-translation-mapping-remove-column-content"
+msgstr ""
+
+#. Default: "Remove"
+#: components/MetadataMappingWidget
+msgid "volto-translation-mapping-remove"
+msgstr ""
+
+#. Default: "Cancel"
+#: components/MetadataMappingWidget
+msgid "volto-translation-mapping-cancel"
+msgstr ""
