@@ -1,5 +1,9 @@
 import Api from '@plone/volto/helpers/Api/Api';
-import type { TranslationInfo, TranslationResult } from '../types';
+import type {
+  TranslationFieldsType,
+  TranslationInfo,
+  TranslationResult,
+} from '../types';
 
 // One Api instance for the add-on; it picks the auth token off the cookie itself.
 let api: Api | null = null;
@@ -53,6 +57,15 @@ export function translateContent(
   return getApi().post(`${path}/@translate`, {
     data: { target_language: targetLanguage, save, overwrite },
   });
+}
+
+// GET @translation-fields on the site root: the content types an editor adds,
+// each with its fields and how the translation treats them. For the control
+// panel only, so uncached.
+export function fetchTranslationFields(): Promise<TranslationFieldsType[]> {
+  return getApi()
+    .get('/@translation-fields')
+    .then((data: { types?: TranslationFieldsType[] }) => data?.types || []);
 }
 
 // Test-only / hot-reload helper.

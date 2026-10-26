@@ -318,6 +318,60 @@
   color: #646c70;
 }
 
+/* metadata selection widget: the mapping widget's styles, plus its list */
+.metadata-selection-widget .metadata-selection-note {
+  color: #646c70;
+  font-size: 0.9em;
+}
+
+.metadata-selection-widget .metadata-selection-field {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6em;
+}
+
+.metadata-selection-widget .metadata-selection-id {
+  margin-left: 0.6em;
+  color: #646c70;
+  font-family: monospace;
+  font-size: 0.85em;
+}
+
+.metadata-selection-widget .ui.table .metadata-selection-mode {
+  width: 14em;
+  text-align: right;
+}
+
+.metadata-selection-widget .metadata-selection-status.mode-translate {
+  color: #006a96;
+}
+
+.metadata-selection-widget .metadata-selection-status.mode-copy {
+  color: #646c70;
+}
+
+/* the fields that always go along: a block of their own at the top */
+.metadata-selection-widget tr.role-always td {
+  background: #fffde8;
+}
+
+.metadata-selection-widget .ui.label.metadata-selection-always {
+  margin: 0 0 0 0.6em;
+  background-color: #e8f4fa;
+  color: #006a96;
+  font-weight: normal;
+}
+
+.metadata-selection-widget .metadata-selection-status.mode-mapping {
+  color: #6a3d9a;
+}
+
+/* cannot go along: grey, but readable */
+.metadata-selection-widget tr.role-impossible td {
+  color: #646c70;
+  font-style: italic;
+}
+
 /* the field tabs, a group of toggle buttons */
 .metadata-mapping-widget .metadata-mapping-tabs {
   display: flex;

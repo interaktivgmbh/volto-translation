@@ -8,7 +8,7 @@ const messages = defineMessages({
   },
   fieldIdPlaceholder: {
     id: 'volto-translation-mapping-field-id-placeholder',
-    defaultMessage: 'Field id, e.g. subject',
+    defaultMessage: 'Field id, e.g. subjects',
   },
   removeField: {
     id: 'volto-translation-mapping-remove-field',
@@ -78,7 +78,7 @@ const messages = defineMessages({
   noFields: {
     id: 'volto-translation-mapping-no-fields',
     defaultMessage:
-      'No field is mapped yet. Add the field whose values have fixed translations, e.g. subject.',
+      'No field is mapped yet. Add the field whose values have fixed translations, e.g. subjects.',
   },
   noLanguages: {
     id: 'volto-translation-mapping-no-languages',

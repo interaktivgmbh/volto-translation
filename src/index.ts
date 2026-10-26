@@ -1,5 +1,6 @@
 import MachineTranslationBanner from './components/MachineTranslationBanner';
 import MetadataMappingWidget from './components/controlpanel/MetadataMapping/MetadataMappingWidget';
+import MetadataSelectionWidget from './components/controlpanel/MetadataSelection/MetadataSelectionWidget';
 import TranslateMenuItem from './components/TranslateMenuItem';
 import TranslationsMenu from './components/TranslationsMenu';
 import TranslateView from './components/TranslateView';
@@ -29,9 +30,10 @@ const applyConfig = (config: VoltoConfig): VoltoConfig => {
     translations: { component: TranslationsMenu, wrapper: null },
   };
 
-  // the control panel names this widget for its metadata mapping field
+  // the control panel names these widgets for its metadata fields
   const widgets = config.widgets as { widget: Record<string, unknown> };
   widgets.widget.translation_metadata_mapping = MetadataMappingWidget;
+  widgets.widget.translation_metadata_selection = MetadataSelectionWidget;
 
   config.addonRoutes = [
     ...(config.addonRoutes || []),

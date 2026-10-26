@@ -502,10 +502,10 @@ msgstr "This working copy was machine translated from the original{source, selec
 msgid "volto-translation-mapping-add-field"
 msgstr "Add field"
 
-#. Default: "Field id, e.g. subject"
+#. Default: "Field id, e.g. subjects"
 #: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-field-id-placeholder"
-msgstr "Field id, e.g. subject"
+msgstr "Field id, e.g. subjects"
 
 #. Default: "Remove field"
 #: components/controlpanel/MetadataMapping/messages
@@ -537,10 +537,10 @@ msgstr "A field id has no spaces."
 msgid "volto-translation-mapping-existing-field-id"
 msgstr "This field is mapped already."
 
-#. Default: "No field is mapped yet. Add the field whose values have fixed translations, e.g. subject."
+#. Default: "No field is mapped yet. Add the field whose values have fixed translations, e.g. subjects."
 #: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-no-fields"
-msgstr "No field is mapped yet. Add the field whose values have fixed translations, e.g. subject."
+msgstr "No field is mapped yet. Add the field whose values have fixed translations, e.g. subjects."
 
 #. Default: "The site has no languages to map between."
 #: components/controlpanel/MetadataMapping/messages
@@ -866,3 +866,123 @@ msgstr "Values per page"
 #: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-export-scope-legend"
 msgstr "What to export?"
+
+#. Default: "Content types"
+#: components/controlpanel/MetadataSelection/messages
+msgid "volto-translation-selection-types-label"
+msgstr "Content types"
+
+#. Default: "Search fields …"
+#: components/controlpanel/MetadataSelection/messages
+msgid "volto-translation-selection-search-placeholder"
+msgstr "Search fields …"
+
+#. Default: "Search fields"
+#: components/controlpanel/MetadataSelection/messages
+msgid "volto-translation-selection-search-label"
+msgstr "Search fields"
+
+#. Default: "{selected} of {total, plural, one {# field} other {# fields}} {selected, plural, one {goes} other {go}} along"
+#: components/controlpanel/MetadataSelection/messages
+msgid "volto-translation-selection-count"
+msgstr "{selected} of {total, plural, one {# field} other {# fields}} {selected, plural, one {goes} other {go}} along"
+
+#. Default: "Field"
+#: components/controlpanel/MetadataSelection/messages
+msgid "volto-translation-selection-column-field"
+msgstr "Field"
+
+#. Default: "Treatment"
+#: components/controlpanel/MetadataSelection/messages
+msgid "volto-translation-selection-column-mode"
+msgstr "Treatment"
+
+#. Default: "Fields of the type {type}"
+#: components/controlpanel/MetadataSelection/messages
+msgid "volto-translation-selection-table-caption"
+msgstr "Fields of the type {type}"
+
+#. Default: "Translate"
+#: components/controlpanel/MetadataSelection/messages
+msgid "volto-translation-selection-mode-translate"
+msgstr "Translate"
+
+#. Default: "Take over"
+#: components/controlpanel/MetadataSelection/messages
+msgid "volto-translation-selection-mode-copy"
+msgstr "Take over"
+
+#. Default: "Via mapping"
+#: components/controlpanel/MetadataSelection/messages
+msgid "volto-translation-selection-mode-mapping"
+msgstr "Via mapping"
+
+#. Default: "Not possible"
+#: components/controlpanel/MetadataSelection/messages
+msgid "volto-translation-selection-mode-impossible"
+msgstr "Not possible"
+
+#. Default: "Always along"
+#: components/controlpanel/MetadataSelection/messages
+msgid "volto-translation-selection-always"
+msgstr "Always along"
+
+#. Default: "Title, description and page content always go along."
+#: components/controlpanel/MetadataSelection/messages
+msgid "volto-translation-selection-reason-always"
+msgstr "Title, description and page content always go along."
+
+#. Default: "The main field of this type always goes along."
+#: components/controlpanel/MetadataSelection/messages
+msgid "volto-translation-selection-reason-primary"
+msgstr "The main field of this type always goes along."
+
+#. Default: "The field has {count, plural, one {# value} other {# values}} in the metadata mapping."
+#: components/controlpanel/MetadataSelection/messages
+msgid "volto-translation-selection-reason-mapping"
+msgstr "The field has {count, plural, one {# value} other {# values}} in the metadata mapping."
+
+#. Default: "A known field whose text is no prose, e.g. an address."
+#: components/controlpanel/MetadataSelection/messages
+msgid "volto-translation-selection-reason-field-name"
+msgstr "A known field whose text is no prose, e.g. an address."
+
+#. Default: "The field is the same in every language."
+#: components/controlpanel/MetadataSelection/messages
+msgid "volto-translation-selection-reason-language-independent"
+msgstr "The field is the same in every language."
+
+#. Default: "Follows from the kind of field: {kind}."
+#: components/controlpanel/MetadataSelection/messages
+msgid "volto-translation-selection-reason-field-type"
+msgstr "Follows from the kind of field: {kind}."
+
+#. Default: "A reference or a structure cannot go along: {kind}."
+#: components/controlpanel/MetadataSelection/messages
+msgid "volto-translation-selection-reason-impossible"
+msgstr "A reference or a structure cannot go along: {kind}."
+
+#. Default: "Loading the fields …"
+#: components/controlpanel/MetadataSelection/messages
+msgid "volto-translation-selection-loading"
+msgstr "Loading the fields …"
+
+#. Default: "The fields could not be loaded: {error}"
+#: components/controlpanel/MetadataSelection/messages
+msgid "volto-translation-selection-load-error"
+msgstr "The fields could not be loaded: {error}"
+
+#. Default: "There is no content type to set up."
+#: components/controlpanel/MetadataSelection/messages
+msgid "volto-translation-selection-no-types"
+msgstr "There is no content type to set up."
+
+#. Default: "No field found."
+#: components/controlpanel/MetadataSelection/messages
+msgid "volto-translation-selection-no-matches"
+msgstr "No field found."
+
+#. Default: "Shows what the translation suggests for each field. Choosing the fields comes next."
+#: components/controlpanel/MetadataSelection/messages
+msgid "volto-translation-selection-read-only"
+msgstr "Shows what the translation suggests for each field. Choosing the fields comes next."

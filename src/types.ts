@@ -74,6 +74,35 @@ export interface TranslationContent {
 export type MetadataMappingRow = Record<string, string>;
 export type MetadataMapping = Record<string, MetadataMappingRow[]>;
 
+// GET @translation-fields: per content type its fields and how the
+// translation treats them, as the backend suggests it.
+export type FieldRole = 'always' | 'default' | 'impossible';
+export type FieldMode = 'translate' | 'copy' | 'mapping';
+export type FieldReason =
+  | 'always'
+  | 'primary'
+  | 'field_name'
+  | 'language_independent'
+  | 'field_type';
+
+export interface TranslationField {
+  id: string;
+  title: string;
+  fieldset: string;
+  kind: string;
+  role: FieldRole;
+  mode: FieldMode | null;
+  reason: FieldReason;
+  // the saved mapping has values for it; the control panel uses its own
+  mapped: boolean;
+}
+
+export interface TranslationFieldsType {
+  id: string;
+  title: string;
+  fields: TranslationField[];
+}
+
 export interface SiteData {
   'plone.default_language'?: string;
   'plone.available_languages'?: string[];
