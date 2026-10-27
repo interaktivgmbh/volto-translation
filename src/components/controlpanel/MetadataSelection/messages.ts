@@ -96,10 +96,25 @@ const messages = defineMessages({
     id: 'volto-translation-selection-no-matches',
     defaultMessage: 'No field found.',
   },
-  readOnly: {
-    id: 'volto-translation-selection-read-only',
-    defaultMessage:
-      'Shows what the translation suggests for each field. Choosing the fields comes next.',
+  modeSkipped: {
+    id: 'volto-translation-selection-mode-skipped',
+    defaultMessage: 'Not selected',
+  },
+  selectAll: {
+    id: 'volto-translation-selection-select-all',
+    defaultMessage: 'Select all',
+  },
+  deselectAll: {
+    id: 'volto-translation-selection-deselect-all',
+    defaultMessage: 'Deselect all',
+  },
+  selectAllLabel: {
+    id: 'volto-translation-selection-select-all-label',
+    defaultMessage: 'Select all fields of {type}',
+  },
+  deselectAllLabel: {
+    id: 'volto-translation-selection-deselect-all-label',
+    defaultMessage: 'Deselect all fields of {type}',
   },
 });
 

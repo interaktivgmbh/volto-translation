@@ -319,11 +319,6 @@
 }
 
 /* metadata selection widget: the mapping widget's styles, plus its list */
-.metadata-selection-widget .metadata-selection-note {
-  color: #646c70;
-  font-size: 0.9em;
-}
-
 .metadata-selection-widget .metadata-selection-field {
   display: flex;
   align-items: baseline;
@@ -348,6 +343,11 @@
 
 .metadata-selection-widget .metadata-selection-status.mode-copy {
   color: #646c70;
+}
+
+.metadata-selection-widget .metadata-selection-status.mode-skipped {
+  color: #646c70;
+  font-style: italic;
 }
 
 /* the fields that always go along: a block of their own at the top */

@@ -97,6 +97,10 @@ export interface TranslationField {
   mapped: boolean;
 }
 
+// The control panel's choice: per content type the fields that go along. A
+// type without an entry takes only what always goes along and what is mapped.
+export type MetadataSelection = Record<string, string[]>;
+
 export interface TranslationFieldsType {
   id: string;
   title: string;

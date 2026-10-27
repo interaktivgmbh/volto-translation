@@ -982,7 +982,27 @@ msgstr ""
 msgid "volto-translation-selection-no-matches"
 msgstr ""
 
-#. Default: "Shows what the translation suggests for each field. Choosing the fields comes next."
+#. Default: "Not selected"
 #: components/controlpanel/MetadataSelection/messages
-msgid "volto-translation-selection-read-only"
+msgid "volto-translation-selection-mode-skipped"
+msgstr ""
+
+#. Default: "Select all"
+#: components/controlpanel/MetadataSelection/messages
+msgid "volto-translation-selection-select-all"
+msgstr ""
+
+#. Default: "Deselect all"
+#: components/controlpanel/MetadataSelection/messages
+msgid "volto-translation-selection-deselect-all"
+msgstr ""
+
+#. Default: "Select all fields of {type}"
+#: components/controlpanel/MetadataSelection/messages
+msgid "volto-translation-selection-select-all-label"
+msgstr ""
+
+#. Default: "Deselect all fields of {type}"
+#: components/controlpanel/MetadataSelection/messages
+msgid "volto-translation-selection-deselect-all-label"
 msgstr ""

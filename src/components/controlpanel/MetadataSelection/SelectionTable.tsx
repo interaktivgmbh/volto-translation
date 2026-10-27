@@ -1,6 +1,7 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 import { Label, Table } from 'semantic-ui-react';
+import { isChecked, isLocked } from '../../../helpers/metadataSelection';
 import type { FieldMode, TranslationField } from '../../../types';
 import messages, { MODE_MESSAGES, REASON_MESSAGES } from './messages';
 
@@ -8,14 +9,17 @@ interface SelectionTableProps {
   fields: TranslationField[];
   // values per field in the metadata mapping as the form holds it now
   mappedCounts: Record<string, number>;
+  // the fields chosen for the type; undefined: none yet
+  chosen: string[] | undefined;
+  onToggle: (fieldId: string, checked: boolean) => void;
   caption: string;
   emptyText: string;
 }
 
-// One row per field: whether it goes along, and how. Read only for now: the
-// check boxes show the suggestion until choosing the fields is built.
+// One row per field: whether it goes along, and how. What always goes along and
+// what the mapping translates is checked and locked.
 const SelectionTable = (props: SelectionTableProps) => {
-  const { fields, mappedCounts } = props;
+  const { fields, mappedCounts, chosen, onToggle } = props;
   const intl = useIntl();
 
   // a field the mapping has values for goes through it, whatever else applies
@@ -61,12 +65,20 @@ const SelectionTable = (props: SelectionTableProps) => {
             </Table.Row>
           )}
           {fields.map((field) => {
-            const possible = field.role !== 'impossible';
+            const checked = isChecked(field, chosen, mappedCounts);
+            const locked = isLocked(field, mappedCounts);
             const checkboxId = `metadata-selection-${field.id}`;
             const fieldMode = modeOf(field);
-            const mode = fieldMode
-              ? intl.formatMessage(MODE_MESSAGES[fieldMode])
-              : intl.formatMessage(messages.modeImpossible);
+            const status =
+              !checked && field.role !== 'impossible'
+                ? 'skipped'
+                : fieldMode || 'impossible';
+            const mode =
+              status === 'skipped'
+                ? intl.formatMessage(messages.modeSkipped)
+                : fieldMode
+                  ? intl.formatMessage(MODE_MESSAGES[fieldMode])
+                  : intl.formatMessage(messages.modeImpossible);
 
             return (
               <Table.Row key={field.id} className={`role-${field.role}`}>
@@ -75,9 +87,11 @@ const SelectionTable = (props: SelectionTableProps) => {
                     <input
                       type="checkbox"
                       id={checkboxId}
-                      checked={possible}
-                      disabled
-                      readOnly
+                      checked={checked}
+                      disabled={locked}
+                      onChange={(event) =>
+                        onToggle(field.id, event.target.checked)
+                      }
                     />
                     <label htmlFor={checkboxId}>
                       {field.title}
@@ -92,7 +106,7 @@ const SelectionTable = (props: SelectionTableProps) => {
                 </Table.Cell>
                 <Table.Cell className="metadata-selection-mode">
                   <span
-                    className={`metadata-selection-status mode-${fieldMode || 'impossible'}`}
+                    className={`metadata-selection-status mode-${status}`}
                     title={reason(field)}
                   >
                     {mode}

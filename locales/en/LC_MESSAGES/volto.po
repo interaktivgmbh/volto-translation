@@ -982,7 +982,27 @@ msgstr "There is no content type to set up."
 msgid "volto-translation-selection-no-matches"
 msgstr "No field found."
 
-#. Default: "Shows what the translation suggests for each field. Choosing the fields comes next."
+#. Default: "Not selected"
 #: components/controlpanel/MetadataSelection/messages
-msgid "volto-translation-selection-read-only"
-msgstr "Shows what the translation suggests for each field. Choosing the fields comes next."
+msgid "volto-translation-selection-mode-skipped"
+msgstr "Not selected"
+
+#. Default: "Select all"
+#: components/controlpanel/MetadataSelection/messages
+msgid "volto-translation-selection-select-all"
+msgstr "Select all"
+
+#. Default: "Deselect all"
+#: components/controlpanel/MetadataSelection/messages
+msgid "volto-translation-selection-deselect-all"
+msgstr "Deselect all"
+
+#. Default: "Select all fields of {type}"
+#: components/controlpanel/MetadataSelection/messages
+msgid "volto-translation-selection-select-all-label"
+msgstr "Select all fields of {type}"
+
+#. Default: "Deselect all fields of {type}"
+#: components/controlpanel/MetadataSelection/messages
+msgid "volto-translation-selection-deselect-all-label"
+msgstr "Deselect all fields of {type}"

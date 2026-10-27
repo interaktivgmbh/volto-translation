@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
-import { Input, Message } from 'semantic-ui-react';
+import { Button, Input, Message } from 'semantic-ui-react';
 import FormFieldWrapper from '@plone/volto/components/manage/Widgets/FormFieldWrapper';
 import { normalisedMapping } from '../../../helpers/metadataMapping';
+import {
+  isChecked,
+  normalisedSelection,
+  withAll,
+  withChoice,
+} from '../../../helpers/metadataSelection';
 import { fetchTranslationFields } from '../../../helpers/translateApi';
-import type { TranslationFieldsType } from '../../../types';
+import type { MetadataSelection, TranslationFieldsType } from '../../../types';
 import { onEnter } from '../MetadataMapping/utils';
 import type { InputData } from '../MetadataMapping/utils';
 import SelectionTable from './SelectionTable';
@@ -15,17 +21,17 @@ interface MetadataSelectionWidgetProps {
   title: string;
   description?: string;
   value?: unknown;
-  onChange: (id: string, value: unknown) => void;
+  onChange: (id: string, value: MetadataSelection) => void;
   formData?: { metadata_mapping_table?: unknown };
   error?: string[];
   fieldSet?: string;
   required?: boolean;
 }
 
-// The fields of each content type and how the translation treats them, as the
-// backend suggests it. Shows them only: choosing the fields comes next.
+// The fields of each content type, which of them go along and how the
+// translation treats them. Chooses into the form: saved with the settings.
 const MetadataSelectionWidget = (props: MetadataSelectionWidgetProps) => {
-  const { title, description, formData } = props;
+  const { id, title, description, value, onChange, formData } = props;
   const intl = useIntl();
   const [types, setTypes] = useState<TranslationFieldsType[] | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
@@ -64,6 +70,32 @@ const MetadataSelectionWidget = (props: MetadataSelectionWidgetProps) => {
   const possible = (shown?.fields || []).filter(
     (field) => field.role !== 'impossible',
   );
+
+  const selection = normalisedSelection(value);
+  const chosen = shown ? selection[shown.id] : undefined;
+  const checkedCount = possible.filter((field) =>
+    isChecked(field, chosen, mappedCounts),
+  ).length;
+
+  const toggle = (fieldId: string, checked: boolean) =>
+    shown &&
+    onChange(
+      id,
+      withChoice(
+        selection,
+        shown.id,
+        shown.fields,
+        mappedCounts,
+        fieldId,
+        checked,
+      ),
+    );
+  const all = (checked: boolean) =>
+    shown &&
+    onChange(
+      id,
+      withAll(selection, shown.id, shown.fields, mappedCounts, checked),
+    );
 
   return (
     <FormFieldWrapper
@@ -131,19 +163,41 @@ const MetadataSelectionWidget = (props: MetadataSelectionWidgetProps) => {
             />
             <span aria-live="polite" aria-atomic>
               {intl.formatMessage(messages.count, {
-                selected: possible.length,
+                selected: checkedCount,
                 total: possible.length,
               })}
             </span>
+            <span className="metadata-mapping-actions">
+              <Button
+                type="button"
+                basic
+                className="metadata-mapping-link"
+                aria-label={intl.formatMessage(messages.selectAllLabel, {
+                  type: shown.title,
+                })}
+                onClick={() => all(true)}
+              >
+                {intl.formatMessage(messages.selectAll)}
+              </Button>
+              <Button
+                type="button"
+                basic
+                className="metadata-mapping-link"
+                aria-label={intl.formatMessage(messages.deselectAllLabel, {
+                  type: shown.title,
+                })}
+                onClick={() => all(false)}
+              >
+                {intl.formatMessage(messages.deselectAll)}
+              </Button>
+            </span>
           </div>
-
-          <p className="metadata-selection-note">
-            {intl.formatMessage(messages.readOnly)}
-          </p>
 
           <SelectionTable
             fields={fields}
             mappedCounts={mappedCounts}
+            chosen={chosen}
+            onToggle={toggle}
             caption={intl.formatMessage(messages.tableCaption, {
               type: shown.title,
             })}
