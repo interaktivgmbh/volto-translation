@@ -451,3 +451,46 @@
   margin-bottom: 0.5em;
   font-weight: bold;
 }
+
+/* the connection test below the API key, on the left as in the layout; what
+   it found below the button */
+.translation-connection-test {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1em 1rem 1.5em;
+  border-bottom: 1px solid #edf1f2;
+  gap: 0.75em;
+}
+
+.translation-connection-result:empty {
+  display: none;
+}
+
+.ui.basic.button.translation-connection-button {
+  padding: 0.6em 1em;
+  border: 1px solid #c7d5d8;
+  border-radius: 1px;
+  margin: 0;
+  box-shadow: none;
+  color: #333 !important;
+  font-weight: normal;
+}
+
+.ui.basic.button.translation-connection-button:hover {
+  border-color: #007eb1;
+  color: #007eb1 !important;
+}
+
+.ui.basic.button.translation-connection-button:focus-visible {
+  outline: 2px solid #006a96;
+  outline-offset: 2px;
+}
+
+.translation-connection-result.ok {
+  color: #1e7a34;
+}
+
+.translation-connection-result.problem {
+  color: #9f3a38;
+}

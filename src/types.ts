@@ -107,6 +107,18 @@ export interface TranslationFieldsType {
   fields: TranslationField[];
 }
 
+// POST @translation-connection: does the translation service answer?
+export interface ConnectionResult {
+  ok: boolean;
+  provider?: string;
+  plan?: 'free' | 'pro' | null;
+  character_count?: number | null;
+  character_limit?: number | null;
+  // why not, for the front end to say in its own words
+  code?: string;
+  message?: string;
+}
+
 export interface SiteData {
   'plone.default_language'?: string;
   'plone.available_languages'?: string[];

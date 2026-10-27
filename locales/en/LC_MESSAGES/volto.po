@@ -1006,3 +1006,68 @@ msgstr "Select all fields of {type}"
 #: components/controlpanel/MetadataSelection/messages
 msgid "volto-translation-selection-deselect-all-label"
 msgstr "Deselect all fields of {type}"
+
+#. Default: "Test connection"
+#: components/controlpanel/ApiKey/messages
+msgid "volto-translation-connection-test"
+msgstr "Test connection"
+
+#. Default: "Testing the connection …"
+#: components/controlpanel/ApiKey/messages
+msgid "volto-translation-connection-testing"
+msgstr "Testing the connection …"
+
+#. Default: "Connected"
+#: components/controlpanel/ApiKey/messages
+msgid "volto-translation-connection-ok"
+msgstr "Connected"
+
+#. Default: "{provider} API Free"
+#: components/controlpanel/ApiKey/messages
+msgid "volto-translation-connection-plan-free"
+msgstr "{provider} API Free"
+
+#. Default: "{provider} API Pro"
+#: components/controlpanel/ApiKey/messages
+msgid "volto-translation-connection-plan-pro"
+msgstr "{provider} API Pro"
+
+#. Default: "{count} of {limit} characters this month"
+#: components/controlpanel/ApiKey/messages
+msgid "volto-translation-connection-usage"
+msgstr "{count} of {limit} characters this month"
+
+#. Default: "There is no API key."
+#: components/controlpanel/ApiKey/messages
+msgid "volto-translation-connection-not-configured"
+msgstr "There is no API key."
+
+#. Default: "The service refused the API key."
+#: components/controlpanel/ApiKey/messages
+msgid "volto-translation-connection-key-refused"
+msgstr "The service refused the API key."
+
+#. Default: "The quota of this key is used up."
+#: components/controlpanel/ApiKey/messages
+msgid "volto-translation-connection-quota-exceeded"
+msgstr "The quota of this key is used up."
+
+#. Default: "The service is busy. Please try again later."
+#: components/controlpanel/ApiKey/messages
+msgid "volto-translation-connection-rate-limited"
+msgstr "The service is busy. Please try again later."
+
+#. Default: "The service cannot be reached."
+#: components/controlpanel/ApiKey/messages
+msgid "volto-translation-connection-unreachable"
+msgstr "The service cannot be reached."
+
+#. Default: "The test failed: {message}"
+#: components/controlpanel/ApiKey/messages
+msgid "volto-translation-connection-failed"
+msgstr "The test failed: {message}"
+
+#. Default: "The test could not be run: {message}"
+#: components/controlpanel/ApiKey/messages
+msgid "volto-translation-connection-not-run"
+msgstr "The test could not be run: {message}"

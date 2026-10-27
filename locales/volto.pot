@@ -1006,3 +1006,68 @@ msgstr ""
 #: components/controlpanel/MetadataSelection/messages
 msgid "volto-translation-selection-deselect-all-label"
 msgstr ""
+
+#. Default: "Test connection"
+#: components/controlpanel/ApiKey/messages
+msgid "volto-translation-connection-test"
+msgstr ""
+
+#. Default: "Testing the connection …"
+#: components/controlpanel/ApiKey/messages
+msgid "volto-translation-connection-testing"
+msgstr ""
+
+#. Default: "Connected"
+#: components/controlpanel/ApiKey/messages
+msgid "volto-translation-connection-ok"
+msgstr ""
+
+#. Default: "{provider} API Free"
+#: components/controlpanel/ApiKey/messages
+msgid "volto-translation-connection-plan-free"
+msgstr ""
+
+#. Default: "{provider} API Pro"
+#: components/controlpanel/ApiKey/messages
+msgid "volto-translation-connection-plan-pro"
+msgstr ""
+
+#. Default: "{count} of {limit} characters this month"
+#: components/controlpanel/ApiKey/messages
+msgid "volto-translation-connection-usage"
+msgstr ""
+
+#. Default: "There is no API key."
+#: components/controlpanel/ApiKey/messages
+msgid "volto-translation-connection-not-configured"
+msgstr ""
+
+#. Default: "The service refused the API key."
+#: components/controlpanel/ApiKey/messages
+msgid "volto-translation-connection-key-refused"
+msgstr ""
+
+#. Default: "The quota of this key is used up."
+#: components/controlpanel/ApiKey/messages
+msgid "volto-translation-connection-quota-exceeded"
+msgstr ""
+
+#. Default: "The service is busy. Please try again later."
+#: components/controlpanel/ApiKey/messages
+msgid "volto-translation-connection-rate-limited"
+msgstr ""
+
+#. Default: "The service cannot be reached."
+#: components/controlpanel/ApiKey/messages
+msgid "volto-translation-connection-unreachable"
+msgstr ""
+
+#. Default: "The test failed: {message}"
+#: components/controlpanel/ApiKey/messages
+msgid "volto-translation-connection-failed"
+msgstr ""
+
+#. Default: "The test could not be run: {message}"
+#: components/controlpanel/ApiKey/messages
+msgid "volto-translation-connection-not-run"
+msgstr ""

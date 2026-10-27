@@ -1,5 +1,6 @@
 import Api from '@plone/volto/helpers/Api/Api';
 import type {
+  ConnectionResult,
   TranslationFieldsType,
   TranslationInfo,
   TranslationResult,
@@ -66,6 +67,17 @@ export function fetchTranslationFields(): Promise<TranslationFieldsType[]> {
   return getApi()
     .get('/@translation-fields')
     .then((data: { types?: TranslationFieldsType[] }) => data?.types || []);
+}
+
+// POST @translation-connection on the site root: asks the translation service
+// with the settings as the control panel's form holds them. The placeholder of
+// the API key, or no key, means the stored one.
+export function testTranslationConnection(form: {
+  provider?: unknown;
+  api_key?: unknown;
+  api_url?: unknown;
+}): Promise<ConnectionResult> {
+  return getApi().post('/@translation-connection', { data: form });
 }
 
 // Test-only / hot-reload helper.
