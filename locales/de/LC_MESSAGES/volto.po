@@ -216,90 +216,22 @@ msgstr "Alle {count} Links anzeigen"
 msgid "volto-translation-failed"
 msgstr "Die Übersetzung ist fehlgeschlagen: {message}"
 
-#. Default: "Translation"
-#: components/TranslationControlPanel
-msgid "volto-translation-cp-title"
-msgstr "Übersetzung"
 
-#. Default: "Save"
-#: components/TranslationControlPanel
-msgid "volto-translation-cp-save"
-msgstr "Speichern"
 
-#. Default: "Settings saved."
-#: components/TranslationControlPanel
-msgid "volto-translation-cp-saved"
-msgstr "Einstellungen gespeichert."
 
-#. Default: "Back"
-#: components/TranslationControlPanel
-msgid "volto-translation-cp-back"
-msgstr "Zurück"
 
-#. Default: "Saving failed: {message}"
-#: components/TranslationControlPanel
-msgid "volto-translation-cp-failed"
-msgstr "Speichern fehlgeschlagen: {message}"
 
-#. Default: "Translation service"
-#: components/TranslationControlPanel
-msgid "volto-translation-cp-provider"
-msgstr "Übersetzungsdienst"
 
-#. Default: "Which service translates. Only DeepL ships with the add-on."
-#: components/TranslationControlPanel
-msgid "volto-translation-cp-provider-help"
-msgstr "Welcher Dienst übersetzt. Mitgeliefert wird nur DeepL."
 
-#. Default: "DeepL API key"
-#: components/TranslationControlPanel
-msgid "volto-translation-cp-api-key"
-msgstr "DeepL-API-Schlüssel"
 
-#. Default: "The key from your DeepL account. A free key ends in ':fx' and is sent to the free endpoint; anything else goes to the pro one."
-#: components/TranslationControlPanel
-msgid "volto-translation-cp-api-key-help"
-msgstr "Der Schlüssel aus dem DeepL-Konto. Ein kostenloser Schlüssel endet auf ':fx' und geht an den Free-Endpunkt, jeder andere an den Pro-Endpunkt."
 
-#. Default: "DeepL API URL"
-#: components/TranslationControlPanel
-msgid "volto-translation-cp-api-url"
-msgstr "DeepL-API-URL"
 
-#. Default: "Only for a proxy or a self-hosted endpoint. Empty means the host that matches the key."
-#: components/TranslationControlPanel
-msgid "volto-translation-cp-api-url-help"
-msgstr "Nur für Proxy oder selbst betriebenen Endpunkt. Leer heißt: der zum Schlüssel passende Host."
 
-#. Default: "Source language"
-#: components/TranslationControlPanel
-msgid "volto-translation-cp-source-language"
-msgstr "Ausgangssprache"
 
-#. Default: "The language the site is written in. Empty lets DeepL detect it per text."
-#: components/TranslationControlPanel
-msgid "volto-translation-cp-source-language-help"
-msgstr "Die Sprache, in der die Website verfasst ist. Leer lässt DeepL sie je Text erkennen."
 
-#. Default: "Offered target languages"
-#: components/TranslationControlPanel
-msgid "volto-translation-cp-target-languages"
-msgstr "Angebotene Zielsprachen"
 
-#. Default: "One language code per line. Empty offers the site's own languages."
-#: components/TranslationControlPanel
-msgid "volto-translation-cp-target-languages-help"
-msgstr "Ein Sprachcode pro Zeile. Leer bietet die Sprachen der Website an."
 
-#. Default: "Translated fields"
-#: components/TranslationControlPanel
-msgid "volto-translation-cp-translate-fields"
-msgstr "Übersetzte Felder"
 
-#. Default: "One field name per line, in the order they are translated."
-#: components/TranslationControlPanel
-msgid "volto-translation-cp-translate-fields-help"
-msgstr "Ein Feldname pro Zeile, in der Reihenfolge der Übersetzung."
 
 
 #. Default: "Language"

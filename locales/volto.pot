@@ -216,90 +216,22 @@ msgstr ""
 msgid "volto-translation-failed"
 msgstr ""
 
-#. Default: "Translation"
-#: components/TranslationControlPanel
-msgid "volto-translation-cp-title"
-msgstr ""
 
-#. Default: "Save"
-#: components/TranslationControlPanel
-msgid "volto-translation-cp-save"
-msgstr ""
 
-#. Default: "Settings saved."
-#: components/TranslationControlPanel
-msgid "volto-translation-cp-saved"
-msgstr ""
 
-#. Default: "Back"
-#: components/TranslationControlPanel
-msgid "volto-translation-cp-back"
-msgstr ""
 
-#. Default: "Saving failed: {message}"
-#: components/TranslationControlPanel
-msgid "volto-translation-cp-failed"
-msgstr ""
 
-#. Default: "Translation service"
-#: components/TranslationControlPanel
-msgid "volto-translation-cp-provider"
-msgstr ""
 
-#. Default: "Which service translates. Only DeepL ships with the add-on."
-#: components/TranslationControlPanel
-msgid "volto-translation-cp-provider-help"
-msgstr ""
 
-#. Default: "DeepL API key"
-#: components/TranslationControlPanel
-msgid "volto-translation-cp-api-key"
-msgstr ""
 
-#. Default: "The key from your DeepL account. A free key ends in ':fx' and is sent to the free endpoint; anything else goes to the pro one."
-#: components/TranslationControlPanel
-msgid "volto-translation-cp-api-key-help"
-msgstr ""
 
-#. Default: "DeepL API URL"
-#: components/TranslationControlPanel
-msgid "volto-translation-cp-api-url"
-msgstr ""
 
-#. Default: "Only for a proxy or a self-hosted endpoint. Empty means the host that matches the key."
-#: components/TranslationControlPanel
-msgid "volto-translation-cp-api-url-help"
-msgstr ""
 
-#. Default: "Source language"
-#: components/TranslationControlPanel
-msgid "volto-translation-cp-source-language"
-msgstr ""
 
-#. Default: "The language the site is written in. Empty lets DeepL detect it per text."
-#: components/TranslationControlPanel
-msgid "volto-translation-cp-source-language-help"
-msgstr ""
 
-#. Default: "Offered target languages"
-#: components/TranslationControlPanel
-msgid "volto-translation-cp-target-languages"
-msgstr ""
 
-#. Default: "One language code per line. Empty offers the site's own languages."
-#: components/TranslationControlPanel
-msgid "volto-translation-cp-target-languages-help"
-msgstr ""
 
-#. Default: "Translated fields"
-#: components/TranslationControlPanel
-msgid "volto-translation-cp-translate-fields"
-msgstr ""
 
-#. Default: "One field name per line, in the order they are translated."
-#: components/TranslationControlPanel
-msgid "volto-translation-cp-translate-fields-help"
-msgstr ""
 
 
 #. Default: "Language"
