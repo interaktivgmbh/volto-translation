@@ -1,5 +1,6 @@
 import Api from '@plone/volto/helpers/Api/Api';
 import type {
+  ApiKeyStatus,
   ConnectionResult,
   TranslationFieldsType,
   TranslationInfo,
@@ -78,6 +79,14 @@ export function testTranslationConnection(form: {
   api_url?: unknown;
 }): Promise<ConnectionResult> {
   return getApi().post('/@translation-connection', { data: form });
+}
+
+// GET @translation-connection on the site root: how the stored API key is
+// kept — encrypted, with which secret, readable — never the key.
+export function fetchApiKeyStatus(): Promise<ApiKeyStatus> {
+  return getApi()
+    .get('/@translation-connection')
+    .then((data: { api_key: ApiKeyStatus }) => data.api_key);
 }
 
 // Test-only / hot-reload helper.

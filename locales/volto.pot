@@ -1071,3 +1071,23 @@ msgstr ""
 #: components/controlpanel/ApiKey/messages
 msgid "volto-translation-connection-not-run"
 msgstr ""
+
+#. Default: "The stored key cannot be decrypted. Please enter it again."
+#: components/controlpanel/ApiKey/messages
+msgid "volto-translation-connection-key-unreadable"
+msgstr ""
+
+#. Default: "Stored encrypted (secret from the server environment)."
+#: components/controlpanel/ApiKey/messages
+msgid "volto-translation-connection-encrypted-environment"
+msgstr ""
+
+#. Default: "Stored encrypted (secret in the database). Set {variable} to protect it in backups too."
+#: components/controlpanel/ApiKey/messages
+msgid "volto-translation-connection-encrypted-site"
+msgstr ""
+
+#. Default: "Stored unencrypted yet; it is encrypted when the settings are saved next."
+#: components/controlpanel/ApiKey/messages
+msgid "volto-translation-connection-not-encrypted"
+msgstr ""

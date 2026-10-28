@@ -49,6 +49,25 @@ const messages = defineMessages({
     id: 'volto-translation-connection-failed',
     defaultMessage: 'The test failed: {message}',
   },
+  keyUnreadable: {
+    id: 'volto-translation-connection-key-unreadable',
+    defaultMessage:
+      'The stored key cannot be decrypted. Please enter it again.',
+  },
+  encryptedEnvironment: {
+    id: 'volto-translation-connection-encrypted-environment',
+    defaultMessage: 'Stored encrypted (secret from the server environment).',
+  },
+  encryptedSite: {
+    id: 'volto-translation-connection-encrypted-site',
+    defaultMessage:
+      'Stored encrypted (secret in the database). Set {variable} to protect it in backups too.',
+  },
+  notEncrypted: {
+    id: 'volto-translation-connection-not-encrypted',
+    defaultMessage:
+      'Stored unencrypted yet; it is encrypted when the settings are saved next.',
+  },
   notRun: {
     id: 'volto-translation-connection-not-run',
     defaultMessage: 'The test could not be run: {message}',
@@ -65,6 +84,7 @@ export const CODE_MESSAGES: Record<
   quota_exceeded: messages.quotaExceeded,
   rate_limited: messages.rateLimited,
   unreachable: messages.unreachable,
+  key_unreadable: messages.keyUnreadable,
 };
 
 export default messages;

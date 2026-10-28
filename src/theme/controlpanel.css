@@ -494,3 +494,17 @@
 .translation-connection-result.problem {
   color: #9f3a38;
 }
+
+/* how the stored key is kept */
+.translation-key-status {
+  color: #646c70;
+  font-size: 0.9em;
+}
+
+.translation-key-status.plain {
+  font-style: italic;
+}
+
+.translation-key-status.problem {
+  color: #9f3a38;
+}

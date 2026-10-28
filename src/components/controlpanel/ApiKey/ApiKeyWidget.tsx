@@ -2,8 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { Button } from 'semantic-ui-react';
 import PasswordWidget from '@plone/volto/components/manage/Widgets/PasswordWidget';
-import { testTranslationConnection } from '../../../helpers/translateApi';
-import type { ConnectionResult } from '../../../types';
+import {
+  fetchApiKeyStatus,
+  testTranslationConnection,
+} from '../../../helpers/translateApi';
+import type { ApiKeyStatus, ConnectionResult } from '../../../types';
 import messages, { CODE_MESSAGES } from './messages';
 
 interface ApiKeyWidgetProps {
@@ -12,6 +15,9 @@ interface ApiKeyWidgetProps {
   formData?: { provider?: unknown; api_url?: unknown };
   [key: string]: unknown;
 }
+
+// what to set for the key to be safe in backups too, see the README
+const SECRET_VARIABLE = 'INTERAKTIV_TRANSLATION_SECRET';
 
 type TestState =
   | { kind: 'idle' }
@@ -26,6 +32,16 @@ const ApiKeyWidget = (props: ApiKeyWidgetProps) => {
   const { id, value, formData } = props;
   const intl = useIntl();
   const [state, setState] = useState<TestState>({ kind: 'idle' });
+  const [keyStatus, setKeyStatus] = useState<ApiKeyStatus | null>(null);
+
+  // how the stored key is kept: asked on opening and after each test
+  const loadKeyStatus = () =>
+    fetchApiKeyStatus()
+      .then(setKeyStatus)
+      .catch(() => setKeyStatus(null));
+  useEffect(() => {
+    loadKeyStatus();
+  }, []);
 
   // a result says nothing about a key or a service changed since
   useEffect(() => {
@@ -39,7 +55,10 @@ const ApiKeyWidget = (props: ApiKeyWidgetProps) => {
       api_key: value,
       api_url: formData?.api_url,
     })
-      .then((result) => setState({ kind: 'done', result }))
+      .then((result) => {
+        setState({ kind: 'done', result });
+        loadKeyStatus();
+      })
       .catch((error: Error) =>
         setState({
           kind: 'failed',
@@ -93,10 +112,42 @@ const ApiKeyWidget = (props: ApiKeyWidgetProps) => {
         ? 'problem'
         : '';
 
+  const keyHint = (status: ApiKeyStatus | null) => {
+    if (!status?.stored) {
+      return null;
+    }
+    if (!status.readable) {
+      return {
+        kind: 'problem',
+        text: intl.formatMessage(messages.keyUnreadable),
+      };
+    }
+    if (status.encryption === 'environment') {
+      return {
+        kind: 'safe',
+        text: `🔒 ${intl.formatMessage(messages.encryptedEnvironment)}`,
+      };
+    }
+    if (status.encryption === 'site') {
+      return {
+        kind: 'safe',
+        text: `🔒 ${intl.formatMessage(messages.encryptedSite, { variable: SECRET_VARIABLE })}`,
+      };
+    }
+
+    return { kind: 'plain', text: intl.formatMessage(messages.notEncrypted) };
+  };
+  const hint = keyHint(keyStatus);
+
   return (
     <>
       <PasswordWidget {...props} />
       <div className="translation-connection-test">
+        {hint && (
+          <span className={`translation-key-status ${hint.kind}`}>
+            {hint.text}
+          </span>
+        )}
         <Button
           type="button"
           basic

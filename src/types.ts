@@ -119,6 +119,13 @@ export interface ConnectionResult {
   message?: string;
 }
 
+// GET @translation-connection: how the stored API key is kept, never the key
+export interface ApiKeyStatus {
+  stored: boolean;
+  encryption: 'environment' | 'site' | 'none' | null;
+  readable: boolean;
+}
+
 export interface SiteData {
   'plone.default_language'?: string;
   'plone.available_languages'?: string[];
