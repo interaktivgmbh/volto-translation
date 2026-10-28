@@ -21,6 +21,10 @@
   on hover.
 - Added widget for editing metadata-mapping in controlpanel providing xlsx
   import/export based on read-excel-file/write-excel-file
+- Added widget for the glossary IDs per direction in the control panel; it
+  lists the glossaries of the account on demand (`POST @translation-glossaries`)
+  to take an ID over, and tells entered IDs that are not in the account or are
+  for another direction.
 
 ## 1.0.0-alpha.1 (2026-10-15)
 

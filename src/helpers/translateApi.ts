@@ -2,6 +2,7 @@ import Api from '@plone/volto/helpers/Api/Api';
 import type {
   ApiKeyStatus,
   ConnectionResult,
+  GlossariesResult,
   TranslationFieldsType,
   TranslationInfo,
   TranslationResult,
@@ -79,6 +80,16 @@ export function testTranslationConnection(form: {
   api_url?: unknown;
 }): Promise<ConnectionResult> {
   return getApi().post('/@translation-connection', { data: form });
+}
+
+// POST @translation-glossaries on the site root: the glossaries of the
+// account, with the settings as the form holds them, saved or not.
+export function fetchGlossaries(form: {
+  provider?: unknown;
+  api_key?: unknown;
+  api_url?: unknown;
+}): Promise<GlossariesResult> {
+  return getApi().post('/@translation-glossaries', { data: form });
 }
 
 // GET @translation-connection on the site root: how the stored API key is

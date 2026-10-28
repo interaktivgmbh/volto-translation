@@ -1023,3 +1023,78 @@ msgstr "Stored encrypted (secret in the database). Set {variable} to protect it 
 #: components/controlpanel/ApiKey/messages
 msgid "volto-translation-connection-not-encrypted"
 msgstr "Stored unencrypted yet; it is encrypted when the settings are saved next."
+
+#. Default: "without glossary"
+#: components/controlpanel/Glossary/messages
+msgid "volto-translation-glossary-none"
+msgstr "without glossary"
+
+#. Default: "There is no target language to translate into."
+#: components/controlpanel/Glossary/messages
+msgid "volto-translation-glossary-no-directions"
+msgstr "There is no target language to translate into."
+
+#. Default: "Show available glossaries"
+#: components/controlpanel/Glossary/messages
+msgid "volto-translation-glossary-list"
+msgstr "Show available glossaries"
+
+#. Default: "Loading the glossaries …"
+#: components/controlpanel/Glossary/messages
+msgid "volto-translation-glossary-loading"
+msgstr "Loading the glossaries …"
+
+#. Default: "{count, plural, =0 {The account has no glossaries.} one {The account has one glossary.} other {The account has # glossaries.}}"
+#: components/controlpanel/Glossary/messages
+msgid "volto-translation-glossary-count"
+msgstr "{count, plural, =0 {The account has no glossaries.} one {The account has one glossary.} other {The account has # glossaries.}}"
+
+#. Default: "The glossaries could not be loaded: {message}"
+#: components/controlpanel/Glossary/messages
+msgid "volto-translation-glossary-not-listed"
+msgstr "The glossaries could not be loaded: {message}"
+
+#. Default: "Name"
+#: components/controlpanel/Glossary/messages
+msgid "volto-translation-glossary-column-name"
+msgstr "Name"
+
+#. Default: "Direction"
+#: components/controlpanel/Glossary/messages
+msgid "volto-translation-glossary-column-direction"
+msgstr "Direction"
+
+#. Default: "Entries"
+#: components/controlpanel/Glossary/messages
+msgid "volto-translation-glossary-column-entries"
+msgstr "Entries"
+
+#. Default: "ID"
+#: components/controlpanel/Glossary/messages
+msgid "volto-translation-glossary-column-id"
+msgstr "ID"
+
+#. Default: "Action"
+#: components/controlpanel/Glossary/messages
+msgid "volto-translation-glossary-column-action"
+msgstr "Action"
+
+#. Default: "Use for {language}"
+#: components/controlpanel/Glossary/messages
+msgid "volto-translation-glossary-take"
+msgstr "Use for {language}"
+
+#. Default: "✓ Used for {language}"
+#: components/controlpanel/Glossary/messages
+msgid "volto-translation-glossary-taken"
+msgstr "✓ Used for {language}"
+
+#. Default: "Not found in the account"
+#: components/controlpanel/Glossary/messages
+msgid "volto-translation-glossary-unknown"
+msgstr "Not found in the account"
+
+#. Default: "“{name}” is for {direction}"
+#: components/controlpanel/Glossary/messages
+msgid "volto-translation-glossary-other-direction"
+msgstr "“{name}” is for {direction}"

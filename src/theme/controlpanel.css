@@ -508,3 +508,58 @@
 .translation-key-status.problem {
   color: #9f3a38;
 }
+
+/* one glossary ID per direction, as in the layout */
+.translation-glossary-ids .translation-glossary-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25em 1em;
+}
+
+.translation-glossary-ids .translation-glossary-row > label {
+  min-width: 12em;
+}
+
+.translation-glossary-ids .translation-glossary-row > .ui.input {
+  flex: 1 1 20em;
+}
+
+.ui.form .translation-glossary-ids .ui.input input[type='text']::placeholder {
+  color: #646c70;
+}
+
+.translation-glossary-hint {
+  flex-basis: 100%;
+  color: #646c70;
+  font-size: 0.9em;
+}
+
+.translation-glossary-hint.ok {
+  color: #1e7a34;
+}
+
+.translation-glossary-hint.problem {
+  color: #9f3a38;
+}
+
+/* the account's glossaries, listed on demand */
+.translation-glossary-ids .translation-glossary-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 1em;
+  gap: 0.75em;
+}
+
+.translation-glossary-list .ui.table {
+  margin: 0;
+}
+
+.translation-glossary-list .ui.table code {
+  word-break: break-all;
+}
+
+.translation-glossary-list .ui.table td:last-child {
+  white-space: nowrap;
+}

@@ -119,6 +119,24 @@ export interface ConnectionResult {
   message?: string;
 }
 
+// one glossary of the translation service's account
+export interface Glossary {
+  id: string;
+  name: string;
+  source: string;
+  target: string;
+  entries?: number | null;
+}
+
+// POST @translation-glossaries: the account's glossaries, or why not
+export interface GlossariesResult {
+  ok: boolean;
+  provider?: string;
+  glossaries?: Glossary[];
+  code?: string;
+  message?: string;
+}
+
 // GET @translation-connection: how the stored API key is kept, never the key
 export interface ApiKeyStatus {
   stored: boolean;

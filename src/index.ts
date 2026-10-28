@@ -1,5 +1,6 @@
 import MachineTranslationBanner from './components/MachineTranslationBanner';
 import ApiKeyWidget from './components/controlpanel/ApiKey/ApiKeyWidget';
+import GlossaryIdsWidget from './components/controlpanel/Glossary/GlossaryIdsWidget';
 import MetadataMappingWidget from './components/controlpanel/MetadataMapping/MetadataMappingWidget';
 import MetadataSelectionWidget from './components/controlpanel/MetadataSelection/MetadataSelectionWidget';
 import TranslateMenuItem from './components/TranslateMenuItem';
@@ -36,6 +37,7 @@ const applyConfig = (config: VoltoConfig): VoltoConfig => {
   widgets.widget.translation_metadata_mapping = MetadataMappingWidget;
   widgets.widget.translation_metadata_selection = MetadataSelectionWidget;
   widgets.widget.translation_api_key = ApiKeyWidget;
+  widgets.widget.translation_glossary_ids = GlossaryIdsWidget;
 
   config.addonRoutes = [
     ...(config.addonRoutes || []),
