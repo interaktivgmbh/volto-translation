@@ -69,8 +69,89 @@ export interface TranslationContent {
   working_copy_of?: { '@id'?: string };
 }
 
+// The metadata mapping of the control panel: per field one row per value,
+// with one entry per language. A missing language keeps the source value.
+export type MetadataMappingRow = Record<string, string>;
+export type MetadataMapping = Record<string, MetadataMappingRow[]>;
+
+// GET @translation-fields: per content type its fields and how the
+// translation treats them, as the backend suggests it.
+export type FieldRole = 'always' | 'default' | 'impossible';
+export type FieldMode = 'translate' | 'copy' | 'mapping';
+export type FieldReason =
+  | 'always'
+  | 'primary'
+  | 'field_name'
+  | 'language_independent'
+  | 'field_type';
+
+export interface TranslationField {
+  id: string;
+  title: string;
+  fieldset: string;
+  kind: string;
+  role: FieldRole;
+  mode: FieldMode | null;
+  reason: FieldReason;
+  // the saved mapping has values for it; the control panel uses its own
+  mapped: boolean;
+}
+
+// The control panel's choice: per content type the fields that go along. A
+// type without an entry takes only what always goes along and what is mapped.
+export type MetadataSelection = Record<string, string[]>;
+
+export interface TranslationFieldsType {
+  id: string;
+  title: string;
+  fields: TranslationField[];
+}
+
+// POST @translation-connection: does the translation service answer?
+export interface ConnectionResult {
+  ok: boolean;
+  provider?: string;
+  plan?: 'free' | 'pro' | null;
+  character_count?: number | null;
+  character_limit?: number | null;
+  // why not, for the front end to say in its own words
+  code?: string;
+  message?: string;
+}
+
+// one glossary of the translation service's account
+export interface Glossary {
+  id: string;
+  name: string;
+  source: string;
+  target: string;
+  entries?: number | null;
+}
+
+// POST @translation-glossaries: the account's glossaries, or why not
+export interface GlossariesResult {
+  ok: boolean;
+  provider?: string;
+  glossaries?: Glossary[];
+  code?: string;
+  message?: string;
+}
+
+// GET @translation-connection: how the stored API key is kept, never the key
+export interface ApiKeyStatus {
+  stored: boolean;
+  encryption: 'environment' | 'site' | 'none' | null;
+  readable: boolean;
+}
+
+export interface SiteData {
+  'plone.default_language'?: string;
+  'plone.available_languages'?: string[];
+}
+
 export interface TranslationState {
   content?: { data?: TranslationContent };
+  site?: { data?: SiteData };
   userSession?: { token?: string };
   actions?: { actions?: { object_buttons?: Array<{ id?: string }> } };
 }

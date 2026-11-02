@@ -19,6 +19,16 @@
   translations no longer share a message id.
 - Disabled machine translate buttons in Manage translations show the reason
   on hover.
+- Added widget for editing metadata-mapping in controlpanel providing xlsx
+  import/export based on read-excel-file/write-excel-file
+- Added widget for the glossary IDs per direction in the control panel; it
+  lists the glossaries of the account on demand (`POST @translation-glossaries`)
+  to take an ID over, and tells entered IDs that are not in the account or are
+  for another direction.
+- Fix: the metadata mapping shows its hint for a site without languages; it
+  was hidden inside the form.
+- Volto 16: the control panel widgets load the site languages from
+  `GET @site` themselves; Volto 16 does not keep them in its state.
 
 ## 1.0.0-alpha.1 (2026-10-15)
 

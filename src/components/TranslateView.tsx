@@ -358,6 +358,9 @@ const TranslateView = (props: TranslateViewProps) => {
               {modes.map(({ key, label, hint }) => {
                 const disabled = key === 'machine' && Boolean(machineRefusal);
                 return (
+                  // the label holds its input and its text; the text sits in a
+                  // column beside the radio, deeper than the rule looks for it
+                  // eslint-disable-next-line jsx-a11y/label-has-associated-control
                   <label
                     key={key}
                     htmlFor={`translation-mode-${key}`}

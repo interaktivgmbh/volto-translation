@@ -1,0 +1,565 @@
+/* metadata mapping widget of the control panel */
+.ui.form .field.metadata-mapping-widget {
+  padding-bottom: 1.5em;
+}
+
+/* room above, so the title does not stick to the band of the fieldset */
+.metadata-mapping-widget .metadata-mapping-title {
+  padding-top: 1.25em;
+  margin-bottom: 0.75em;
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+/* the description as a grey band below the title, as in the layout */
+.metadata-mapping-widget .metadata-mapping-description {
+  padding: 0.9em 1em;
+  margin-bottom: 1.25em;
+  background: #edf1f2;
+  color: #555;
+  font-size: 0.9em;
+  line-height: 1.5;
+}
+
+/* Pastanaga makes every text input of a form 60px high: compact here */
+.ui.form .metadata-mapping-widget .ui.input input[type='text'] {
+  height: 2.6em;
+  padding: 0.4em 0.6em;
+}
+
+/* export and import: plain links, as in the layout */
+.metadata-mapping-widget .ui.basic.button.metadata-mapping-link {
+  padding: 0;
+  margin: 0;
+  box-shadow: none;
+  color: #007eb1 !important;
+  font-weight: normal;
+}
+
+.metadata-mapping-widget .ui.basic.button.metadata-mapping-link:hover {
+  background: none !important;
+  text-decoration: underline;
+}
+
+.metadata-mapping-widget .metadata-mapping-fields,
+.metadata-mapping-widget .metadata-mapping-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 1em;
+  gap: 0.5em;
+}
+
+.metadata-mapping-widget .metadata-mapping-fields {
+  padding-bottom: 1em;
+  border-bottom: 1px solid #edf1f2;
+}
+
+/* field tabs and secondary actions: outlined, as in the layout */
+.metadata-mapping-widget .ui.button.metadata-mapping-tab,
+.metadata-mapping-widget .ui.button.metadata-mapping-secondary,
+.metadata-mapping-modal .ui.button.metadata-mapping-secondary {
+  padding: 0.6em 1em;
+  border: 1px solid #c7d5d8;
+  border-radius: 1px;
+  margin: 0;
+  background: #fff;
+  box-shadow: none;
+  color: #333;
+  font-weight: normal;
+}
+
+.metadata-mapping-widget .ui.button.metadata-mapping-tab:hover,
+.metadata-mapping-widget .ui.button.metadata-mapping-secondary:hover,
+.metadata-mapping-modal .ui.button.metadata-mapping-secondary:hover {
+  border-color: #007eb1;
+  color: #007eb1;
+}
+
+.metadata-mapping-widget .ui.button.metadata-mapping-tab.selected {
+  border-color: #006a96;
+  background: #e8f4fa;
+  color: #006a96;
+}
+
+.metadata-mapping-widget .ui.button.metadata-mapping-secondary.negative {
+  border-color: #e7c5c4;
+  color: #9f3a38;
+}
+
+.metadata-mapping-widget .ui.button.metadata-mapping-secondary.negative:hover {
+  border-color: #9f3a38;
+  background: #fff6f6;
+}
+
+.metadata-mapping-widget .metadata-mapping-add-field {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  gap: 0.5em;
+}
+
+.metadata-mapping-widget .metadata-mapping-toolbar > .ui.input {
+  flex: 1 1 20em;
+}
+
+.metadata-mapping-widget .metadata-mapping-toolbar > .ui.button {
+  margin: 0;
+}
+
+/* the table takes the full width and scrolls sideways with many languages */
+.metadata-mapping-widget .metadata-mapping-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.metadata-mapping-widget .ui.table.metadata-mapping-table {
+  width: 100%;
+  border-radius: 0;
+  table-layout: fixed;
+}
+
+.metadata-mapping-widget .ui.table .metadata-mapping-action {
+  width: 5.5em;
+  text-align: center;
+}
+
+.metadata-mapping-widget .ui.table.metadata-mapping-table thead th {
+  padding: 0.9em 0.6em;
+  background: #f3f5f6;
+  font-size: 0.85em;
+  font-weight: normal;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+.metadata-mapping-widget .metadata-mapping-language {
+  margin-bottom: 0.35em;
+}
+
+.metadata-mapping-widget .ui.table th .ui.button {
+  display: block;
+  margin-top: 0.5em;
+  text-transform: none;
+}
+
+.metadata-mapping-widget .ui.label.metadata-mapping-role {
+  margin: 0;
+  font-weight: normal;
+  text-transform: none;
+}
+
+.metadata-mapping-widget .ui.label.metadata-mapping-role.role-source {
+  background-color: #006a96;
+  color: #fff;
+}
+
+.metadata-mapping-widget .ui.label.metadata-mapping-role.role-target {
+  background-color: #e8f4fa;
+  color: #006a96;
+}
+
+.metadata-mapping-widget .ui.label.metadata-mapping-role.role-orphan {
+  background-color: #fff6f6;
+  color: #9f3a38;
+}
+
+/* the source value heads its row, but looks like any other cell */
+.metadata-mapping-widget .ui.table.metadata-mapping-table tbody th {
+  background: transparent;
+  font-weight: normal;
+  text-align: left;
+}
+
+.metadata-mapping-widget .ui.table td,
+.metadata-mapping-widget .ui.table tbody th {
+  padding: 0.5em 0.6em;
+  vertical-align: middle;
+}
+
+/* "no values yet" or "none found" */
+.metadata-mapping-widget .ui.table td.metadata-mapping-empty {
+  padding: 1.25em 0.6em;
+  color: #646c70;
+  font-style: italic;
+}
+
+/* filled cells stand out; empty ones keep the source value */
+.ui.form .metadata-mapping-widget .ui.input.filled input[type='text'] {
+  border-bottom: 1px solid #948d4a;
+  background: #fffde8;
+}
+
+.ui.form .metadata-mapping-widget .ui.input.empty input[type='text'] {
+  border-bottom: 1px solid #8a979b;
+  background: transparent;
+}
+
+.ui.form
+  .metadata-mapping-widget
+  .ui.input.empty
+  input[type='text']::placeholder {
+  color: #646c70;
+  font-style: italic;
+}
+
+.metadata-mapping-widget td.role-unoffered .ui.input input,
+.metadata-mapping-widget th.role-unoffered .metadata-mapping-language {
+  color: #646c70;
+}
+
+.metadata-mapping-widget td.role-orphan {
+  background-color: #fff6f6;
+}
+
+.metadata-mapping-widget .ui.button.metadata-mapping-remove-row {
+  padding: 0.3em;
+  background: none;
+  box-shadow: none;
+  color: #646c70;
+}
+
+.metadata-mapping-widget .ui.button.metadata-mapping-remove-row:hover {
+  color: #9f3a38;
+}
+
+/* search and filter above the table */
+/* a line between finding values and adding them */
+.metadata-mapping-widget .metadata-mapping-filter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding-bottom: 1em;
+  border-bottom: 1px solid #edf1f2;
+  margin-bottom: 1em;
+  gap: 0.5em 1.5em;
+}
+
+.metadata-mapping-widget .metadata-mapping-filter > .ui.input {
+  flex: 0 1 18em;
+}
+
+/* the search is a box, as in the layout; .ui.input outweighs Pastanaga's rule */
+.ui.form
+  .metadata-mapping-widget
+  .metadata-mapping-filter
+  .ui.input
+  input[type='text'] {
+  border: 1px solid #8a979b;
+}
+
+.metadata-mapping-widget .metadata-mapping-actions {
+  display: flex;
+  margin-left: auto;
+  gap: 1.5em;
+}
+
+/* below the table: range, pages and page size, as in the layout */
+.metadata-mapping-widget .metadata-mapping-pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 0.8em 0;
+  border-bottom: 1px solid #edf1f2;
+  color: #555;
+  font-size: 0.9em;
+  gap: 0.5em 2em;
+}
+
+.metadata-mapping-widget .metadata-mapping-pages,
+.metadata-mapping-widget .metadata-mapping-page-size {
+  display: flex;
+  align-items: center;
+  gap: 0.25em;
+}
+
+.metadata-mapping-widget .metadata-mapping-page-size {
+  margin-left: auto;
+  gap: 0.5em;
+}
+
+/* the number centred in its box */
+.metadata-mapping-widget .metadata-mapping-pagination .ui.basic.button {
+  display: inline-flex;
+  min-width: 2.2em;
+  height: 2.2em;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.5em;
+  border: 1px solid transparent;
+  margin: 0;
+  box-shadow: none;
+  color: #555 !important;
+  font-weight: normal;
+  line-height: 1;
+}
+
+.metadata-mapping-widget .metadata-mapping-pagination .ui.basic.button:hover {
+  border-color: #c7d5d8;
+}
+
+.metadata-mapping-widget
+  .metadata-mapping-pagination
+  .ui.basic.button.selected {
+  border-color: #007eb1;
+  background: #e8f4fa !important;
+  color: #006a96 !important;
+}
+
+.metadata-mapping-widget .metadata-mapping-pagination .gap {
+  padding: 0 0.3em;
+}
+
+/* the placeholders are the only visible label: AA contrast */
+.ui.form .metadata-mapping-widget .ui.input input[type='text']::placeholder,
+.metadata-mapping-modal .ui.input input[type='text']::placeholder {
+  color: #646c70;
+}
+
+/* metadata selection widget: the mapping widget's styles, plus its list */
+.metadata-selection-widget .metadata-selection-field {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6em;
+}
+
+.metadata-selection-widget .metadata-selection-id {
+  margin-left: 0.6em;
+  color: #646c70;
+  font-family: monospace;
+  font-size: 0.85em;
+}
+
+.metadata-selection-widget .ui.table .metadata-selection-mode {
+  width: 14em;
+  text-align: right;
+}
+
+.metadata-selection-widget .metadata-selection-status.mode-translate {
+  color: #006a96;
+}
+
+.metadata-selection-widget .metadata-selection-status.mode-copy {
+  color: #646c70;
+}
+
+.metadata-selection-widget .metadata-selection-status.mode-skipped {
+  color: #646c70;
+  font-style: italic;
+}
+
+/* the fields that always go along: a block of their own at the top */
+.metadata-selection-widget tr.role-always td {
+  background: #fffde8;
+}
+
+.metadata-selection-widget .ui.label.metadata-selection-always {
+  margin: 0 0 0 0.6em;
+  background-color: #e8f4fa;
+  color: #006a96;
+  font-weight: normal;
+}
+
+.metadata-selection-widget .metadata-selection-status.mode-mapping {
+  color: #6a3d9a;
+}
+
+/* cannot go along: grey, but readable */
+.metadata-selection-widget tr.role-impossible td {
+  color: #646c70;
+  font-style: italic;
+}
+
+/* the field tabs, a group of toggle buttons */
+.metadata-mapping-widget .metadata-mapping-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+}
+
+/* read by screen readers only */
+.metadata-mapping-sr-only {
+  position: absolute;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  border: 0;
+  margin: -1px;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* the button styles above hide semantic-ui's focus: a visible ring instead */
+.metadata-mapping-widget .ui.button:focus-visible,
+.metadata-mapping-modal .ui.button:focus-visible,
+.metadata-mapping-confirm .ui.button:focus-visible {
+  outline: 2px solid #006a96;
+  outline-offset: 2px;
+}
+
+/* import and export modal: they render outside the widget */
+.metadata-mapping-modal .metadata-mapping-import-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 1em 0;
+  gap: 0.5em 1em;
+}
+
+.metadata-mapping-modal .metadata-mapping-import-row > label,
+.metadata-mapping-modal .metadata-mapping-import-label {
+  min-width: 8em;
+  font-weight: bold;
+}
+
+.metadata-mapping-modal .metadata-mapping-import-effect,
+.metadata-mapping-modal .file-name {
+  color: #555;
+}
+
+.metadata-mapping-modal .metadata-mapping-modal-intro {
+  margin-top: 1.5em;
+  color: #555;
+}
+
+.metadata-mapping-modal .metadata-mapping-export-scope {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8em;
+}
+
+.metadata-mapping-modal .metadata-mapping-import-summary {
+  margin: 1em 0;
+}
+
+.metadata-mapping-modal .metadata-mapping-import-warning {
+  margin-top: 0.3em;
+  color: #9f3a38;
+  font-size: 0.9em;
+}
+
+.metadata-mapping-modal fieldset.metadata-mapping-export-scope {
+  padding: 0;
+  border: 0;
+  margin: 0;
+}
+
+.metadata-mapping-modal .metadata-mapping-export-scope legend {
+  margin-bottom: 0.5em;
+  font-weight: bold;
+}
+
+/* the connection test below the API key, on the left as in the layout; what
+   it found below the button */
+.translation-connection-test {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1em 1rem 1.5em;
+  border-bottom: 1px solid #edf1f2;
+  gap: 0.75em;
+}
+
+.translation-connection-result:empty {
+  display: none;
+}
+
+.ui.basic.button.translation-connection-button {
+  padding: 0.6em 1em;
+  border: 1px solid #c7d5d8;
+  border-radius: 1px;
+  margin: 0;
+  box-shadow: none;
+  color: #333 !important;
+  font-weight: normal;
+}
+
+.ui.basic.button.translation-connection-button:hover {
+  border-color: #007eb1;
+  color: #007eb1 !important;
+}
+
+.ui.basic.button.translation-connection-button:focus-visible {
+  outline: 2px solid #006a96;
+  outline-offset: 2px;
+}
+
+.translation-connection-result.ok {
+  color: #1e7a34;
+}
+
+.translation-connection-result.problem {
+  color: #9f3a38;
+}
+
+/* how the stored key is kept */
+.translation-key-status {
+  color: #646c70;
+  font-size: 0.9em;
+}
+
+.translation-key-status.plain {
+  font-style: italic;
+}
+
+.translation-key-status.problem {
+  color: #9f3a38;
+}
+
+/* one glossary ID per direction, as in the layout */
+.translation-glossary-ids .translation-glossary-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25em 1em;
+}
+
+.translation-glossary-ids .translation-glossary-row > label {
+  min-width: 12em;
+}
+
+.translation-glossary-ids .translation-glossary-row > .ui.input {
+  flex: 1 1 20em;
+}
+
+.ui.form .translation-glossary-ids .ui.input input[type='text']::placeholder {
+  color: #646c70;
+}
+
+.translation-glossary-hint {
+  flex-basis: 100%;
+  color: #646c70;
+  font-size: 0.9em;
+}
+
+.translation-glossary-hint.ok {
+  color: #1e7a34;
+}
+
+.translation-glossary-hint.problem {
+  color: #9f3a38;
+}
+
+/* the account's glossaries, listed on demand */
+.translation-glossary-ids .translation-glossary-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 1em;
+  gap: 0.75em;
+}
+
+.translation-glossary-list .ui.table {
+  margin: 0;
+}
+
+.translation-glossary-list .ui.table code {
+  word-break: break-all;
+}
+
+.translation-glossary-list .ui.table td:last-child {
+  white-space: nowrap;
+}

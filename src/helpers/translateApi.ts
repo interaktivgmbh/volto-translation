@@ -1,5 +1,12 @@
 import Api from '@plone/volto/helpers/Api/Api';
-import type { TranslationInfo, TranslationResult } from '../types';
+import type {
+  ApiKeyStatus,
+  ConnectionResult,
+  GlossariesResult,
+  TranslationFieldsType,
+  TranslationInfo,
+  TranslationResult,
+} from '../types';
 
 // One Api instance for the add-on; it picks the auth token off the cookie itself.
 let api: Api | null = null;
@@ -53,6 +60,44 @@ export function translateContent(
   return getApi().post(`${path}/@translate`, {
     data: { target_language: targetLanguage, save, overwrite },
   });
+}
+
+// GET @translation-fields on the site root: the content types an editor adds,
+// each with its fields and how the translation treats them. For the control
+// panel only, so uncached.
+export function fetchTranslationFields(): Promise<TranslationFieldsType[]> {
+  return getApi()
+    .get('/@translation-fields')
+    .then((data: { types?: TranslationFieldsType[] }) => data?.types || []);
+}
+
+// POST @translation-connection on the site root: asks the translation service
+// with the settings as the control panel's form holds them. The placeholder of
+// the API key, or no key, means the stored one.
+export function testTranslationConnection(form: {
+  provider?: unknown;
+  api_key?: unknown;
+  api_url?: unknown;
+}): Promise<ConnectionResult> {
+  return getApi().post('/@translation-connection', { data: form });
+}
+
+// POST @translation-glossaries on the site root: the glossaries of the
+// account, with the settings as the form holds them, saved or not.
+export function fetchGlossaries(form: {
+  provider?: unknown;
+  api_key?: unknown;
+  api_url?: unknown;
+}): Promise<GlossariesResult> {
+  return getApi().post('/@translation-glossaries', { data: form });
+}
+
+// GET @translation-connection on the site root: how the stored API key is
+// kept — encrypted, with which secret, readable — never the key.
+export function fetchApiKeyStatus(): Promise<ApiKeyStatus> {
+  return getApi()
+    .get('/@translation-connection')
+    .then((data: { api_key: ApiKeyStatus }) => data.api_key);
 }
 
 // Test-only / hot-reload helper.
