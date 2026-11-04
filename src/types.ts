@@ -83,7 +83,8 @@ export type FieldReason =
   | 'primary'
   | 'field_name'
   | 'language_independent'
-  | 'field_type';
+  | 'field_type'
+  | 'reference';
 
 export interface TranslationField {
   id: string;

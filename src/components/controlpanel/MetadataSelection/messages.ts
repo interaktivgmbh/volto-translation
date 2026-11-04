@@ -76,9 +76,14 @@ const messages = defineMessages({
     id: 'volto-translation-selection-reason-field-type',
     defaultMessage: 'Follows from the kind of field: {kind}.',
   },
+  reasonReference: {
+    id: 'volto-translation-selection-reason-reference',
+    defaultMessage:
+      'A reference: it points at the translation of its target, else at the target itself.',
+  },
   reasonImpossible: {
     id: 'volto-translation-selection-reason-impossible',
-    defaultMessage: 'A reference or a structure cannot go along: {kind}.',
+    defaultMessage: 'A structure cannot go along: {kind}.',
   },
   loading: {
     id: 'volto-translation-selection-loading',
@@ -136,6 +141,7 @@ export const REASON_MESSAGES: Record<
   field_name: messages.reasonFieldName,
   language_independent: messages.reasonLanguageIndependent,
   field_type: messages.reasonFieldType,
+  reference: messages.reasonReference,
 };
 
 export default messages;

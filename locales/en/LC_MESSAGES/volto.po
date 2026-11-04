@@ -889,10 +889,15 @@ msgstr "The field is the same in every language."
 msgid "volto-translation-selection-reason-field-type"
 msgstr "Follows from the kind of field: {kind}."
 
-#. Default: "A reference or a structure cannot go along: {kind}."
+#. Default: "A reference: it points at the translation of its target, else at the target itself."
+#: components/controlpanel/MetadataSelection/messages
+msgid "volto-translation-selection-reason-reference"
+msgstr "A reference: it points at the translation of its target, else at the target itself."
+
+#. Default: "A structure cannot go along: {kind}."
 #: components/controlpanel/MetadataSelection/messages
 msgid "volto-translation-selection-reason-impossible"
-msgstr "A reference or a structure cannot go along: {kind}."
+msgstr "A structure cannot go along: {kind}."
 
 #. Default: "Loading the fields …"
 #: components/controlpanel/MetadataSelection/messages
