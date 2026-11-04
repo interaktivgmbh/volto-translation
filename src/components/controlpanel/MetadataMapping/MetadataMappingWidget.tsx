@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { useIntl } from 'react-intl';
 import { Button, Confirm, Message } from 'semantic-ui-react';
 import FormFieldWrapper from '@plone/volto/components/manage/Widgets/FormFieldWrapper';
 import { languageName } from '../../../helpers/languages';
+import { useSiteLanguages } from '../../../helpers/siteLanguages';
 import {
   duplicateValues,
   isIncomplete,
@@ -14,11 +14,7 @@ import {
   pageSlice,
   withoutLanguage,
 } from '../../../helpers/metadataMapping';
-import type {
-  MetadataMapping,
-  MetadataMappingRow,
-  TranslationState,
-} from '../../../types';
+import type { MetadataMapping, MetadataMappingRow } from '../../../types';
 import MappingExportModal from './MappingExportModal';
 import MappingFieldBar from './MappingFieldBar';
 import MappingFilterBar from './MappingFilterBar';
@@ -69,7 +65,11 @@ type Pending =
 const MetadataMappingWidget = (props: MetadataMappingWidgetProps) => {
   const { id, title, description, value, onChange, formData } = props;
   const intl = useIntl();
-  const site = useSelector((state: TranslationState) => state.site?.data) || {};
+  const {
+    source: sourceLanguage,
+    available: siteLanguages,
+    loaded: languagesLoaded,
+  } = useSiteLanguages();
 
   const mapping = normalisedMapping(value);
   const fieldIds = Object.keys(mapping);
@@ -108,8 +108,6 @@ const MetadataMappingWidget = (props: MetadataMappingWidgetProps) => {
   const current = selected && selected in mapping ? selected : fieldIds[0];
   const rows: MetadataMappingRow[] = current ? mapping[current] || [] : [];
 
-  const siteLanguages = site['plone.available_languages'] || [];
-  const sourceLanguage = site['plone.default_language'] || siteLanguages[0];
   const columns = mappingColumns(
     rows,
     siteLanguages,
@@ -294,8 +292,10 @@ const MetadataMappingWidget = (props: MetadataMappingWidgetProps) => {
         {!current && (
           <Message info>{intl.formatMessage(messages.noFields)}</Message>
         )}
-        {current && !siteLanguages.length && (
-          <Message warning>{intl.formatMessage(messages.noLanguages)}</Message>
+        {current && languagesLoaded && !siteLanguages.length && (
+          <Message warning visible>
+            {intl.formatMessage(messages.noLanguages)}
+          </Message>
         )}
 
         {current && siteLanguages.length > 0 && (

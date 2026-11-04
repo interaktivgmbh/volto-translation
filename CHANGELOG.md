@@ -25,6 +25,8 @@
   lists the glossaries of the account on demand (`POST @translation-glossaries`)
   to take an ID over, and tells entered IDs that are not in the account or are
   for another direction.
+- Fix: the metadata mapping shows its hint for a site without languages; it
+  was hidden inside the form.
 
 ## 1.0.0-alpha.1 (2026-10-15)
 

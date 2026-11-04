@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { useIntl } from 'react-intl';
 import { Button, Input } from 'semantic-ui-react';
 import FormFieldWrapper from '@plone/volto/components/manage/Widgets/FormFieldWrapper';
 import { fetchGlossaries } from '../../../helpers/translateApi';
 import { languageName } from '../../../helpers/languages';
 import { languageCodes } from '../../../helpers/metadataMapping';
-import type {
-  Glossary,
-  GlossariesResult,
-  TranslationState,
-} from '../../../types';
+import { useSiteLanguages } from '../../../helpers/siteLanguages';
+import type { Glossary, GlossariesResult } from '../../../types';
 import type { InputData } from '../MetadataMapping/utils';
 import { CODE_MESSAGES } from '../ApiKey/messages';
 import messages from './messages';
@@ -54,11 +50,9 @@ function baseCode(code: string): string {
 const GlossaryIdsWidget = (props: GlossaryIdsWidgetProps) => {
   const { id, value, onChange, formData } = props;
   const intl = useIntl();
-  const site = useSelector((state: TranslationState) => state.site?.data) || {};
+  const { source, available: siteLanguages } = useSiteLanguages();
   const [list, setList] = useState<ListState>({ kind: 'idle' });
 
-  const siteLanguages = site['plone.available_languages'] || [];
-  const source = site['plone.default_language'] || siteLanguages[0];
   const offered = languageCodes(formData?.target_languages);
   // an empty choice offers every site language
   const targets = (offered.length ? offered : siteLanguages).filter(
