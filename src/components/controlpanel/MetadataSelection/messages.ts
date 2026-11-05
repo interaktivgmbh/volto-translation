@@ -81,6 +81,11 @@ const messages = defineMessages({
     defaultMessage:
       'A reference: it points at the translation of its target, else at the target itself.',
   },
+  reasonLink: {
+    id: 'volto-translation-selection-reason-link',
+    defaultMessage:
+      'A link: an internal one points at the translation of its target, else at the target itself.',
+  },
   reasonImpossible: {
     id: 'volto-translation-selection-reason-impossible',
     defaultMessage: 'A structure cannot go along: {kind}.',
@@ -142,6 +147,7 @@ export const REASON_MESSAGES: Record<
   language_independent: messages.reasonLanguageIndependent,
   field_type: messages.reasonFieldType,
   reference: messages.reasonReference,
+  link: messages.reasonLink,
 };
 
 export default messages;

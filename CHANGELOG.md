@@ -29,6 +29,8 @@
   was hidden inside the form.
 - The field selection explains references: taken over, pointing at the
   translation of their target. Needs `reason: reference` from the backend.
+- The field selection explains link fields (`reason: link`), as the address
+  of a link.
 
 ## 1.0.0-alpha.1 (2026-10-15)
 

@@ -894,6 +894,11 @@ msgstr "Ergibt sich aus der Art des Feldes: {kind}."
 msgid "volto-translation-selection-reason-reference"
 msgstr "Ein Verweis: Er zeigt auf die Übersetzung des Ziels, gibt es keine, auf das Ziel selbst."
 
+#. Default: "A link: an internal one points at the translation of its target, else at the target itself."
+#: components/controlpanel/MetadataSelection/messages
+msgid "volto-translation-selection-reason-link"
+msgstr "Ein Link: Ein interner zeigt auf die Übersetzung des Ziels, gibt es keine, auf das Ziel selbst."
+
 #. Default: "A structure cannot go along: {kind}."
 #: components/controlpanel/MetadataSelection/messages
 msgid "volto-translation-selection-reason-impossible"

@@ -894,6 +894,11 @@ msgstr "Follows from the kind of field: {kind}."
 msgid "volto-translation-selection-reason-reference"
 msgstr "A reference: it points at the translation of its target, else at the target itself."
 
+#. Default: "A link: an internal one points at the translation of its target, else at the target itself."
+#: components/controlpanel/MetadataSelection/messages
+msgid "volto-translation-selection-reason-link"
+msgstr "A link: an internal one points at the translation of its target, else at the target itself."
+
 #. Default: "A structure cannot go along: {kind}."
 #: components/controlpanel/MetadataSelection/messages
 msgid "volto-translation-selection-reason-impossible"
