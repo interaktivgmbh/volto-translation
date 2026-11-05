@@ -889,7 +889,17 @@ msgstr ""
 msgid "volto-translation-selection-reason-field-type"
 msgstr ""
 
-#. Default: "A reference or a structure cannot go along: {kind}."
+#. Default: "A reference: it points at the translation of its target, else at the target itself."
+#: components/controlpanel/MetadataSelection/messages
+msgid "volto-translation-selection-reason-reference"
+msgstr ""
+
+#. Default: "A link: an internal one points at the translation of its target, else at the target itself."
+#: components/controlpanel/MetadataSelection/messages
+msgid "volto-translation-selection-reason-link"
+msgstr ""
+
+#. Default: "A structure cannot go along: {kind}."
 #: components/controlpanel/MetadataSelection/messages
 msgid "volto-translation-selection-reason-impossible"
 msgstr ""
