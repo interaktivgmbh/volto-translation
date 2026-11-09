@@ -67,6 +67,11 @@ const messages = defineMessages({
     defaultMessage:
       'Machine translation is not available for this content type.',
   },
+  sourceWorkingCopy: {
+    id: 'volto-translation-source-working-copy',
+    defaultMessage:
+      'This page has an open working copy. Check it in or discard it, then translate.',
+  },
 });
 
 interface TranslationsMenuProps {
@@ -115,8 +120,11 @@ const TranslationsMenu = (props: TranslationsMenuProps) => {
   // One entry per language there is something to do for: a machine
   // translation, or, while there is no translation yet, Plone's own form.
   // The translate page offers the choice.
+  // the live content would be translated, not the newer working copy
   const machineReady =
-    Boolean(info?.configured) && info?.translatable !== false;
+    Boolean(info?.configured) &&
+    info?.translatable !== false &&
+    !info?.working_copy_url;
   const targets = (info?.languages || []).filter((language) => {
     if (language.code === contentLanguage) return false;
     const exists = Boolean(info?.translations?.[language.code]?.url);
@@ -168,6 +176,15 @@ const TranslationsMenu = (props: TranslationsMenuProps) => {
             info?.translatable === false && (
               <li className="translations-menu-notice">
                 <span>{intl.formatMessage(messages.notTranslatable)}</span>
+              </li>
+            )}
+
+          {!isWorkingCopy &&
+            info?.configured &&
+            info?.translatable !== false &&
+            info?.working_copy_url && (
+              <li className="translations-menu-notice">
+                <span>{intl.formatMessage(messages.sourceWorkingCopy)}</span>
               </li>
             )}
 

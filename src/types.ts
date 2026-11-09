@@ -21,6 +21,8 @@ export interface TranslationInfo {
   translations?: Record<string, TranslationLanguageEntry>;
   is_working_copy?: boolean;
   baseline_url?: string | null;
+  // the open working copy of the content itself, if it has one
+  working_copy_url?: string | null;
   translatable?: boolean;
 }
 
