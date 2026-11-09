@@ -95,6 +95,11 @@ const messages = defineMessages({
     id: 'volto-translation-not-offered-for-machine',
     defaultMessage: '{language} is not offered for automatic translation.',
   },
+  sourceWorkingCopy: {
+    id: 'volto-translation-source-working-copy',
+    defaultMessage:
+      'This page has an open working copy. Check it in or discard it, then translate.',
+  },
   back: { id: 'volto-translation-back', defaultMessage: 'Back' },
   notConfigured: {
     id: 'volto-translation-not-configured',
@@ -230,9 +235,11 @@ const TranslateView = (props: TranslateViewProps) => {
     ? messages.notConfigured
     : info?.translatable === false
       ? messages.notTranslatable
-      : targetLanguage && !targetLanguage.machine
-        ? messages.notOfferedForMachine
-        : null;
+      : info?.working_copy_url
+        ? messages.sourceWorkingCopy
+        : targetLanguage && !targetLanguage.machine
+          ? messages.notOfferedForMachine
+          : null;
   // Plone's own translation form only creates a translation that is missing,
   // and only on a multilingual site; there the editor chooses the way.
   const offersChoice =

@@ -33,6 +33,9 @@
   translation of their target. Needs `reason: reference` from the backend.
 - The field selection explains link fields (`reason: link`), as the address
   of a link.
+- A page with an open working copy is not offered for machine translation:
+  the Translations menu and the translate page say to check it in or discard
+  it first. Needs `working_copy_url` from `GET @translate`.
 
 ## 1.0.0-alpha.1 (2026-10-15)
 

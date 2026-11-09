@@ -1108,3 +1108,8 @@ msgstr ""
 #: components/controlpanel/Glossary/messages
 msgid "volto-translation-glossary-other-direction"
 msgstr ""
+
+#. Default: "This page has an open working copy. Check it in or discard it, then translate."
+#: components/TranslateView components/TranslationsMenu
+msgid "volto-translation-source-working-copy"
+msgstr ""
