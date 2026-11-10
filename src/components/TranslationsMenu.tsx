@@ -129,7 +129,10 @@ const TranslationsMenu = (props: TranslationsMenuProps) => {
     if (language.code === contentLanguage) return false;
     const exists = Boolean(info?.translations?.[language.code]?.url);
 
-    return (language.machine && machineReady) || (isMultilingual && !exists);
+    return (
+      (language.machine && machineReady) ||
+      (isMultilingual && !exists && info?.manual_translatable !== false)
+    );
   });
 
   const canCheckOut = hasObjectButton('iterate_checkout');
@@ -175,7 +178,10 @@ const TranslationsMenu = (props: TranslationsMenuProps) => {
             info?.configured &&
             info?.translatable === false && (
               <li className="translations-menu-notice">
-                <span>{intl.formatMessage(messages.notTranslatable)}</span>
+                <span>
+                  {info?.refusal?.message ||
+                    intl.formatMessage(messages.notTranslatable)}
+                </span>
               </li>
             )}
 

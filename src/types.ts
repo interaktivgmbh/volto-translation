@@ -24,6 +24,10 @@ export interface TranslationInfo {
   // the open working copy of the content itself, if it has one
   working_copy_url?: string | null;
   translatable?: boolean;
+  // whether Plone's own form may translate it by hand: not without a language
+  manual_translatable?: boolean;
+  // why it is not translatable, said by the backend in the user's language
+  refusal?: { code: string; message: string } | null;
 }
 
 export interface TranslationLinkReport {
