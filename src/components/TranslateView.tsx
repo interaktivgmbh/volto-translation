@@ -243,7 +243,10 @@ const TranslateView = (props: TranslateViewProps) => {
   // Plone's own translation form only creates a translation that is missing,
   // and only on a multilingual site; there the editor chooses the way.
   const offersChoice =
-    isMultilingual && Boolean(targetLanguage) && !targetExists;
+    isMultilingual &&
+    Boolean(targetLanguage) &&
+    !targetExists &&
+    info?.manual_translatable !== false;
   const chosenMode: Mode = offersChoice
     ? machineRefusal
       ? 'manual'
@@ -264,6 +267,12 @@ const TranslateView = (props: TranslateViewProps) => {
 
   const targetName = targetLanguage
     ? languageName(targetLanguage.code, intl.locale, targetLanguage.title)
+    : '';
+
+  // the backend says why the content is not translatable, in the user's language
+  const machineRefusalText = machineRefusal
+    ? (info?.translatable === false && info?.refusal?.message) ||
+      intl.formatMessage(machineRefusal, { language: targetName })
     : '';
 
   const createByHand = () =>
@@ -385,12 +394,11 @@ const TranslateView = (props: TranslateViewProps) => {
                     <span>
                       <strong>{intl.formatMessage(messages[label])}</strong>
                       <span className="translation-mode-hint">
-                        {intl.formatMessage(
-                          disabled && machineRefusal
-                            ? machineRefusal
-                            : messages[hint],
-                          { language: targetName },
-                        )}
+                        {disabled && machineRefusal
+                          ? machineRefusalText
+                          : intl.formatMessage(messages[hint], {
+                              language: targetName,
+                            })}
                       </span>
                     </span>
                   </label>
@@ -406,9 +414,7 @@ const TranslateView = (props: TranslateViewProps) => {
           targetLanguage &&
           machineRefusal && (
             <Segment>
-              <Message info>
-                {intl.formatMessage(machineRefusal, { language: targetName })}
-              </Message>
+              <Message info>{machineRefusalText}</Message>
             </Segment>
           )}
 

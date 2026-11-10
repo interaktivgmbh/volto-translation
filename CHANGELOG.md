@@ -34,6 +34,10 @@
 - A page with an open working copy is not offered for machine translation:
   the Translations menu and the translate page say to check it in or discard
   it first. Needs `working_copy_url` from `GET @translate`.
+- Content without a language of its own is not offered for translation, by
+  machine or by hand: the Translations menu, the translate page and Manage
+  translations say why instead, in the words of the backend. Needs
+  `manual_translatable` and `refusal` from `GET @translate`.
 
 ## 1.0.0-alpha.1 (2026-10-15)
 

@@ -272,13 +272,24 @@ const ManageTranslations = (props) => {
       });
   }
 
-  // Why the machine-translate buttons are disabled, if they are.
+  // Why the machine-translate buttons are disabled, if they are; the backend
+  // says it in the user's language where it knows the reason.
   const machineRefusal =
     translationInfo && !translationInfo.configured
-      ? messages.notConfigured
+      ? intl.formatMessage(messages.notConfigured)
       : translationInfo?.translatable === false
-        ? messages.notTranslatable
+        ? translationInfo.refusal?.message ||
+          intl.formatMessage(messages.notTranslatable)
         : null;
+  // Content without a language: no translation at all, as in Plone itself.
+  // Read off the content too: the translation info only comes in the
+  // browser, after the server has rendered the page.
+  const contentLanguage =
+    typeof content?.language === 'string'
+      ? content.language
+      : content?.language?.token || '';
+  const translatableByHand =
+    Boolean(contentLanguage) && translationInfo?.manual_translatable !== false;
 
   function statusLabel(status) {
     const message = STATUS_MESSAGES[status];
@@ -308,7 +319,15 @@ const ManageTranslations = (props) => {
             )}
           </Segment>
         )}
-        {content && !translationInfo?.is_working_copy && (
+        {content &&
+          !translationInfo?.is_working_copy &&
+          !translatableByHand &&
+          translationInfo?.refusal?.message && (
+            <Segment className="machine-translation-working-copy-notice">
+              {translationInfo.refusal.message}
+            </Segment>
+          )}
+        {content && !translationInfo?.is_working_copy && translatableByHand && (
           <Table selectable compact singleLine attached>
             <Table.Header>
               <Table.Row>
@@ -341,8 +360,10 @@ const ManageTranslations = (props) => {
                       )}
                     </Table.Cell>
                     <Table.Cell>
-                      <Link to={flattenToAppURL(translations[lang]?.url || '')}>
-                        {flattenToAppURL(translations[lang]?.url || '')}
+                      <Link
+                        to={flattenToAppURL(translations?.[lang]?.url || '')}
+                      >
+                        {flattenToAppURL(translations?.[lang]?.url || '')}
                       </Link>
                     </Table.Cell>
                     <Table.Cell>
@@ -366,7 +387,7 @@ const ManageTranslations = (props) => {
                       <Button.Group
                         title={
                           machineRefusal && lang !== content.language.token
-                            ? intl.formatMessage(machineRefusal)
+                            ? machineRefusal
                             : undefined
                         }
                       >
