@@ -355,18 +355,23 @@ const TranslateView = (props: TranslateViewProps) => {
           </Segment>
         )}
 
-        {!result && !busy && targetLanguage && isMultilingual && (
-          <Segment secondary className="translation-situation">
-            {intl.formatMessage(
-              workingCopyExists
-                ? messages.workingCopyPresent
-                : targetExists
-                  ? messages.translationExists
-                  : messages.noTranslation,
-              { language: targetName },
-            )}
-          </Segment>
-        )}
+        {/* nothing to tell of a translation that cannot be made at all */}
+        {!result &&
+          !busy &&
+          targetLanguage &&
+          isMultilingual &&
+          info?.manual_translatable !== false && (
+            <Segment secondary className="translation-situation">
+              {intl.formatMessage(
+                workingCopyExists
+                  ? messages.workingCopyPresent
+                  : targetExists
+                    ? messages.translationExists
+                    : messages.noTranslation,
+                { language: targetName },
+              )}
+            </Segment>
+          )}
 
         {!result && !busy && offersChoice && (
           <Segment>
