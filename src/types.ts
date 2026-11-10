@@ -162,7 +162,15 @@ export interface TranslationState {
 
 export interface ApiError {
   message?: string;
-  response?: { body?: { message?: string; type?: string } };
+  response?: {
+    body?: {
+      message?: string;
+      type?: string;
+      // what was refused, and the values its message names
+      code?: string;
+      values?: Record<string, string>;
+    };
+  };
 }
 
 export interface VoltoConfig {
