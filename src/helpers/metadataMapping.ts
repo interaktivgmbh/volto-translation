@@ -1,4 +1,8 @@
-import type { MetadataMapping, MetadataMappingRow } from '../types';
+import type {
+  MetadataMapping,
+  MetadataMappingRow,
+  TranslationFieldsType,
+} from '../types';
 
 // What a language column is for. "orphan" holds values of a language the site
 // no longer has: they are never used and the column may be removed.
@@ -196,4 +200,62 @@ export function pageNumbers(
     });
 
   return numbers;
+}
+
+// A field to add to the mapping: each mappable field of the site's content
+// types once, by its title.
+export interface FieldChoice {
+  id: string;
+  title: string;
+}
+
+export function mappableFields(
+  types: TranslationFieldsType[],
+  mapped: string[],
+): FieldChoice[] {
+  const choices = new Map<string, FieldChoice>();
+  types.forEach((type) =>
+    type.fields.forEach((field) => {
+      if (
+        field.mappable &&
+        !mapped.includes(field.id) &&
+        !choices.has(field.id)
+      ) {
+        choices.set(field.id, { id: field.id, title: field.title || field.id });
+      }
+    }),
+  );
+
+  return Array.from(choices.values()).sort((a, b) =>
+    a.title.localeCompare(b.title),
+  );
+}
+
+// Mapped fields no content type of the site has (left from an import or an
+// earlier setup): shown with a hint, to be removed.
+export function unknownFields(
+  types: TranslationFieldsType[],
+  mapped: string[],
+): string[] {
+  const known = new Set(
+    types.flatMap((type) => type.fields.map((field) => field.id)),
+  );
+
+  return mapped.filter((fieldId) => !known.has(fieldId));
+}
+
+// The title of each field of the site's content types, by its id.
+export function fieldTitles(
+  types: TranslationFieldsType[],
+): Record<string, string> {
+  const titles: Record<string, string> = {};
+  types.forEach((type) =>
+    type.fields.forEach((field) => {
+      if (!(field.id in titles) && field.title) {
+        titles[field.id] = field.title;
+      }
+    }),
+  );
+
+  return titles;
 }

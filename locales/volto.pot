@@ -216,24 +216,6 @@ msgstr ""
 msgid "volto-translation-failed"
 msgstr ""
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #. Default: "Language"
 #: components/MachineTranslations customization
 msgid "Language"
@@ -434,11 +416,6 @@ msgstr ""
 msgid "volto-translation-mapping-add-field"
 msgstr ""
 
-#. Default: "Field id, e.g. subjects"
-#: components/controlpanel/MetadataMapping/messages
-msgid "volto-translation-mapping-field-id-placeholder"
-msgstr ""
-
 #. Default: "Remove field"
 #: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-remove-field"
@@ -462,11 +439,6 @@ msgstr ""
 #. Default: "A field id has no spaces."
 #: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-space-in-field-id"
-msgstr ""
-
-#. Default: "This field is mapped already."
-#: components/controlpanel/MetadataMapping/messages
-msgid "volto-translation-mapping-existing-field-id"
 msgstr ""
 
 #. Default: "No field is mapped yet. Add the field whose values have fixed translations, e.g. subjects."
@@ -757,11 +729,6 @@ msgstr ""
 #. Default: "Mapped fields"
 #: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-fields-label"
-msgstr ""
-
-#. Default: "Id of a new field"
-#: components/controlpanel/MetadataMapping/messages
-msgid "volto-translation-mapping-field-id-label"
 msgstr ""
 
 #. Default: "Search values"
@@ -1112,4 +1079,34 @@ msgstr ""
 #. Default: "This page has an open working copy. Check it in or discard it, then translate."
 #: components/TranslateView components/TranslationsMenu
 msgid "volto-translation-source-working-copy"
+msgstr ""
+
+#. Default: "Choose a field"
+#: components/controlpanel/MetadataMapping/messages
+msgid "volto-translation-mapping-field-choice-placeholder"
+msgstr ""
+
+#. Default: "Field to add to the mapping"
+#: components/controlpanel/MetadataMapping/messages
+msgid "volto-translation-mapping-field-choice-label"
+msgstr ""
+
+#. Default: "No further field can be mapped."
+#: components/controlpanel/MetadataMapping/messages
+msgid "volto-translation-mapping-no-field-left"
+msgstr ""
+
+#. Default: "Choose a field first."
+#: components/controlpanel/MetadataMapping/messages
+msgid "volto-translation-mapping-no-field-chosen"
+msgstr ""
+
+#. Default: "The fields could not be loaded: {message}"
+#: components/controlpanel/MetadataMapping/messages
+msgid "volto-translation-mapping-fields-not-loaded"
+msgstr ""
+
+#. Default: "in no content type"
+#: components/controlpanel/MetadataMapping/messages
+msgid "volto-translation-mapping-unknown-field"
 msgstr ""

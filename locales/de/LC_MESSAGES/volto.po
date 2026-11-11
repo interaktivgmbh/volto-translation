@@ -216,24 +216,6 @@ msgstr "Alle {count} Links anzeigen"
 msgid "volto-translation-failed"
 msgstr "Die Übersetzung ist fehlgeschlagen: {message}"
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #. Default: "Language"
 #: components/MachineTranslations customization
 msgid "Language"
@@ -434,11 +416,6 @@ msgstr "Diese Arbeitskopie wurde automatisiert aus dem Original{source, select, 
 msgid "volto-translation-mapping-add-field"
 msgstr "Feld hinzufügen"
 
-#. Default: "Field id, e.g. subjects"
-#: components/controlpanel/MetadataMapping/messages
-msgid "volto-translation-mapping-field-id-placeholder"
-msgstr "Feld-ID, z. B. subjects"
-
 #. Default: "Remove field"
 #: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-remove-field"
@@ -463,11 +440,6 @@ msgstr "Bitte eine Feld-ID eingeben."
 #: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-space-in-field-id"
 msgstr "Eine Feld-ID enthält keine Leerzeichen."
-
-#. Default: "This field is mapped already."
-#: components/controlpanel/MetadataMapping/messages
-msgid "volto-translation-mapping-existing-field-id"
-msgstr "Dieses Feld ist schon gemappt."
 
 #. Default: "No field is mapped yet. Add the field whose values have fixed translations, e.g. subjects."
 #: components/controlpanel/MetadataMapping/messages
@@ -758,11 +730,6 @@ msgstr "Feld {field} entfernen"
 #: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-fields-label"
 msgstr "Gemappte Felder"
-
-#. Default: "Id of a new field"
-#: components/controlpanel/MetadataMapping/messages
-msgid "volto-translation-mapping-field-id-label"
-msgstr "ID eines neuen Felds"
 
 #. Default: "Search values"
 #: components/controlpanel/MetadataMapping/messages
@@ -1113,3 +1080,33 @@ msgstr "„{name}“ ist für {direction}"
 #: components/TranslateView components/TranslationsMenu
 msgid "volto-translation-source-working-copy"
 msgstr "Diese Seite hat eine offene Arbeitskopie. Erst einchecken oder verwerfen, dann übersetzen."
+
+#. Default: "Choose a field"
+#: components/controlpanel/MetadataMapping/messages
+msgid "volto-translation-mapping-field-choice-placeholder"
+msgstr "Feld auswählen"
+
+#. Default: "Field to add to the mapping"
+#: components/controlpanel/MetadataMapping/messages
+msgid "volto-translation-mapping-field-choice-label"
+msgstr "Feld, das zum Mapping hinzugefügt wird"
+
+#. Default: "No further field can be mapped."
+#: components/controlpanel/MetadataMapping/messages
+msgid "volto-translation-mapping-no-field-left"
+msgstr "Kein weiteres Feld kann gemappt werden."
+
+#. Default: "Choose a field first."
+#: components/controlpanel/MetadataMapping/messages
+msgid "volto-translation-mapping-no-field-chosen"
+msgstr "Bitte zuerst ein Feld auswählen."
+
+#. Default: "The fields could not be loaded: {message}"
+#: components/controlpanel/MetadataMapping/messages
+msgid "volto-translation-mapping-fields-not-loaded"
+msgstr "Die Felder konnten nicht geladen werden: {message}"
+
+#. Default: "in no content type"
+#: components/controlpanel/MetadataMapping/messages
+msgid "volto-translation-mapping-unknown-field"
+msgstr "in keinem Inhaltstyp"

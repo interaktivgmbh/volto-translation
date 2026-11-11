@@ -40,6 +40,10 @@
   machine or by hand: the Translations menu, the translate page and Manage
   translations say why instead, in the words of the backend. Needs
   `manual_translatable` and `refusal` from `GET @translate`.
+- The metadata mapping adds a field by choosing it from the fields of the
+  site's content types that may be mapped, instead of typing its id. The
+  field tabs show title and id; a mapped field no content type has is marked
+  so. Needs `mappable` from `GET @translation-fields`.
 
 ## 1.0.0-alpha.1 (2026-10-15)
 
