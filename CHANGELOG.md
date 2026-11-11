@@ -50,6 +50,9 @@
   working copy actions with it; now only that entry goes. Volto 16: the
   add-on sets `hasWorkingCopySupport`, without which Volto 16 does not show
   them.
+- The report lists images and files in a section of their own instead of
+  among the links: they are usually not translated. Needs `kind` in the link
+  report of `POST @translate`; without it everything stays under the links.
 
 ## 1.0.0-alpha.1 (2026-10-15)
 
