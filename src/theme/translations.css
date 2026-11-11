@@ -1,10 +1,18 @@
 .pastanaga-menu:not(.translations-menu)
-  .pastanaga-menu-list:has(a[href$='/manage-translations']) {
+  .pastanaga-menu-list
+  li:has(> a[href$='/manage-translations']) {
   display: none;
 }
 
 .pastanaga-menu:not(.translations-menu)
-  header:has(+ .pastanaga-menu-list a[href$='/manage-translations']) {
+  .pastanaga-menu-list:has(li:only-child > a[href$='/manage-translations']) {
+  display: none;
+}
+
+.pastanaga-menu:not(.translations-menu)
+  header:has(
+    + .pastanaga-menu-list li:only-child > a[href$='/manage-translations']
+  ) {
   display: none;
 }
 
