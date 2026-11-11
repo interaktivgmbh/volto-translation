@@ -81,36 +81,6 @@ msgstr ""
 msgid "volto-translation-menu-manage"
 msgstr ""
 
-#. Default: "Create working copy"
-#: components/TranslationsMenu
-msgid "volto-translation-menu-working-copy"
-msgstr ""
-
-#. Default: "View working copy"
-#: components/TranslationsMenu
-msgid "volto-translation-menu-view-working-copy"
-msgstr ""
-
-#. Default: "Check in working copy"
-#: components/TranslationsMenu
-msgid "volto-translation-menu-apply-working-copy"
-msgstr ""
-
-#. Default: "Discard working copy"
-#: components/TranslationsMenu
-msgid "volto-translation-menu-remove-working-copy"
-msgstr ""
-
-#. Default: "The working copy was discarded"
-#: components/TranslationsMenu
-msgid "volto-translation-menu-working-copy-removed"
-msgstr ""
-
-#. Default: "The working copy is now the main content"
-#: components/TranslationsMenu
-msgid "volto-translation-menu-working-copy-applied"
-msgstr ""
-
 #. Default: "Translate {title}"
 #: components/TranslateView
 msgid "volto-translation-headline"

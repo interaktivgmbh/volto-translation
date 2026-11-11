@@ -44,6 +44,12 @@
   site's content types that may be mapped, instead of typing its id. The
   field tabs show title and id; a mapped field no content type has is marked
   so. Needs `mappable` from `GET @translation-fields`.
+- The working copy actions are back under "Manage content…" in the more menu,
+  as Volto has them, and no longer in the Translations menu. Fix: the rule
+  hiding Volto's own "Manage translations" there hid the whole list, the
+  working copy actions with it; now only that entry goes. Volto 16: the
+  add-on sets `hasWorkingCopySupport`, without which Volto 16 does not show
+  them.
 
 ## 1.0.0-alpha.1 (2026-10-15)
 

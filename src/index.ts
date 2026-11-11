@@ -30,6 +30,10 @@ const applyConfig = (config: VoltoConfig): VoltoConfig => {
     translations: { component: TranslationsMenu, wrapper: null },
   };
 
+  // Volto 16 shows the working copy actions under "Manage content…" in the
+  // more menu only with this; Volto 17 and later whenever iterate offers them
+  config.settings.hasWorkingCopySupport = true;
+
   // the control panel names these widgets for its metadata fields
   const widgets = config.widgets as { widget: Record<string, unknown> };
   widgets.widget.translation_metadata_mapping = MetadataMappingWidget;
