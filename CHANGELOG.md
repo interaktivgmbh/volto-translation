@@ -46,6 +46,9 @@
   as Volto has them, and no longer in the Translations menu. Fix: the rule
   hiding Volto's own "Manage translations" there hid the whole list, the
   working copy actions with it; now only that entry goes.
+- The report lists images and files in a section of their own instead of
+  among the links: they are usually not translated. Needs `kind` in the link
+  report of `POST @translate`; without it everything stays under the links.
 
 ## 1.0.0-alpha.1 (2026-10-15)
 

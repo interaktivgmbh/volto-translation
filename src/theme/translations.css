@@ -146,6 +146,10 @@
   overflow-wrap: anywhere;
 }
 
+#page-translate .translation-asset-url {
+  overflow-wrap: anywhere;
+}
+
 #page-translate .translation-link-untouched {
   color: #878f93;
 }

@@ -181,6 +181,21 @@ msgstr "unverändert – keine Übersetzung vorhanden, der bisherige Link bleibt
 msgid "volto-translation-report-show-all-links"
 msgstr "Alle {count} Links anzeigen"
 
+#. Default: "Images and files"
+#: components/TranslationReportView
+msgid "volto-translation-report-assets-section"
+msgstr "Bilder und Dateien"
+
+#. Default: "Images and files are not translated. Their references stay as they are, unless the image or file has a translation of its own."
+#: components/TranslationReportView
+msgid "volto-translation-report-assets-intro"
+msgstr "Bilder und Dateien werden nicht übersetzt. Die Verweise bleiben bestehen, außer es gibt eine Übersetzung des Bilds bzw. der Datei."
+
+#. Default: "Show all {count} images and files"
+#: components/TranslationReportView
+msgid "volto-translation-report-show-all-assets"
+msgstr "Alle {count} Bilder und Dateien anzeigen"
+
 #. Default: "The translation failed: {message}"
 #: components/TranslateView
 msgid "volto-translation-failed"

@@ -31,6 +31,8 @@ export interface TranslationInfo {
 }
 
 export interface TranslationLinkReport {
+  // what it points at; an older backend does not tell
+  kind?: 'image' | 'file' | 'link';
   text?: string;
   before?: string;
   after?: string | null;

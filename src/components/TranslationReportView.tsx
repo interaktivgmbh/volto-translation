@@ -3,7 +3,7 @@ import { defineMessages, useIntl } from 'react-intl';
 import { Segment } from 'semantic-ui-react';
 import UniversalLink from '@plone/volto/components/manage/UniversalLink/UniversalLink';
 import { flattenToAppURL } from '@plone/volto/helpers/Url/Url';
-import type { TranslationReport } from '../types';
+import type { TranslationLinkReport, TranslationReport } from '../types';
 
 const messages = defineMessages({
   storedAsTranslation: {
@@ -61,6 +61,19 @@ const messages = defineMessages({
     id: 'volto-translation-report-show-all-links',
     defaultMessage: 'Show all {count} links',
   },
+  assetsSection: {
+    id: 'volto-translation-report-assets-section',
+    defaultMessage: 'Images and files',
+  },
+  assetsIntro: {
+    id: 'volto-translation-report-assets-intro',
+    defaultMessage:
+      'Images and files are not translated. Their references stay as they are, unless the image or file has a translation of its own.',
+  },
+  showAllAssets: {
+    id: 'volto-translation-report-show-all-assets',
+    defaultMessage: 'Show all {count} images and files',
+  },
   metadataSection: {
     id: 'volto-translation-report-metadata-section',
     defaultMessage: 'Metadata',
@@ -94,9 +107,16 @@ const TranslationReportView = ({
 }: TranslationReportViewProps) => {
   const intl = useIntl();
   const [allLinks, setAllLinks] = useState(false);
+  const [allAssets, setAllAssets] = useState(false);
 
-  const links = report.links || [];
+  // images and files have a section of their own: they are usually not
+  // translated, which is no failed link
+  const isAsset = (link: TranslationLinkReport) =>
+    link.kind === 'image' || link.kind === 'file';
+  const links = (report.links || []).filter((link) => !isAsset(link));
+  const assets = (report.links || []).filter(isAsset);
   const shown = allLinks ? links : links.slice(0, LINKS_SHOWN);
+  const shownAssets = allAssets ? assets : assets.slice(0, LINKS_SHOWN);
   const rewritten = links.filter((link) => link.after).length;
   const copied = report.copied || [];
 
@@ -189,6 +209,53 @@ const TranslationReportView = ({
             >
               {intl.formatMessage(messages.showAllLinks, {
                 count: links.length,
+              })}
+            </button>
+          )}
+        </Segment>
+      )}
+
+      {assets.length > 0 && (
+        <Segment className="translation-section-title">
+          {intl.formatMessage(messages.assetsSection)}
+        </Segment>
+      )}
+      {assets.length > 0 && (
+        <Segment secondary className="translation-situation">
+          {intl.formatMessage(messages.assetsIntro)}
+        </Segment>
+      )}
+      {assets.length > 0 && (
+        <Segment className="translation-assets">
+          <div className="translation-links-table">
+            {shownAssets.map((asset, index) => (
+              <div
+                className="translation-link"
+                key={`${asset.before}-${index}`}
+              >
+                {asset.text && <strong>{asset.text}</strong>}
+                <div className="translation-asset-url">
+                  {asset.before}
+                  {asset.after && (
+                    <>
+                      {' → '}
+                      <UniversalLink href={flattenToAppURL(asset.after)}>
+                        {asset.after}
+                      </UniversalLink>
+                    </>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+          {!allAssets && assets.length > LINKS_SHOWN && (
+            <button
+              type="button"
+              className="translation-links-more"
+              onClick={() => setAllAssets(true)}
+            >
+              {intl.formatMessage(messages.showAllAssets, {
+                count: assets.length,
               })}
             </button>
           )}

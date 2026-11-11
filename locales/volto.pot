@@ -181,6 +181,21 @@ msgstr ""
 msgid "volto-translation-report-show-all-links"
 msgstr ""
 
+#. Default: "Images and files"
+#: components/TranslationReportView
+msgid "volto-translation-report-assets-section"
+msgstr ""
+
+#. Default: "Images and files are not translated. Their references stay as they are, unless the image or file has a translation of its own."
+#: components/TranslationReportView
+msgid "volto-translation-report-assets-intro"
+msgstr ""
+
+#. Default: "Show all {count} images and files"
+#: components/TranslationReportView
+msgid "volto-translation-report-show-all-assets"
+msgstr ""
+
 #. Default: "The translation failed: {message}"
 #: components/TranslateView
 msgid "volto-translation-failed"
