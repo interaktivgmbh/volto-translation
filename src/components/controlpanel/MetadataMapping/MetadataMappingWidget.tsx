@@ -10,11 +10,19 @@ import {
   languageCodes,
   mappingColumns,
   matchesSearch,
+  fieldTitles,
+  mappableFields,
   normalisedMapping,
   pageSlice,
+  unknownFields,
   withoutLanguage,
 } from '../../../helpers/metadataMapping';
-import type { MetadataMapping, MetadataMappingRow } from '../../../types';
+import { fetchTranslationFields } from '../../../helpers/translateApi';
+import type {
+  MetadataMapping,
+  MetadataMappingRow,
+  TranslationFieldsType,
+} from '../../../types';
 import MappingExportModal from './MappingExportModal';
 import MappingFieldBar from './MappingFieldBar';
 import MappingFilterBar from './MappingFilterBar';
@@ -84,7 +92,23 @@ const MetadataMappingWidget = (props: MetadataMappingWidgetProps) => {
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(DEFAULT_PAGE_SIZE);
   const [focus, setFocus] = useState<FocusRequest | null>(null);
+  // the content types' fields: which may be added, which are unknown
+  const [types, setTypes] = useState<TranslationFieldsType[] | null>(null);
+  const [typesError, setTypesError] = useState<string | null>(null);
   const root = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    let mounted = true;
+    fetchTranslationFields()
+      .then((loaded) => mounted && setTypes(loaded))
+      .catch(
+        (error: Error) =>
+          mounted && setTypesError(String(error?.message || error)),
+      );
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   // the browser's storage is unknown on the server: read it once mounted
   useEffect(() => setPageSize(storedPageSize()), []);
@@ -250,6 +274,10 @@ const MetadataMappingWidget = (props: MetadataMappingWidgetProps) => {
         <MappingFieldBar
           fieldIds={fieldIds}
           current={current}
+          choices={types ? mappableFields(types, fieldIds) : null}
+          unknownIds={types ? unknownFields(types, fieldIds) : []}
+          titles={types ? fieldTitles(types) : {}}
+          loadError={typesError}
           onSelect={selectField}
           onAdd={addField}
           onRemove={() =>

@@ -6,9 +6,9 @@ const messages = defineMessages({
     id: 'volto-translation-mapping-add-field',
     defaultMessage: 'Add field',
   },
-  fieldIdPlaceholder: {
-    id: 'volto-translation-mapping-field-id-placeholder',
-    defaultMessage: 'Field id, e.g. subjects',
+  fieldChoicePlaceholder: {
+    id: 'volto-translation-mapping-field-choice-placeholder',
+    defaultMessage: 'Choose a field',
   },
   removeField: {
     id: 'volto-translation-mapping-remove-field',
@@ -22,9 +22,25 @@ const messages = defineMessages({
     id: 'volto-translation-mapping-fields-label',
     defaultMessage: 'Mapped fields',
   },
-  fieldIdLabel: {
-    id: 'volto-translation-mapping-field-id-label',
-    defaultMessage: 'Id of a new field',
+  fieldChoiceLabel: {
+    id: 'volto-translation-mapping-field-choice-label',
+    defaultMessage: 'Field to add to the mapping',
+  },
+  noFieldLeft: {
+    id: 'volto-translation-mapping-no-field-left',
+    defaultMessage: 'No further field can be mapped.',
+  },
+  noFieldChosen: {
+    id: 'volto-translation-mapping-no-field-chosen',
+    defaultMessage: 'Choose a field first.',
+  },
+  fieldsNotLoaded: {
+    id: 'volto-translation-mapping-fields-not-loaded',
+    defaultMessage: 'The fields could not be loaded: {message}',
+  },
+  unknownField: {
+    id: 'volto-translation-mapping-unknown-field',
+    defaultMessage: 'in no content type',
   },
   searchLabel: {
     id: 'volto-translation-mapping-search-label',
@@ -70,10 +86,6 @@ const messages = defineMessages({
   spaceInFieldId: {
     id: 'volto-translation-mapping-space-in-field-id',
     defaultMessage: 'A field id has no spaces.',
-  },
-  existingFieldId: {
-    id: 'volto-translation-mapping-existing-field-id',
-    defaultMessage: 'This field is mapped already.',
   },
   noFields: {
     id: 'volto-translation-mapping-no-fields',

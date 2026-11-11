@@ -99,6 +99,23 @@
   gap: 0.5em;
 }
 
+/* the choice of a new field: wide enough for "Title (id)" */
+.metadata-mapping-widget .metadata-mapping-add-field .ui.dropdown {
+  min-width: 16em;
+}
+
+/* a mapped field no content type has */
+.metadata-mapping-widget .ui.button.metadata-mapping-tab.unknown {
+  border-style: dashed;
+}
+
+.metadata-mapping-widget .metadata-mapping-tab-hint {
+  display: block;
+  margin-top: 0.2em;
+  font-size: 0.8em;
+  font-weight: normal;
+}
+
 .metadata-mapping-widget .metadata-mapping-toolbar > .ui.input {
   flex: 1 1 20em;
 }

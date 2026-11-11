@@ -103,6 +103,8 @@ export interface TranslationField {
   reason: FieldReason;
   // the saved mapping has values for it; the control panel uses its own
   mapped: boolean;
+  // may be added to the metadata mapping: a field of texts going along by its type
+  mappable?: boolean;
 }
 
 // The control panel's choice: per content type the fields that go along. A
