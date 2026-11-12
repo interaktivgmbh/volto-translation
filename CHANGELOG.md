@@ -59,6 +59,10 @@
 - The report lists images and files in a section of their own instead of
   among the links: they are usually not translated. Needs `kind` in the link
   report of `POST @translate`; without it everything stays under the links.
+- Fix: the translate page and the link status page no longer fail to
+  hydrate when loaded directly; the toolbar is rendered once the page is
+  mounted (`ToolbarPortal`). Fix: no prop type warning for the children of
+  `Container` on these pages and in Manage translations.
 
 ## 1.0.0-alpha.1 (2026-10-15)
 
