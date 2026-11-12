@@ -33,9 +33,36 @@ export interface TranslationInfo {
 export interface TranslationLinkReport {
   // what it points at; an older backend does not tell
   kind?: 'image' | 'file' | 'link';
+  // an older backend does not tell
+  status?: TranslationLinkStatus;
   text?: string;
   before?: string;
   after?: string | null;
+}
+
+// how a link stands to the language of the content that holds it
+export type TranslationLinkStatus =
+  | 'translated'
+  | 'translatable'
+  | 'untranslated'
+  | 'independent'
+  | 'broken'
+  | 'external';
+
+// GET @translation-links: one link of the content as it is now
+export interface TranslationLink {
+  text?: string | null;
+  kind?: 'image' | 'file' | 'link';
+  status: TranslationLinkStatus;
+  url?: string | null;
+  // where a translatable link could point instead
+  translation?: string | null;
+}
+
+export interface TranslationLinks {
+  language?: string | null;
+  items: TranslationLink[];
+  summary?: Partial<Record<TranslationLinkStatus, number>>;
 }
 
 export interface TranslationMetadataReport {

@@ -1095,3 +1095,123 @@ msgstr ""
 #: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-unknown-field"
 msgstr ""
+
+#. Default: "Link status"
+#: components/TranslationsMenu
+msgid "volto-translation-menu-link-status"
+msgstr ""
+
+#. Default: "Link status"
+#: components/TranslationLinksView
+msgid "volto-translation-links-title"
+msgstr ""
+
+#. Default: "Translation status of the links of {title}"
+#: components/TranslationLinksView
+msgid "volto-translation-links-headline"
+msgstr ""
+
+#. Default: "This content holds no links."
+#: components/TranslationLinksView
+msgid "volto-translation-links-none"
+msgstr ""
+
+#. Default: "The links could not be loaded: {message}"
+#: components/TranslationLinksView
+msgid "volto-translation-links-failed"
+msgstr ""
+
+#. Default: "Translation available ({count})"
+#: components/TranslationLinksView
+msgid "volto-translation-links-translatable"
+msgstr ""
+
+#. Default: "These links point at content of another language that has a translation by now."
+#: components/TranslationLinksView
+msgid "volto-translation-links-translatable-hint"
+msgstr ""
+
+#. Default: "Target not found ({count})"
+#: components/TranslationLinksView
+msgid "volto-translation-links-broken"
+msgstr ""
+
+#. Default: "The target of these links was not found."
+#: components/TranslationLinksView
+msgid "volto-translation-links-broken-hint"
+msgstr ""
+
+#. Default: "Without translation ({count})"
+#: components/TranslationLinksView
+msgid "volto-translation-links-untranslated"
+msgstr ""
+
+#. Default: "These links point at content of another language that has no translation."
+#: components/TranslationLinksView
+msgid "volto-translation-links-untranslated-hint"
+msgstr ""
+
+#. Default: "External links ({count})"
+#: components/TranslationLinksView
+msgid "volto-translation-links-external"
+msgstr ""
+
+#. Default: "These links lead out of the site and are not checked any further."
+#: components/TranslationLinksView
+msgid "volto-translation-links-external-hint"
+msgstr ""
+
+#. Default: "In the language of this content ({count})"
+#: components/TranslationLinksView
+msgid "volto-translation-links-translated"
+msgstr ""
+
+#. Default: "These links point at content in the language of this content."
+#: components/TranslationLinksView
+msgid "volto-translation-links-translated-hint"
+msgstr ""
+
+#. Default: "Without a language of its own ({count})"
+#: components/TranslationLinksView
+msgid "volto-translation-links-independent"
+msgstr ""
+
+#. Default: "The target of these links has no language of its own."
+#: components/TranslationLinksView
+msgid "volto-translation-links-independent-hint"
+msgstr ""
+
+#. Default: "Image"
+#: components/TranslationLinksView
+msgid "volto-translation-links-kind-image"
+msgstr ""
+
+#. Default: "File"
+#: components/TranslationLinksView
+msgid "volto-translation-links-kind-file"
+msgstr ""
+
+#. Default: "Translation"
+#: components/TranslationLinksView
+msgid "volto-translation-links-translation"
+msgstr ""
+
+#. Default: "Show all {count}"
+#: components/TranslationLinksView
+msgid "volto-translation-links-show-all"
+msgstr ""
+
+#. Default: "Back"
+#: components/TranslationLinksView
+msgid "volto-translation-links-back"
+msgstr ""
+
+#. Default: "Images and files ({count})"
+#: components/TranslationLinksView
+msgid "volto-translation-links-assets"
+msgstr ""
+
+#. Default: "Images and files are not translated. Their references stay as they are, unless the image or file has a translation of its own."
+#: components/TranslationLinksView
+msgid "volto-translation-links-assets-hint"
+msgstr ""

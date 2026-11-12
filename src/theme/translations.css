@@ -150,6 +150,13 @@
   overflow-wrap: anywhere;
 }
 
+#page-translate .translation-link-kind {
+  margin-left: 8px;
+  color: #878f93;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
 #page-translate .translation-link-untouched {
   color: #878f93;
 }
