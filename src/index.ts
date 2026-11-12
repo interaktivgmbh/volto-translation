@@ -6,6 +6,7 @@ import MetadataSelectionWidget from './components/controlpanel/MetadataSelection
 import TranslateMenuItem from './components/TranslateMenuItem';
 import TranslationsMenu from './components/TranslationsMenu';
 import TranslateView from './components/TranslateView';
+import TranslationLinksView from './components/TranslationLinksView';
 import type { VoltoConfig } from './types';
 import './theme/translations.css';
 import './theme/controlpanel.css';
@@ -42,11 +43,17 @@ const applyConfig = (config: VoltoConfig): VoltoConfig => {
   config.addonRoutes = [
     ...(config.addonRoutes || []),
     { path: '/**/translate', component: TranslateView, exact: true },
+    {
+      path: '/**/translation-links',
+      component: TranslationLinksView,
+      exact: true,
+    },
   ];
 
   config.settings.nonContentRoutes = [
     ...(config.settings.nonContentRoutes || []),
     '/translate',
+    '/translation-links',
   ];
 
   return config;

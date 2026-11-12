@@ -20,6 +20,10 @@ const messages = defineMessages({
     id: 'volto-translation-menu-manage',
     defaultMessage: 'Manage translations',
   },
+  linkStatus: {
+    id: 'volto-translation-menu-link-status',
+    defaultMessage: 'Link status',
+  },
   workingCopyNotice: {
     id: 'volto-translation-working-copy-notice',
     defaultMessage:
@@ -174,6 +178,16 @@ const TranslationsMenu = (props: TranslationsMenuProps) => {
             <li>
               <Link to={`${path}/manage-translations`} onClick={close}>
                 {intl.formatMessage(messages.manageTranslations)}
+                <Icon name={rightArrowSVG} size="24px" />
+              </Link>
+            </li>
+          )}
+
+          {/* on a working copy too: that is where a fresh translation is reviewed */}
+          {isMultilingual && (
+            <li>
+              <Link to={`${path}/translation-links`} onClick={close}>
+                {intl.formatMessage(messages.linkStatus)}
                 <Icon name={rightArrowSVG} size="24px" />
               </Link>
             </li>

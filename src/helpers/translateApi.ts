@@ -5,6 +5,7 @@ import type {
   GlossariesResult,
   TranslationFieldsType,
   TranslationInfo,
+  TranslationLinks,
   TranslationResult,
 } from '../types';
 
@@ -60,6 +61,12 @@ export function translateContent(
   return getApi().post(`${path}/@translate`, {
     data: { target_language: targetLanguage, save, overwrite },
   });
+}
+
+// GET @translation-links on one object: its links as they are now, each with
+// how it stands to the language of the content. Uncached: content changes.
+export function fetchTranslationLinks(path: string): Promise<TranslationLinks> {
+  return getApi().get(`${path}/@translation-links`);
 }
 
 // GET @translation-fields on the site root: the content types an editor adds,

@@ -46,6 +46,12 @@
   as Volto has them, and no longer in the Translations menu. Fix: the rule
   hiding Volto's own "Manage translations" there hid the whole list, the
   working copy actions with it; now only that entry goes.
+- New page "Link status" (`/translation-links` on a content, an entry in the
+  Translations menu): the links of the content as it is now, grouped by how
+  they stand to its language: a translation is available, target not found,
+  without translation, external, in the language of the content, without a
+  language of its own; images and files in a section of their own, as in the
+  report. Read-only. Needs `GET @translation-links`.
 - The report lists images and files in a section of their own instead of
   among the links: they are usually not translated. Needs `kind` in the link
   report of `POST @translate`; without it everything stays under the links.
