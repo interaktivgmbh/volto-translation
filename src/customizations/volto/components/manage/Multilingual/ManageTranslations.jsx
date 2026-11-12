@@ -32,7 +32,6 @@ import {
 import { getContent } from '@plone/volto/actions/content/content';
 import { defineMessages, FormattedMessage, useIntl } from 'react-intl';
 import { useSelector, useDispatch } from 'react-redux';
-import { createPortal } from 'react-dom';
 import { toast } from 'react-toastify';
 
 import addSVG from '@plone/volto/icons/add.svg';
@@ -42,6 +41,7 @@ import translateSVG from '@plone/volto/icons/translate.svg';
 import unlinkSVG from '@plone/volto/icons/unlink.svg';
 
 import { fetchTranslationInfoFor } from '../../../../../helpers/translateApi';
+import ToolbarPortal from '../../../../../components/ToolbarPortal';
 
 const messages = defineMessages({
   success: {
@@ -157,13 +157,8 @@ const ManageTranslations = (props) => {
   const content = useSelector((state) => state.content.data);
   const dispatch = useDispatch();
 
-  const [isClient, setIsClient] = useState(false);
   // GET @translate's per-language view: {lang: {url, status, working_copy}}.
   const [translationInfo, setTranslationInfo] = useState(null);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
 
   const loadTranslationInfo = React.useCallback(() => {
     fetchTranslationInfoFor(getBaseUrl(pathname))
@@ -482,24 +477,22 @@ const ManageTranslations = (props) => {
             </Table.Body>
           </Table>
         )}
-        {isClient &&
-          createPortal(
-            <Toolbar
-              pathname={pathname}
-              hideDefaultViewButtons
-              inner={
-                <Link to={`${getBaseUrl(pathname)}`} className="item">
-                  <Icon
-                    name={backSVG}
-                    className="contents circled"
-                    size="30px"
-                    title={intl.formatMessage(messages.back)}
-                  />
-                </Link>
-              }
-            />,
-            document.getElementById('toolbar'),
-          )}
+        <ToolbarPortal>
+          <Toolbar
+            pathname={pathname}
+            hideDefaultViewButtons
+            inner={
+              <Link to={`${getBaseUrl(pathname)}`} className="item">
+                <Icon
+                  name={backSVG}
+                  className="contents circled"
+                  size="30px"
+                  title={intl.formatMessage(messages.back)}
+                />
+              </Link>
+            }
+          />
+        </ToolbarPortal>
       </Segment.Group>
     </Container>
   );

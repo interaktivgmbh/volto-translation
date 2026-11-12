@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { createPortal } from 'react-dom';
 import { useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import { defineMessages, useIntl } from 'react-intl';
@@ -18,6 +17,7 @@ import {
 import config from '@plone/registry';
 import { languageName } from '../helpers/languages';
 import TranslationReportView from './TranslationReportView';
+import ToolbarPortal from './ToolbarPortal';
 import type {
   ApiError,
   TranslationInfo,
@@ -261,9 +261,6 @@ const TranslateView = (props: TranslateViewProps) => {
   }, [target]);
 
   if (!token) return null;
-
-  // createPortal needs a real node; on the server there is none.
-  const toolbarNode = __CLIENT__ ? document.getElementById('toolbar') : null;
 
   const targetName = targetLanguage
     ? languageName(targetLanguage.code, intl.locale, targetLanguage.title)
@@ -546,25 +543,22 @@ const TranslateView = (props: TranslateViewProps) => {
           </Button>
         </Segment>
       </Segment.Group>
-      {__CLIENT__ &&
-        toolbarNode &&
-        createPortal(
-          <Toolbar
-            pathname={props.location.pathname}
-            hideDefaultViewButtons
-            inner={
-              <Link to={flattenToAppURL(path)} className="item">
-                <Icon
-                  name={backSVG}
-                  className="contents circled"
-                  size="30px"
-                  title={intl.formatMessage(messages.back)}
-                />
-              </Link>
-            }
-          />,
-          toolbarNode,
-        )}
+      <ToolbarPortal>
+        <Toolbar
+          pathname={props.location.pathname}
+          hideDefaultViewButtons
+          inner={
+            <Link to={flattenToAppURL(path)} className="item">
+              <Icon
+                name={backSVG}
+                className="contents circled"
+                size="30px"
+                title={intl.formatMessage(messages.back)}
+              />
+            </Link>
+          }
+        />
+      </ToolbarPortal>
     </Container>
   );
 };

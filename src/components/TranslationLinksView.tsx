@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { createPortal } from 'react-dom';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { defineMessages, useIntl } from 'react-intl';
@@ -11,6 +10,7 @@ import Icon from '@plone/volto/components/theme/Icon/Icon';
 import backSVG from '@plone/volto/icons/back.svg';
 import { getBaseUrl, flattenToAppURL } from '@plone/volto/helpers/Url/Url';
 import { fetchTranslationLinks } from '../helpers/translateApi';
+import ToolbarPortal from './ToolbarPortal';
 import type {
   ApiError,
   TranslationLink,
@@ -170,9 +170,6 @@ const TranslationLinksView = (props: TranslationLinksViewProps) => {
     };
   }, [path]);
 
-  // createPortal needs a real node; on the server there is none.
-  const toolbarNode = __CLIENT__ ? document.getElementById('toolbar') : null;
-
   // images and files have a section of their own, as in the report: they are
   // usually not translated, which is no link to go after
   const isAsset = (link: TranslationLink) =>
@@ -301,25 +298,22 @@ const TranslationLinksView = (props: TranslationLinksViewProps) => {
           );
         })}
       </Segment.Group>
-      {__CLIENT__ &&
-        toolbarNode &&
-        createPortal(
-          <Toolbar
-            pathname={props.location.pathname}
-            hideDefaultViewButtons
-            inner={
-              <Link to={flattenToAppURL(path)} className="item">
-                <Icon
-                  name={backSVG}
-                  className="contents circled"
-                  size="30px"
-                  title={intl.formatMessage(messages.back)}
-                />
-              </Link>
-            }
-          />,
-          toolbarNode,
-        )}
+      <ToolbarPortal>
+        <Toolbar
+          pathname={props.location.pathname}
+          hideDefaultViewButtons
+          inner={
+            <Link to={flattenToAppURL(path)} className="item">
+              <Icon
+                name={backSVG}
+                className="contents circled"
+                size="30px"
+                title={intl.formatMessage(messages.back)}
+              />
+            </Link>
+          }
+        />
+      </ToolbarPortal>
     </Container>
   );
 };
