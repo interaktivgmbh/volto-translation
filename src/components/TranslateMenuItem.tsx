@@ -74,11 +74,13 @@ const TranslateMenuItem = (props: TranslateMenuItemProps) => {
 
   if (!token || !worthOpening) return null;
   // Volto renders `main.toolbar.top` outside the block it hides on views that
-  // bring their own toolbar — edit, contents, manage-translations, our own
+  // bring their own toolbar — edit, manage-translations, our own
   // translate page. Without this the button would be the only one left
   // standing there. getBaseUrl strips exactly those routes, so a path it
-  // shortens is not a content view.
-  if (getBaseUrl(pathname) !== pathname) return null;
+  // shortens is not a content view, except the contents view: it keeps the
+  // full toolbar, Volto's "…" menu among it, and the menu belongs there too.
+  const basePath = getBaseUrl(pathname);
+  if (basePath !== pathname && pathname !== `${basePath}/contents`) return null;
   if (!content?.['@id'] || content['@type'] === 'Plone Site') return null;
 
   const label = intl.formatMessage(messages.translate);

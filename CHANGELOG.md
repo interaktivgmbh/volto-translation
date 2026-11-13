@@ -63,6 +63,8 @@
   hydrate when loaded directly; the toolbar is rendered once the page is
   mounted (`ToolbarPortal`). Fix: no prop type warning for the children of
   `Container` on these pages and in Manage translations.
+- Fix: the Translations menu is offered in the contents view as well, for
+  the folder shown, as Volto offers its own menus there.
 
 ## 1.0.0-alpha.1 (2026-10-15)
 
