@@ -35,6 +35,8 @@ interface MappingImportModalProps {
 }
 
 const FIELD_ERROR = 'metadata-mapping-import-field-error';
+// the choice not to import a sheet; no field id has a space
+const NO_FIELD = 'no field';
 const SHEETS_LABEL = 'metadata-mapping-import-sheets-label';
 
 const XLSX_TYPES =
@@ -137,11 +139,19 @@ const MappingImportModal = (props: MappingImportModalProps) => {
     }
   };
 
-  const options = fields.map((field) => ({
-    key: field.id,
-    value: field.id,
-    text: field.title === field.id ? field.id : `${field.title} (${field.id})`,
-  }));
+  const options = [
+    {
+      key: NO_FIELD,
+      value: NO_FIELD,
+      text: intl.formatMessage(messages.importNoField),
+    },
+    ...fields.map((field) => ({
+      key: field.id,
+      value: field.id,
+      text:
+        field.title === field.id ? field.id : `${field.title} (${field.id})`,
+    })),
+  ];
 
   return (
     <Modal
@@ -245,12 +255,8 @@ const MappingImportModal = (props: MappingImportModalProps) => {
                           <Dropdown
                             search
                             selection
-                            clearable
-                            value={target}
+                            value={target || NO_FIELD}
                             options={options}
-                            placeholder={intl.formatMessage(
-                              messages.importNoField,
-                            )}
                             aria-label={intl.formatMessage(
                               messages.importFieldFor,
                               { sheet: sheet.name },
@@ -264,7 +270,10 @@ const MappingImportModal = (props: MappingImportModalProps) => {
                             ) =>
                               setTargets({
                                 ...targets,
-                                [sheet.name]: String(data.value || ''),
+                                [sheet.name]:
+                                  data.value === NO_FIELD
+                                    ? ''
+                                    : String(data.value || ''),
                               })
                             }
                           />
