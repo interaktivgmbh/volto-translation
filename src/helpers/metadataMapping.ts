@@ -231,6 +231,20 @@ export function mappableFields(
   );
 }
 
+// The fields an import may go into: the mapped ones first, as the tabs show
+// them, then those that may be added.
+export function importableFields(
+  types: TranslationFieldsType[] | null,
+  mapped: string[],
+): FieldChoice[] {
+  const titles = types ? fieldTitles(types) : {};
+
+  return [
+    ...mapped.map((id) => ({ id, title: titles[id] || id })),
+    ...(types ? mappableFields(types, mapped) : []),
+  ];
+}
+
 // Mapped fields no content type of the site has (left from an import or an
 // earlier setup): shown with a hint, to be removed.
 export function unknownFields(

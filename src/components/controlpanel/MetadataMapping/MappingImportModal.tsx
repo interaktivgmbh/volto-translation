@@ -3,13 +3,17 @@ import { useIntl } from 'react-intl';
 import {
   Button,
   Dropdown,
-  Input,
   Label,
   Message,
   Modal,
+  Table,
 } from 'semantic-ui-react';
 import { readWorkbook } from '../../../helpers/excelFile';
-import { sheetToRows } from '../../../helpers/metadataMappingExcel';
+import type { FieldChoice } from '../../../helpers/metadataMapping';
+import {
+  sheetTargets,
+  sheetToRows,
+} from '../../../helpers/metadataMappingExcel';
 import type {
   ImportedSheet,
   SheetWarning,
@@ -22,6 +26,8 @@ import type { InputData } from './utils';
 interface MappingImportModalProps {
   open: boolean;
   mapping: MetadataMapping;
+  // the fields a sheet may go into: the mapped ones and those to be added
+  fields: FieldChoice[];
   currentField?: string;
   siteLanguages: string[];
   onImport: (fields: MetadataMapping) => void;
@@ -29,6 +35,7 @@ interface MappingImportModalProps {
 }
 
 const FIELD_ERROR = 'metadata-mapping-import-field-error';
+const SHEETS_LABEL = 'metadata-mapping-import-sheets-label';
 
 const XLSX_TYPES =
   '.xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
@@ -44,39 +51,47 @@ const WARNING_MESSAGES: Record<
   headerlessValues: messages.importHeaderlessValues,
 };
 
-// Imports one sheet of a file into one field, the selected one by default.
+// Imports the sheets of a file, each into the field chosen for it: the one
+// the sheet is named like, as the export names it, unless the editor says
+// otherwise. A sheet without a field is left out.
 const MappingImportModal = (props: MappingImportModalProps) => {
-  const { open, mapping, currentField, siteLanguages, onImport, onClose } =
-    props;
+  const {
+    open,
+    mapping,
+    fields,
+    currentField,
+    siteLanguages,
+    onImport,
+    onClose,
+  } = props;
   const intl = useIntl();
   const fileInput = useRef<HTMLInputElement>(null);
-  const [fieldId, setFieldId] = useState(currentField || '');
   const [fileName, setFileName] = useState('');
   const [reading, setReading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   // only the sheets that hold values
   const [sheets, setSheets] = useState<ImportedSheet[]>([]);
-  const [sheetName, setSheetName] = useState('');
+  // the field of each sheet, by the sheet's name
+  const [targets, setTargets] = useState<Record<string, string>>({});
 
   useDialogFocus(open, '.metadata-mapping-import-modal');
 
-  // each opening starts over, with the field selected now
+  // each opening starts over
   useEffect(() => {
     if (open) {
-      setFieldId(currentField || '');
       setFileName('');
       setReading(false);
       setError(null);
       setSheets([]);
-      setSheetName('');
+      setTargets({});
     }
-  }, [open, currentField]);
+  }, [open]);
 
   const readFile = async (file: File) => {
     setFileName(file.name);
     setError(null);
     setSheets([]);
-    setSheetName('');
+    setTargets({});
     setReading(true);
     try {
       const withValues = (await readWorkbook(file))
@@ -86,9 +101,13 @@ const MappingImportModal = (props: MappingImportModalProps) => {
         setError(intl.formatMessage(messages.importNoSheets));
       }
       setSheets(withValues);
-      // a file of all fields has a sheet named like the target field
-      const named = withValues.find((sheet) => sheet.name === fieldId.trim());
-      setSheetName((named || withValues[0])?.name || '');
+      setTargets(
+        sheetTargets(
+          withValues.map((sheet) => sheet.name),
+          fields,
+          currentField,
+        ),
+      );
     } catch (readError) {
       setError(
         intl.formatMessage(messages.importReadError, {
@@ -100,22 +119,29 @@ const MappingImportModal = (props: MappingImportModalProps) => {
     }
   };
 
-  const target = fieldId.trim();
-  const fieldIdError = !target
-    ? intl.formatMessage(messages.emptyFieldId)
-    : /\s/.test(target)
-      ? intl.formatMessage(messages.spaceInFieldId)
-      : null;
-  const existing = target ? mapping[target] : undefined;
-  const sheet = sheets.find((candidate) => candidate.name === sheetName);
-  const canImport = !fieldIdError && !!sheet;
+  const chosen = sheets.filter((sheet) => targets[sheet.name]);
+  // a field takes the values of one sheet only
+  const shared = (fieldId: string) =>
+    chosen.filter((sheet) => targets[sheet.name] === fieldId).length > 1;
+  const canImport =
+    chosen.length > 0 && !chosen.some((sheet) => shared(targets[sheet.name]));
 
   const apply = () => {
-    if (sheet && !fieldIdError) {
-      onImport({ [target]: sheet.rows });
+    if (canImport) {
+      onImport(
+        Object.fromEntries(
+          chosen.map((sheet) => [targets[sheet.name], sheet.rows]),
+        ),
+      );
       onClose();
     }
   };
+
+  const options = fields.map((field) => ({
+    key: field.id,
+    value: field.id,
+    text: field.title === field.id ? field.id : `${field.title} (${field.id})`,
+  }));
 
   return (
     <Modal
@@ -128,36 +154,6 @@ const MappingImportModal = (props: MappingImportModalProps) => {
         {intl.formatMessage(messages.importHeader)}
       </Modal.Header>
       <Modal.Content>
-        <div className="metadata-mapping-import-row">
-          <label htmlFor="metadata-mapping-import-field">
-            {intl.formatMessage(messages.importField)}
-          </label>
-          <Input
-            id="metadata-mapping-import-field"
-            value={fieldId}
-            error={!!fieldIdError}
-            aria-invalid={!!fieldIdError || undefined}
-            aria-describedby={fieldIdError ? FIELD_ERROR : undefined}
-            onChange={(_event: React.SyntheticEvent, data: InputData) =>
-              setFieldId(String(data.value))
-            }
-          />
-          {!fieldIdError && (
-            <span className="metadata-mapping-import-effect">
-              {existing
-                ? intl.formatMessage(messages.importReplaces, {
-                    count: existing.length,
-                  })
-                : intl.formatMessage(messages.importNewField)}
-            </span>
-          )}
-        </div>
-        {fieldIdError && (
-          <Label id={FIELD_ERROR} role="alert" basic color="red" pointing>
-            {fieldIdError}
-          </Label>
-        )}
-
         <p className="metadata-mapping-modal-intro">
           {intl.formatMessage(messages.importIntro)}
         </p>
@@ -195,59 +191,115 @@ const MappingImportModal = (props: MappingImportModalProps) => {
           </Message>
         )}
 
-        {sheets.length > 1 && (
-          <div className="metadata-mapping-import-row">
-            {/* the dropdown is no form element: it is named by aria-labelledby */}
-            <span
-              id="metadata-mapping-import-sheet-label"
-              className="metadata-mapping-import-label"
-            >
-              {intl.formatMessage(messages.importSheet)}
-            </span>
-            <Dropdown
-              aria-labelledby="metadata-mapping-import-sheet-label"
-              selection
-              value={sheetName}
-              options={sheets.map((candidate) => ({
-                key: candidate.name,
-                value: candidate.name,
-                text: candidate.name,
-              }))}
-              onChange={(_event: React.SyntheticEvent, data: InputData) =>
-                setSheetName(String(data.value))
-              }
-            />
-          </div>
-        )}
-
         {/* read out once the file is read */}
         <div className="metadata-mapping-import-summary" aria-live="polite">
-          {sheet && (
-            <div>
-              {intl.formatMessage(messages.importSheetValues, {
-                sheet: sheet.name,
-                count: sheet.rows.length,
-              })}
-            </div>
+          {sheets.length > 0 && (
+            <>
+              <span id={SHEETS_LABEL} className="metadata-mapping-sr-only">
+                {intl.formatMessage(messages.importSheets)}
+              </span>
+              <Table
+                compact
+                className="metadata-mapping-import-sheets"
+                aria-labelledby={SHEETS_LABEL}
+              >
+                <Table.Header>
+                  <Table.Row>
+                    <Table.HeaderCell scope="col">
+                      {intl.formatMessage(messages.importSheet)}
+                    </Table.HeaderCell>
+                    <Table.HeaderCell scope="col">
+                      {intl.formatMessage(messages.importValues)}
+                    </Table.HeaderCell>
+                    <Table.HeaderCell scope="col">
+                      {intl.formatMessage(messages.importField)}
+                    </Table.HeaderCell>
+                  </Table.Row>
+                </Table.Header>
+                <Table.Body>
+                  {sheets.map((sheet, index) => {
+                    const target = targets[sheet.name] || '';
+                    const existing = target ? mapping[target] : undefined;
+                    const sameField = !!target && shared(target);
+                    const errorId = `${FIELD_ERROR}-${index}`;
+
+                    return (
+                      <Table.Row key={sheet.name}>
+                        <Table.Cell>
+                          {sheet.name}
+                          {sheet.warnings.map((warning) => (
+                            <div
+                              key={JSON.stringify(warning)}
+                              className="metadata-mapping-import-warning"
+                            >
+                              {intl.formatMessage(
+                                WARNING_MESSAGES[warning.kind],
+                                // header, column, count: whatever the kind has
+                                warning,
+                              )}
+                            </div>
+                          ))}
+                        </Table.Cell>
+                        <Table.Cell>{sheet.rows.length}</Table.Cell>
+                        <Table.Cell>
+                          <Dropdown
+                            search
+                            selection
+                            clearable
+                            value={target}
+                            options={options}
+                            placeholder={intl.formatMessage(
+                              messages.importNoField,
+                            )}
+                            aria-label={intl.formatMessage(
+                              messages.importFieldFor,
+                              { sheet: sheet.name },
+                            )}
+                            error={sameField}
+                            aria-invalid={sameField || undefined}
+                            aria-describedby={sameField ? errorId : undefined}
+                            onChange={(
+                              _event: React.SyntheticEvent,
+                              data: InputData,
+                            ) =>
+                              setTargets({
+                                ...targets,
+                                [sheet.name]: String(data.value || ''),
+                              })
+                            }
+                          />
+                          {target && !sameField && (
+                            <div className="metadata-mapping-import-effect">
+                              {existing
+                                ? intl.formatMessage(messages.importReplaces, {
+                                    count: existing.length,
+                                  })
+                                : intl.formatMessage(messages.importNewField)}
+                            </div>
+                          )}
+                          {sameField && (
+                            <Label
+                              id={errorId}
+                              role="alert"
+                              basic
+                              color="red"
+                              pointing
+                            >
+                              {intl.formatMessage(messages.importSameField)}
+                            </Label>
+                          )}
+                        </Table.Cell>
+                      </Table.Row>
+                    );
+                  })}
+                </Table.Body>
+              </Table>
+            </>
           )}
-          {sheet?.warnings.map((warning) => (
-            <div
-              key={JSON.stringify(warning)}
-              className="metadata-mapping-import-warning"
-            >
-              {intl.formatMessage(
-                WARNING_MESSAGES[warning.kind],
-                // header, column, count: whatever the kind has
-                warning,
-              )}
-            </div>
-          ))}
         </div>
 
-        {sheet && !fieldIdError && (
-          <Message info>
-            {intl.formatMessage(messages.importNote, { field: target })}
-          </Message>
+        {canImport && (
+          <Message info>{intl.formatMessage(messages.importNote)}</Message>
         )}
       </Modal.Content>
       <Modal.Actions>
