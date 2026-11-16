@@ -61,6 +61,11 @@
   `Container` on these pages and in Manage translations.
 - Fix: the Translations menu is offered in the contents view as well, for
   the folder shown, as Volto offers its own menus there.
+- The Excel import of the metadata mapping takes all sheets of a file at
+  once: it lists them and offers a field for each, chosen already where a
+  sheet is named like one field, as the export names it. The field is chosen
+  from the mapped fields and those that may be added; a sheet without a
+  field is left out. The text input for the field is gone.
 
 ## 1.0.0-alpha.1 (2026-10-15)
 

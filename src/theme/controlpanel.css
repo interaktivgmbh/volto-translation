@@ -452,6 +452,22 @@
   margin: 1em 0;
 }
 
+/* one row per sheet of the file, with the field it goes into */
+.metadata-mapping-modal .ui.table.metadata-mapping-import-sheets td {
+  vertical-align: top;
+}
+
+.metadata-mapping-modal .metadata-mapping-import-sheets .ui.dropdown {
+  min-width: 16em;
+}
+
+.metadata-mapping-modal
+  .metadata-mapping-import-sheets
+  .metadata-mapping-import-effect {
+  margin-top: 0.3em;
+  font-size: 0.9em;
+}
+
 .metadata-mapping-modal .metadata-mapping-import-warning {
   margin-top: 0.3em;
   color: #9f3a38;

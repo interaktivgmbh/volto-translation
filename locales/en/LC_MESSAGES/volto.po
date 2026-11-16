@@ -601,20 +601,40 @@ msgstr "Import"
 msgid "volto-translation-mapping-import-headerless-values"
 msgstr "Column {column} has no header; {count, plural, one {# value is} other {# values are}} left out."
 
-#. Default: "One column per language, one row per value. The first row names the languages, by code (\"de\") or name (\"German\"). An empty cell keeps the value of the source language. A file with several sheets asks which one to take."
+#. Default: "One column per language, one row per value. The first row names the languages, by code (\"de\") or name (\"German\"). An empty cell keeps the value of the source language. Each sheet goes into the field chosen for it; a sheet without a field is left out."
 #: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-import-intro"
-msgstr "One column per language, one row per value. The first row names the languages, by code (\"de\") or name (\"German\"). An empty cell keeps the value of the source language. A file with several sheets asks which one to take."
+msgstr "One column per language, one row per value. The first row names the languages, by code (\"de\") or name (\"German\"). An empty cell keeps the value of the source language. Each sheet goes into the field chosen for it; a sheet without a field is left out."
 
-#. Default: "The import replaces the values of {field} completely; the other fields stay as they are. It takes effect once the settings are saved."
+#. Default: "The import replaces the values of the chosen fields completely; the other fields stay as they are. It takes effect once the settings are saved."
 #: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-import-note"
-msgstr "The import replaces the values of {field} completely; the other fields stay as they are. It takes effect once the settings are saved."
+msgstr "The import replaces the values of the chosen fields completely; the other fields stay as they are. It takes effect once the settings are saved."
 
-#. Default: "{sheet}: {count, plural, one {# value} other {# values}}"
+#. Default: "Values"
 #: components/controlpanel/MetadataMapping/messages
-msgid "volto-translation-mapping-import-sheet-values"
-msgstr "{sheet}: {count, plural, one {# value} other {# values}}"
+msgid "volto-translation-mapping-import-values"
+msgstr "Values"
+
+#. Default: "Sheets of the file"
+#: components/controlpanel/MetadataMapping/messages
+msgid "volto-translation-mapping-import-sheets"
+msgstr "Sheets of the file"
+
+#. Default: "Field for the sheet {sheet}"
+#: components/controlpanel/MetadataMapping/messages
+msgid "volto-translation-mapping-import-field-for"
+msgstr "Field for the sheet {sheet}"
+
+#. Default: "Not imported"
+#: components/controlpanel/MetadataMapping/messages
+msgid "volto-translation-mapping-import-no-field"
+msgstr "Not imported"
+
+#. Default: "Chosen for more than one sheet."
+#: components/controlpanel/MetadataMapping/messages
+msgid "volto-translation-mapping-import-same-field"
+msgstr "Chosen for more than one sheet."
 
 #. Default: "Column \"{header}\" is no language of the site; it is taken over but not used."
 #: components/controlpanel/MetadataMapping/messages

@@ -11,6 +11,7 @@ import {
   mappingColumns,
   matchesSearch,
   fieldTitles,
+  importableFields,
   mappableFields,
   normalisedMapping,
   pageSlice,
@@ -363,6 +364,7 @@ const MetadataMappingWidget = (props: MetadataMappingWidgetProps) => {
         <MappingImportModal
           open={importing}
           mapping={mapping}
+          fields={importableFields(types, fieldIds)}
           currentField={current}
           siteLanguages={siteLanguages}
           onImport={importFields}

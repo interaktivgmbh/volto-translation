@@ -1,6 +1,7 @@
 import type { MetadataMapping, MetadataMappingRow } from '../types';
 import { ISO_639_1_CODES, languageName } from './languages';
 import { mappingColumns } from './metadataMapping';
+import type { FieldChoice } from './metadataMapping';
 
 // A worksheet as plain cells: no library type leaks past this point.
 export interface Sheet {
@@ -140,6 +141,51 @@ export function sheetToRows(
   });
 
   return { name: sheet.name, rows, warnings };
+}
+
+// The field a name tells: its id, or its title when no other field has it.
+function namedField(name: string, fields: FieldChoice[]): string | undefined {
+  const text = name.trim();
+  const exact = fields.find((field) => field.id === text);
+  if (exact) {
+    return exact.id;
+  }
+  const lower = text.toLowerCase();
+  const byId = fields.filter((field) => field.id.toLowerCase() === lower);
+  if (byId.length) {
+    return byId.length === 1 ? byId[0].id : undefined;
+  }
+  const byTitle = fields.filter((field) => field.title.toLowerCase() === lower);
+
+  return byTitle.length === 1 ? byTitle[0].id : undefined;
+}
+
+// The field each sheet goes into where that is beyond doubt: the sheet is
+// named like one field, as the export names it, and no other sheet is. The
+// only sheet of a file, named like no field, goes into the fallback.
+export function sheetTargets(
+  sheetNames: string[],
+  fields: FieldChoice[],
+  fallback?: string,
+): Record<string, string> {
+  const named = sheetNames.map((name) => namedField(name, fields));
+  const targets: Record<string, string> = {};
+  sheetNames.forEach((name, index) => {
+    const field = named[index];
+    if (field && named.filter((other) => other === field).length === 1) {
+      targets[name] = field;
+    }
+  });
+  if (
+    sheetNames.length === 1 &&
+    !named[0] &&
+    fallback &&
+    fields.some((field) => field.id === fallback)
+  ) {
+    targets[sheetNames[0]] = fallback;
+  }
+
+  return targets;
 }
 
 export function isSheetName(name: string): boolean {

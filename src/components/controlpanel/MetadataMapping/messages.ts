@@ -246,7 +246,7 @@ const messages = defineMessages({
   importIntro: {
     id: 'volto-translation-mapping-import-intro',
     defaultMessage:
-      'One column per language, one row per value. The first row names the languages, by code ("de") or name ("German"). An empty cell keeps the value of the source language. A file with several sheets asks which one to take.',
+      'One column per language, one row per value. The first row names the languages, by code ("de") or name ("German"). An empty cell keeps the value of the source language. Each sheet goes into the field chosen for it; a sheet without a field is left out.',
   },
   importChooseFile: {
     id: 'volto-translation-mapping-import-choose-file',
@@ -272,9 +272,25 @@ const messages = defineMessages({
     id: 'volto-translation-mapping-import-replaces',
     defaultMessage: 'Replaces {count, plural, one {# value} other {# values}}',
   },
-  importSheetValues: {
-    id: 'volto-translation-mapping-import-sheet-values',
-    defaultMessage: '{sheet}: {count, plural, one {# value} other {# values}}',
+  importValues: {
+    id: 'volto-translation-mapping-import-values',
+    defaultMessage: 'Values',
+  },
+  importSheets: {
+    id: 'volto-translation-mapping-import-sheets',
+    defaultMessage: 'Sheets of the file',
+  },
+  importFieldFor: {
+    id: 'volto-translation-mapping-import-field-for',
+    defaultMessage: 'Field for the sheet {sheet}',
+  },
+  importNoField: {
+    id: 'volto-translation-mapping-import-no-field',
+    defaultMessage: 'Not imported',
+  },
+  importSameField: {
+    id: 'volto-translation-mapping-import-same-field',
+    defaultMessage: 'Chosen for more than one sheet.',
   },
   importNewField: {
     id: 'volto-translation-mapping-import-new-field',
@@ -305,7 +321,7 @@ const messages = defineMessages({
   importNote: {
     id: 'volto-translation-mapping-import-note',
     defaultMessage:
-      'The import replaces the values of {field} completely; the other fields stay as they are. It takes effect once the settings are saved.',
+      'The import replaces the values of the chosen fields completely; the other fields stay as they are. It takes effect once the settings are saved.',
   },
   importButton: {
     id: 'volto-translation-mapping-import-button',
