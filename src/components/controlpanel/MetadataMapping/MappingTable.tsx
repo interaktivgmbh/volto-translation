@@ -4,7 +4,10 @@ import { Button, Input, Label, Table } from 'semantic-ui-react';
 import Icon from '@plone/volto/components/theme/Icon/Icon';
 import clearSVG from '@plone/volto/icons/clear.svg';
 import { cellValue, withCell } from '../../../helpers/metadataMapping';
-import type { MappingColumn } from '../../../helpers/metadataMapping';
+import type {
+  MappingColumn,
+  RowChange,
+} from '../../../helpers/metadataMapping';
 import type { MetadataMappingRow } from '../../../types';
 import messages, { ROLE_MESSAGES } from './messages';
 import type { InputData } from './utils';
@@ -19,6 +22,9 @@ interface MappingTableProps {
   entries: MappingEntry[];
   columns: MappingColumn[];
   duplicates: Set<string>;
+  // how each row of the field stands to the rows before an import, by its
+  // position; empty without an import
+  marks: (RowChange | undefined)[];
   caption: string;
   emptyText: string;
   languageName: (code: string) => string;
@@ -30,7 +36,8 @@ interface MappingTableProps {
 // One row per value, one column per language; the header shows each language's
 // role. The source value heads its row, so a screen reader names the row with it.
 const MappingTable = (props: MappingTableProps) => {
-  const { entries, columns, duplicates, languageName, onChangeRow } = props;
+  const { entries, columns, duplicates, marks, languageName, onChangeRow } =
+    props;
   const intl = useIntl();
   const source = columns.find((column) => column.role === 'source')?.code;
   // the cell a new row's cursor goes to, see the widget
@@ -99,6 +106,7 @@ const MappingTable = (props: MappingTableProps) => {
           {entries.map(({ row, index }) => {
             const sourceValue = source ? cellValue(row, source).trim() : '';
             const duplicateId = `metadata-mapping-duplicate-${index}`;
+            const mark = marks[index];
             const removeLabel = sourceValue
               ? intl.formatMessage(messages.removeValue, { value: sourceValue })
               : intl.formatMessage(messages.removeRow, { row: index + 1 });
@@ -106,11 +114,21 @@ const MappingTable = (props: MappingTableProps) => {
             return (
               // rows have no id of their own; their position is their identity
               // eslint-disable-next-line react/no-array-index-key
-              <Table.Row key={index} data-row={index}>
+              <Table.Row
+                key={index}
+                data-row={index}
+                className={mark ? `mark-${mark.mark}` : undefined}
+              >
                 {columns.map((column) => {
                   const cell = cellValue(row, column.code);
                   const isSource = column.code === source;
                   const duplicate = isSource && duplicates.has(cell.trim());
+                  // a new row says so at its start, a changed one in the
+                  // cells that changed
+                  const marked =
+                    mark?.mark === 'added'
+                      ? isSource
+                      : !!mark?.languages.includes(column.code.toLowerCase());
                   const label =
                     isSource || !sourceValue
                       ? intl.formatMessage(messages.cellLabelRow, {
@@ -132,6 +150,7 @@ const MappingTable = (props: MappingTableProps) => {
                         column.code === focusCode
                           ? 'metadata-mapping-focus'
                           : '',
+                        marked ? 'metadata-mapping-marked' : '',
                       ].join(' ')}
                     >
                       <Input
@@ -169,6 +188,18 @@ const MappingTable = (props: MappingTableProps) => {
                           className="metadata-mapping-sr-only"
                         >
                           {intl.formatMessage(messages.duplicate)}
+                        </span>
+                      )}
+                      {/* in words, not by colour alone */}
+                      {mark && marked && (
+                        <span
+                          className={`metadata-mapping-mark mark-${mark.mark}`}
+                        >
+                          {intl.formatMessage(
+                            mark.mark === 'added'
+                              ? messages.markAdded
+                              : messages.markChanged,
+                          )}
                         </span>
                       )}
                     </Table.Cell>

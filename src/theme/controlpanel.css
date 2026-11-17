@@ -196,6 +196,51 @@
   vertical-align: middle;
 }
 
+/* what an import changed, until the settings are saved: a bar at the row's
+   start and the word in the cell of the source value */
+.metadata-mapping-widget .ui.table tr.mark-added > :first-child {
+  box-shadow: inset 4px 0 0 #2e8540;
+}
+
+.metadata-mapping-widget .ui.table tr.mark-changed > :first-child {
+  box-shadow: inset 4px 0 0 #b26a00;
+}
+
+.metadata-mapping-widget .ui.table .metadata-mapping-marked {
+  position: relative;
+}
+
+.metadata-mapping-widget .metadata-mapping-mark {
+  position: absolute;
+  top: 50%;
+  right: 1.2em;
+  padding: 0.1em 0.5em;
+  border-radius: 3px;
+  font-size: 0.75em;
+  font-weight: normal;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+/* the word sits on the input's end: the value stops before it */
+.metadata-mapping-widget .ui.table .metadata-mapping-marked .ui.input input {
+  padding-right: 6.5em;
+}
+
+.metadata-mapping-widget .metadata-mapping-mark.mark-added {
+  background: #e6f4ea;
+  color: #1a5d2e;
+}
+
+.metadata-mapping-widget .metadata-mapping-mark.mark-changed {
+  background: #fff1d6;
+  color: #7a4b00;
+}
+
+.metadata-mapping-widget .metadata-mapping-import-marks.ui.message {
+  margin: 0.5em 0;
+}
+
 /* "no values yet" or "none found" */
 .metadata-mapping-widget .ui.table td.metadata-mapping-empty {
   padding: 1.25em 0.6em;

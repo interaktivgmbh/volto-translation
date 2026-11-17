@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useIntl } from 'react-intl';
+import { useSelector } from 'react-redux';
 import { Button, Confirm, Message } from 'semantic-ui-react';
 import FormFieldWrapper from '@plone/volto/components/manage/Widgets/FormFieldWrapper';
 import { languageName } from '../../../helpers/languages';
@@ -15,6 +16,8 @@ import {
   mappableFields,
   normalisedMapping,
   pageSlice,
+  removedCount,
+  rowChanges,
   unknownFields,
   withoutLanguage,
 } from '../../../helpers/metadataMapping';
@@ -85,6 +88,18 @@ const MetadataMappingWidget = (props: MetadataMappingWidgetProps) => {
   const [selected, setSelected] = useState<string | undefined>(fieldIds[0]);
   const [pending, setPending] = useState<Pending>(null);
   const [importing, setImporting] = useState(false);
+  // the rows each imported field had before, to mark what the import changed
+  // until the settings are saved
+  const [beforeImport, setBeforeImport] = useState<MetadataMapping>({});
+  const saving = useSelector(
+    (state: { controlpanels?: { update?: { loading?: boolean } } }) =>
+      !!state.controlpanels?.update?.loading,
+  );
+  const saved = useSelector(
+    (state: { controlpanels?: { update?: { loaded?: boolean } } }) =>
+      !!state.controlpanels?.update?.loaded,
+  );
+  const wasSaving = useRef(false);
   const [exporting, setExporting] = useState(false);
   const [search, setSearch] = useState('');
   const [incompleteOnly, setIncompleteOnly] = useState(false);
@@ -110,6 +125,14 @@ const MetadataMappingWidget = (props: MetadataMappingWidgetProps) => {
       mounted = false;
     };
   }, []);
+
+  // saved: what was imported is the mapping now
+  useEffect(() => {
+    if (wasSaving.current && !saving && saved) {
+      setBeforeImport({});
+    }
+    wasSaving.current = saving;
+  }, [saving, saved]);
 
   // the browser's storage is unknown on the server: read it once mounted
   useEffect(() => setPageSize(storedPageSize()), []);
@@ -157,6 +180,8 @@ const MetadataMappingWidget = (props: MetadataMappingWidgetProps) => {
         (matchesSearch(row, search) &&
           (!incompleteOnly || isIncomplete(row, targetCodes))),
     );
+  const before = current ? beforeImport[current] : undefined;
+  const marks = before ? rowChanges(before, rows, sourceLanguage) : [];
   const incompleteCount = rows.filter((row) =>
     isIncomplete(row, targetCodes),
   ).length;
@@ -243,6 +268,13 @@ const MetadataMappingWidget = (props: MetadataMappingWidgetProps) => {
 
   // fields of the file replace theirs completely; the others stay
   const importFields = (fields: MetadataMapping) => {
+    // a field imported twice is still told against the rows before the first
+    setBeforeImport({
+      ...Object.fromEntries(
+        Object.keys(fields).map((fieldId) => [fieldId, mapping[fieldId] || []]),
+      ),
+      ...beforeImport,
+    });
     change({ ...mapping, ...fields });
     setSelected(Object.keys(fields)[0]);
     resetView();
@@ -333,10 +365,25 @@ const MetadataMappingWidget = (props: MetadataMappingWidgetProps) => {
               sourceLanguageName={name(sourceLanguage || '')}
               onAdd={addValue}
             />
+            {/* read out after an import */}
+            <div aria-live="polite">
+              {before && (
+                <Message info className="metadata-mapping-import-marks">
+                  {intl.formatMessage(messages.importMarks, {
+                    added: marks.filter((mark) => mark?.mark === 'added')
+                      .length,
+                    changed: marks.filter((mark) => mark?.mark === 'changed')
+                      .length,
+                    removed: removedCount(before, rows, sourceLanguage),
+                  })}
+                </Message>
+              )}
+            </div>
             <MappingTable
               entries={entries.slice(slice.start, slice.end)}
               columns={columns}
               duplicates={duplicates}
+              marks={marks}
               emptyText={intl.formatMessage(
                 rows.length ? messages.noMatches : messages.noValues,
               )}

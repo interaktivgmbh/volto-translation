@@ -110,6 +110,97 @@ export function duplicateValues(
   return duplicates;
 }
 
+// A row as one text, whatever the order and the case of its language keys.
+export function rowText(row: MetadataMappingRow): string {
+  return JSON.stringify(
+    Object.entries(row)
+      .filter(([, value]) => value)
+      .map(([language, value]) => [language.toLowerCase(), value])
+      .sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0)),
+  );
+}
+
+// What tells a row from the others: its value in the source language, or all
+// it holds where it has none.
+export function rowKey(
+  row: MetadataMappingRow,
+  sourceLanguage: string | undefined,
+): string {
+  const value = sourceLanguage ? cellValue(row, sourceLanguage).trim() : '';
+
+  return value ? `value ${value}` : `row ${rowText(row)}`;
+}
+
+// The rows by what tells them. A value named twice has two rows: the first
+// of now stands to the first of before, the second to the second.
+function rowsByKey(
+  rows: MetadataMappingRow[],
+  sourceLanguage: string | undefined,
+): Map<string, MetadataMappingRow[]> {
+  const byKey = new Map<string, MetadataMappingRow[]>();
+  rows.forEach((row) => {
+    const key = rowKey(row, sourceLanguage);
+    byKey.set(key, [...(byKey.get(key) || []), row]);
+  });
+
+  return byKey;
+}
+
+export type RowMark = 'added' | 'changed';
+
+export interface RowChange {
+  mark: RowMark;
+  // the languages whose value changed, in lower case; none for a new row
+  languages: string[];
+}
+
+// How each row stands to the rows the field had before: new, changed in some
+// of its languages, or as it was (undefined).
+export function rowChanges(
+  before: MetadataMappingRow[],
+  rows: MetadataMappingRow[],
+  sourceLanguage: string | undefined,
+): (RowChange | undefined)[] {
+  const known = rowsByKey(before, sourceLanguage);
+  const met = new Map<string, number>();
+
+  return rows.map((row) => {
+    const key = rowKey(row, sourceLanguage);
+    const position = met.get(key) || 0;
+    met.set(key, position + 1);
+    const old = known.get(key)?.[position];
+    if (!old) {
+      return { mark: 'added', languages: [] };
+    }
+    const languages = Array.from(
+      new Set(
+        [...Object.keys(old), ...Object.keys(row)].map((language) =>
+          language.toLowerCase(),
+        ),
+      ),
+    ).filter(
+      (language) => cellValue(old, language) !== cellValue(row, language),
+    );
+
+    return languages.length ? { mark: 'changed', languages } : undefined;
+  });
+}
+
+// The rows the field had before that it has no longer.
+export function removedCount(
+  before: MetadataMappingRow[],
+  rows: MetadataMappingRow[],
+  sourceLanguage: string | undefined,
+): number {
+  const kept = rowsByKey(rows, sourceLanguage);
+  let removed = 0;
+  rowsByKey(before, sourceLanguage).forEach((old, key) => {
+    removed += Math.max(0, old.length - (kept.get(key) || []).length);
+  });
+
+  return removed;
+}
+
 // A choice field arrives as [{token, title}] from the backend and may hold
 // plain codes once the editor changed it.
 export function languageCodes(value: unknown): string[] {
