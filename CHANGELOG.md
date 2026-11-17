@@ -74,6 +74,12 @@
   `{type: {field: "translate" | "copy"}}`. Needs `modes` from
   `GET @translation-fields` and the backend's upgrade step 1001 → 1002: a
   selection still saved as a list of fields is not shown.
+- The Excel import of the metadata mapping tells what it changes before it
+  is taken over: per sheet how many values are new, changed, dropped and
+  unchanged in the chosen field, a row told by its value in the source
+  language. A sheet without a row to import stays in the list with what is
+  wrong with it, instead of being left out unseen; the import says why it is
+  not offered yet, and a file that is no .xlsx gets a message of its own.
 
 ## 1.0.0-alpha.1 (2026-10-15)
 

@@ -367,6 +367,7 @@ const MetadataMappingWidget = (props: MetadataMappingWidgetProps) => {
           fields={importableFields(types, fieldIds)}
           currentField={current}
           siteLanguages={siteLanguages}
+          sourceLanguage={sourceLanguage}
           onImport={importFields}
           onClose={() => setImporting(false)}
         />

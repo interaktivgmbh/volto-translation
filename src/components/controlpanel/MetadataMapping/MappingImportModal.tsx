@@ -11,6 +11,8 @@ import {
 import { readWorkbook } from '../../../helpers/excelFile';
 import type { FieldChoice } from '../../../helpers/metadataMapping';
 import {
+  isEmptySheet,
+  sheetChanges,
   sheetTargets,
   sheetToRows,
 } from '../../../helpers/metadataMappingExcel';
@@ -30,6 +32,8 @@ interface MappingImportModalProps {
   fields: FieldChoice[];
   currentField?: string;
   siteLanguages: string[];
+  // the language a row is told by, to say what the import changes
+  sourceLanguage?: string;
   onImport: (fields: MetadataMapping) => void;
   onClose: () => void;
 }
@@ -63,6 +67,7 @@ const MappingImportModal = (props: MappingImportModalProps) => {
     fields,
     currentField,
     siteLanguages,
+    sourceLanguage,
     onImport,
     onClose,
   } = props;
@@ -71,7 +76,8 @@ const MappingImportModal = (props: MappingImportModalProps) => {
   const [fileName, setFileName] = useState('');
   const [reading, setReading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  // only the sheets that hold values
+  // the sheets that hold anything; one without a row to import is shown with
+  // what is wrong with it
   const [sheets, setSheets] = useState<ImportedSheet[]>([]);
   // the field of each sheet, by the sheet's name
   const [targets, setTargets] = useState<Record<string, string>>({});
@@ -94,18 +100,25 @@ const MappingImportModal = (props: MappingImportModalProps) => {
     setError(null);
     setSheets([]);
     setTargets({});
+    // the file dialog offers .xlsx only, but takes any file
+    if (!/\.xlsx$/i.test(file.name)) {
+      setError(intl.formatMessage(messages.importNotXlsx));
+      return;
+    }
     setReading(true);
     try {
-      const withValues = (await readWorkbook(file))
-        .map((sheet) => sheetToRows(sheet, siteLanguages, intl.locale))
-        .filter((sheet) => sheet.rows.length);
-      if (!withValues.length) {
+      const filled = (await readWorkbook(file))
+        .filter((sheet) => !isEmptySheet(sheet))
+        .map((sheet) => sheetToRows(sheet, siteLanguages, intl.locale));
+      if (!filled.length) {
         setError(intl.formatMessage(messages.importNoSheets));
       }
-      setSheets(withValues);
+      setSheets(filled);
       setTargets(
         sheetTargets(
-          withValues.map((sheet) => sheet.name),
+          filled
+            .filter((sheet) => sheet.rows.length)
+            .map((sheet) => sheet.name),
           fields,
           currentField,
         ),
@@ -121,12 +134,22 @@ const MappingImportModal = (props: MappingImportModalProps) => {
     }
   };
 
-  const chosen = sheets.filter((sheet) => targets[sheet.name]);
+  const importable = sheets.filter((sheet) => sheet.rows.length);
+  const chosen = importable.filter((sheet) => targets[sheet.name]);
   // a field takes the values of one sheet only
   const shared = (fieldId: string) =>
     chosen.filter((sheet) => targets[sheet.name] === fieldId).length > 1;
   const canImport =
     chosen.length > 0 && !chosen.some((sheet) => shared(targets[sheet.name]));
+
+  // why there is nothing to import yet; a field chosen twice says so in its row
+  const hint = !sheets.length
+    ? null
+    : !importable.length
+      ? intl.formatMessage(messages.importNothing)
+      : !chosen.length
+        ? intl.formatMessage(messages.importChooseField)
+        : null;
 
   const apply = () => {
     if (canImport) {
@@ -252,37 +275,45 @@ const MappingImportModal = (props: MappingImportModalProps) => {
                         </Table.Cell>
                         <Table.Cell>{sheet.rows.length}</Table.Cell>
                         <Table.Cell>
-                          <Dropdown
-                            search
-                            selection
-                            value={target || NO_FIELD}
-                            options={options}
-                            aria-label={intl.formatMessage(
-                              messages.importFieldFor,
-                              { sheet: sheet.name },
-                            )}
-                            error={sameField}
-                            aria-invalid={sameField || undefined}
-                            aria-describedby={sameField ? errorId : undefined}
-                            onChange={(
-                              _event: React.SyntheticEvent,
-                              data: InputData,
-                            ) =>
-                              setTargets({
-                                ...targets,
-                                [sheet.name]:
-                                  data.value === NO_FIELD
-                                    ? ''
-                                    : String(data.value || ''),
-                              })
-                            }
-                          />
+                          {sheet.rows.length > 0 && (
+                            <Dropdown
+                              search
+                              selection
+                              value={target || NO_FIELD}
+                              options={options}
+                              aria-label={intl.formatMessage(
+                                messages.importFieldFor,
+                                { sheet: sheet.name },
+                              )}
+                              error={sameField}
+                              aria-invalid={sameField || undefined}
+                              aria-describedby={sameField ? errorId : undefined}
+                              onChange={(
+                                _event: React.SyntheticEvent,
+                                data: InputData,
+                              ) =>
+                                setTargets({
+                                  ...targets,
+                                  [sheet.name]:
+                                    data.value === NO_FIELD
+                                      ? ''
+                                      : String(data.value || ''),
+                                })
+                              }
+                            />
+                          )}
                           {target && !sameField && (
                             <div className="metadata-mapping-import-effect">
                               {existing
-                                ? intl.formatMessage(messages.importReplaces, {
-                                    count: existing.length,
-                                  })
+                                ? intl.formatMessage(
+                                    messages.importChanges,
+                                    // added, changed, removed, unchanged
+                                    sheetChanges(
+                                      existing,
+                                      sheet.rows,
+                                      sourceLanguage,
+                                    ),
+                                  )
                                 : intl.formatMessage(messages.importNewField)}
                             </div>
                           )}
@@ -305,6 +336,11 @@ const MappingImportModal = (props: MappingImportModalProps) => {
               </Table>
             </>
           )}
+        </div>
+
+        {/* read out with the sheets: why the import is not offered yet */}
+        <div aria-live="polite">
+          {hint && <Message warning>{hint}</Message>}
         </div>
 
         {canImport && (
