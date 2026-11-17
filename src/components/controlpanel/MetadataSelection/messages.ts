@@ -43,6 +43,14 @@ const messages = defineMessages({
     id: 'volto-translation-selection-mode-mapping',
     defaultMessage: 'Via mapping',
   },
+  modeChoice: {
+    id: 'volto-translation-selection-mode-choice',
+    defaultMessage: 'Treatment of {field}',
+  },
+  reasonChosen: {
+    id: 'volto-translation-selection-reason-chosen',
+    defaultMessage: 'Chosen for this content type.',
+  },
   modeImpossible: {
     id: 'volto-translation-selection-mode-impossible',
     defaultMessage: 'Not possible',

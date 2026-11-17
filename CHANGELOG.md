@@ -70,6 +70,14 @@
   sheet is named like one field, as the export names it. The field is chosen
   from the mapped fields and those that may be added; a sheet without a
   field is left out. The text input for the field is gone.
+- The fields per content type choose in one place whether and how a field
+  goes along: a choice in place of the checkbox, "Not selected", "Translate"
+  or "Take over" for a text, "Not selected" or "Take over" for any other
+  field. What always goes along, what the mapping translates and what cannot
+  go along has no choice. The setting is saved as
+  `{type: {field: "translate" | "copy"}}`. Needs `modes` from
+  `GET @translation-fields` and the backend's upgrade step 1001 → 1002: a
+  selection still saved as a list of fields is not shown.
 
 ## 1.0.0-alpha.1 (2026-10-15)
 

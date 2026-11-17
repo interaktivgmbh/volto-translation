@@ -113,6 +113,8 @@ export type MetadataMapping = Record<string, MetadataMappingRow[]>;
 // translation treats them, as the backend suggests it.
 export type FieldRole = 'always' | 'default' | 'impossible';
 export type FieldMode = 'translate' | 'copy' | 'mapping';
+// how a site may choose a field to go along
+export type ChosenMode = 'translate' | 'copy';
 export type FieldReason =
   | 'always'
   | 'primary'
@@ -128,7 +130,10 @@ export interface TranslationField {
   fieldset: string;
   kind: string;
   role: FieldRole;
+  // how the field goes along by its kind: what the choice suggests
   mode: FieldMode | null;
+  // the modes a site may choose for the field; none where it has no choice
+  modes?: ChosenMode[];
   reason: FieldReason;
   // the saved mapping has values for it; the control panel uses its own
   mapped: boolean;
@@ -136,9 +141,11 @@ export interface TranslationField {
   mappable?: boolean;
 }
 
-// The control panel's choice: per content type the fields that go along. A
-// type without an entry takes only what always goes along and what is mapped.
-export type MetadataSelection = Record<string, string[]>;
+// The control panel's choice: per content type the fields that go along, each
+// translated or taken over. A type without an entry takes only what always
+// goes along and what is mapped.
+export type ChosenFields = Record<string, ChosenMode>;
+export type MetadataSelection = Record<string, ChosenFields>;
 
 export interface TranslationFieldsType {
   id: string;

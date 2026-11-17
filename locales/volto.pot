@@ -821,6 +821,16 @@ msgstr ""
 msgid "volto-translation-selection-mode-mapping"
 msgstr ""
 
+#. Default: "Treatment of {field}"
+#: components/controlpanel/MetadataSelection/messages
+msgid "volto-translation-selection-mode-choice"
+msgstr ""
+
+#. Default: "Chosen for this content type."
+#: components/controlpanel/MetadataSelection/messages
+msgid "volto-translation-selection-reason-chosen"
+msgstr ""
+
 #. Default: "Not possible"
 #: components/controlpanel/MetadataSelection/messages
 msgid "volto-translation-selection-mode-impossible"

@@ -349,9 +349,86 @@
   font-size: 0.85em;
 }
 
+/* the fixed layout takes the width from the header cell, whose font is
+   smaller: 17em there hold the choice and the padding of a body cell */
 .metadata-selection-widget .ui.table .metadata-selection-mode {
-  width: 14em;
+  width: 17em;
   text-align: right;
+}
+
+/* every row as high as one with a choice */
+.metadata-selection-widget .ui.table.metadata-selection-table td {
+  height: 3.2em;
+  padding-top: 0.3em;
+  padding-bottom: 0.3em;
+}
+
+/* a mark in front of the fields that go along */
+.metadata-selection-widget .metadata-selection-check {
+  flex: 0 0 1.2em;
+  color: #006a96;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* whether and how a field goes along: the choice in place of the treatment,
+   as wide for every field and with an arrow of its own */
+.metadata-selection-widget
+  .metadata-selection-table
+  select.metadata-selection-choice {
+  width: 12.5em;
+  height: 2.3em;
+  padding: 0 2em 0 0.7em;
+  border: 1px solid #c7d5d8;
+  border-radius: 3px;
+  appearance: none;
+  background: #fff
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23646c70' stroke-width='1.5'/%3E%3C/svg%3E")
+    no-repeat right 0.7em center;
+  color: #333;
+  cursor: pointer;
+  font: inherit;
+  line-height: 1.2;
+}
+
+.metadata-selection-widget
+  .metadata-selection-table
+  select.metadata-selection-choice:hover {
+  border-color: #007eb1;
+}
+
+.metadata-selection-widget
+  .metadata-selection-table
+  select.metadata-selection-choice.mode-translate {
+  color: #006a96;
+}
+
+.metadata-selection-widget
+  .metadata-selection-table
+  select.metadata-selection-choice:focus-visible {
+  outline: 2px solid #006a96;
+  outline-offset: 2px;
+}
+
+.metadata-selection-widget
+  .metadata-selection-table
+  select.metadata-selection-choice.mode-skipped {
+  color: #646c70;
+  font-style: italic;
+}
+
+/* the options are no state of the row */
+.metadata-selection-widget
+  .metadata-selection-table
+  select.metadata-selection-choice
+  option {
+  color: #333;
+  font-style: normal;
+}
+
+/* a field left out: its name grey, to tell at a glance what goes along */
+.metadata-selection-widget tr.status-skipped .metadata-selection-field {
+  color: #646c70;
 }
 
 .metadata-selection-widget .metadata-selection-status.mode-translate {
