@@ -80,6 +80,11 @@
   language. A sheet without a row to import stays in the list with what is
   wrong with it, instead of being left out unseen; the import says why it is
   not offered yet, and a file that is no .xlsx gets a message of its own.
+- After an Excel import the metadata mapping marks what it changed: new and
+  changed values carry a bar and the word in their row, and a line above
+  the table counts them and the dropped ones. The marks tell the table
+  against the values before the import, so a value edited afterwards is
+  marked as well; they go once the settings are saved.
 
 ## 1.0.0-alpha.1 (2026-10-15)
 

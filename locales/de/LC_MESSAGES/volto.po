@@ -571,6 +571,21 @@ msgstr "In Feld"
 msgid "volto-translation-mapping-import-changes"
 msgstr "{added} neu, {changed} geändert, {removed} entfallen, {unchanged} unverändert"
 
+#. Default: "Since the import: {added} new, {changed} changed, {removed} dropped. New and changed values are marked until the settings are saved."
+#: components/controlpanel/MetadataMapping/messages
+msgid "volto-translation-mapping-import-marks"
+msgstr "Seit dem Import: {added} neu, {changed} geändert, {removed} entfallen. Neue und geänderte Werte sind markiert, bis die Einstellungen gespeichert sind."
+
+#. Default: "New"
+#: components/controlpanel/MetadataMapping/messages
+msgid "volto-translation-mapping-mark-added"
+msgstr "Neu"
+
+#. Default: "Changed"
+#: components/controlpanel/MetadataMapping/messages
+msgid "volto-translation-mapping-mark-changed"
+msgstr "Geändert"
+
 #. Default: "This is no .xlsx file. Save the table as an Excel workbook (.xlsx) and choose that file."
 #: components/controlpanel/MetadataMapping/messages
 msgid "volto-translation-mapping-import-not-xlsx"

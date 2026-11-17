@@ -273,6 +273,19 @@ const messages = defineMessages({
     defaultMessage:
       '{added} new, {changed} changed, {removed} dropped, {unchanged} unchanged',
   },
+  importMarks: {
+    id: 'volto-translation-mapping-import-marks',
+    defaultMessage:
+      'Since the import: {added} new, {changed} changed, {removed} dropped. New and changed values are marked until the settings are saved.',
+  },
+  markAdded: {
+    id: 'volto-translation-mapping-mark-added',
+    defaultMessage: 'New',
+  },
+  markChanged: {
+    id: 'volto-translation-mapping-mark-changed',
+    defaultMessage: 'Changed',
+  },
   importNotXlsx: {
     id: 'volto-translation-mapping-import-not-xlsx',
     defaultMessage:
