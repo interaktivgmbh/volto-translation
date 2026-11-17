@@ -188,6 +188,71 @@ export function sheetTargets(
   return targets;
 }
 
+// A sheet without a single value: Excel's spare sheets, left out unseen.
+export function isEmptySheet(sheet: Sheet): boolean {
+  return !sheet.rows.some((cells) => cells.some((cell) => cellText(cell)));
+}
+
+export interface SheetChanges {
+  added: number;
+  changed: number;
+  removed: number;
+  unchanged: number;
+}
+
+// A row as one text, whatever the order and the case of its language keys.
+function rowText(row: MetadataMappingRow): string {
+  return JSON.stringify(
+    Object.entries(row)
+      .filter(([, value]) => value)
+      .map(([language, value]) => [language.toLowerCase(), value])
+      .sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0)),
+  );
+}
+
+// What an import does to a field. A row is told by its value in the source
+// language, a row without one by all it holds: new, changed, unchanged, or,
+// where the file no longer has it, removed. A value named twice counts once,
+// its last row, as the translation takes it.
+export function sheetChanges(
+  existing: MetadataMappingRow[],
+  imported: MetadataMappingRow[],
+  sourceLanguage: string | undefined,
+): SheetChanges {
+  const byKey = (rows: MetadataMappingRow[]) => {
+    const texts = new Map<string, string>();
+    rows.forEach((row) => {
+      const text = rowText(row);
+      const language = Object.keys(row).find(
+        (key) => key.toLowerCase() === sourceLanguage?.toLowerCase(),
+      );
+      const value = language ? row[language].trim() : '';
+      texts.set(value ? `value ${value}` : `row ${text}`, text);
+    });
+
+    return texts;
+  };
+  const before = byKey(existing);
+  const after = byKey(imported);
+  const changes = { added: 0, changed: 0, removed: 0, unchanged: 0 };
+  after.forEach((text, key) => {
+    if (!before.has(key)) {
+      changes.added += 1;
+    } else if (before.get(key) === text) {
+      changes.unchanged += 1;
+    } else {
+      changes.changed += 1;
+    }
+  });
+  before.forEach((_text, key) => {
+    if (!after.has(key)) {
+      changes.removed += 1;
+    }
+  });
+
+  return changes;
+}
+
 export function isSheetName(name: string): boolean {
   return SHEET_NAME_RE.test(name);
 }

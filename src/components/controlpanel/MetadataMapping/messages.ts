@@ -268,9 +268,24 @@ const messages = defineMessages({
     id: 'volto-translation-mapping-import-field',
     defaultMessage: 'Into field',
   },
-  importReplaces: {
-    id: 'volto-translation-mapping-import-replaces',
-    defaultMessage: 'Replaces {count, plural, one {# value} other {# values}}',
+  importChanges: {
+    id: 'volto-translation-mapping-import-changes',
+    defaultMessage:
+      '{added} new, {changed} changed, {removed} dropped, {unchanged} unchanged',
+  },
+  importNotXlsx: {
+    id: 'volto-translation-mapping-import-not-xlsx',
+    defaultMessage:
+      'This is no .xlsx file. Save the table as an Excel workbook (.xlsx) and choose that file.',
+  },
+  importNothing: {
+    id: 'volto-translation-mapping-import-nothing',
+    defaultMessage:
+      'No sheet of the file can be imported: none has a value below a column that names a language.',
+  },
+  importChooseField: {
+    id: 'volto-translation-mapping-import-choose-field',
+    defaultMessage: 'Choose a field for at least one sheet to import it.',
   },
   importValues: {
     id: 'volto-translation-mapping-import-values',

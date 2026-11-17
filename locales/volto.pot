@@ -566,9 +566,24 @@ msgstr ""
 msgid "volto-translation-mapping-import-field"
 msgstr ""
 
-#. Default: "Replaces {count, plural, one {# value} other {# values}}"
+#. Default: "{added} new, {changed} changed, {removed} dropped, {unchanged} unchanged"
 #: components/controlpanel/MetadataMapping/messages
-msgid "volto-translation-mapping-import-replaces"
+msgid "volto-translation-mapping-import-changes"
+msgstr ""
+
+#. Default: "This is no .xlsx file. Save the table as an Excel workbook (.xlsx) and choose that file."
+#: components/controlpanel/MetadataMapping/messages
+msgid "volto-translation-mapping-import-not-xlsx"
+msgstr ""
+
+#. Default: "No sheet of the file can be imported: none has a value below a column that names a language."
+#: components/controlpanel/MetadataMapping/messages
+msgid "volto-translation-mapping-import-nothing"
+msgstr ""
+
+#. Default: "Choose a field for at least one sheet to import it."
+#: components/controlpanel/MetadataMapping/messages
+msgid "volto-translation-mapping-import-choose-field"
 msgstr ""
 
 #. Default: "New field"
