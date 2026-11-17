@@ -8,9 +8,14 @@ import {
   normalisedSelection,
   withAll,
   withChoice,
+  withMode,
 } from '../../../helpers/metadataSelection';
 import { fetchTranslationFields } from '../../../helpers/translateApi';
-import type { MetadataSelection, TranslationFieldsType } from '../../../types';
+import type {
+  ChosenMode,
+  MetadataSelection,
+  TranslationFieldsType,
+} from '../../../types';
 import { onEnter } from '../MetadataMapping/utils';
 import type { InputData } from '../MetadataMapping/utils';
 import SelectionTable from './SelectionTable';
@@ -89,6 +94,12 @@ const MetadataSelectionWidget = (props: MetadataSelectionWidgetProps) => {
         fieldId,
         checked,
       ),
+    );
+  const choose = (fieldId: string, mode: ChosenMode) =>
+    shown &&
+    onChange(
+      id,
+      withMode(selection, shown.id, shown.fields, mappedCounts, fieldId, mode),
     );
   const all = (checked: boolean) =>
     shown &&
@@ -198,6 +209,7 @@ const MetadataSelectionWidget = (props: MetadataSelectionWidgetProps) => {
             mappedCounts={mappedCounts}
             chosen={chosen}
             onToggle={toggle}
+            onMode={choose}
             caption={intl.formatMessage(messages.tableCaption, {
               type: shown.title,
             })}
