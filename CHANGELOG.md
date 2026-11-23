@@ -89,6 +89,10 @@
   the table counts them and the dropped ones. The marks tell the table
   against the values before the import, so a value edited afterwards is
   marked as well; they go once the settings are saved.
+- Fix: a project that lists "Translate to …" under "Manage content…" in the
+  more menu keeps its other entries there, the working copy actions among
+  them. The whole list went with those links; now only the links go, and
+  the list with its heading where it holds nothing else.
 
 ## 1.0.0-alpha.1 (2026-10-15)
 

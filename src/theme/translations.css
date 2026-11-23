@@ -1,28 +1,34 @@
 .pastanaga-menu:not(.translations-menu)
   .pastanaga-menu-list
-  li:has(> a[href$='/manage-translations']) {
-  display: none;
-}
-
-.pastanaga-menu:not(.translations-menu)
-  .pastanaga-menu-list:has(li:only-child > a[href$='/manage-translations']) {
-  display: none;
-}
-
-.pastanaga-menu:not(.translations-menu)
-  header:has(
-    + .pastanaga-menu-list li:only-child > a[href$='/manage-translations']
+  li:has(
+    > a:is([href$='/manage-translations'], [href$='/create-translation'])
   ) {
   display: none;
 }
 
 .pastanaga-menu:not(.translations-menu)
-  .pastanaga-menu-list:has(a[href$='/create-translation']) {
+  .pastanaga-menu-list:has(
+    li > a:is([href$='/manage-translations'], [href$='/create-translation'])
+  ):not(
+    :has(
+        li > :not([href$='/manage-translations'], [href$='/create-translation'])
+      )
+  ) {
   display: none;
 }
 
 .pastanaga-menu:not(.translations-menu)
-  header:has(+ .pastanaga-menu-list a[href$='/create-translation']) {
+  header:has(
+    + .pastanaga-menu-list
+      li
+      > a:is([href$='/manage-translations'], [href$='/create-translation'])
+  ):not(
+    :has(
+        + .pastanaga-menu-list
+          li
+          > :not([href$='/manage-translations'], [href$='/create-translation'])
+      )
+  ) {
   display: none;
 }
 
