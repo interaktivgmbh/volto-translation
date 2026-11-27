@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { defineMessages, useIntl } from 'react-intl';
 import Icon from '@plone/volto/components/theme/Icon/Icon';
 import rightArrowSVG from '@plone/volto/icons/right-key.svg';
-import { getBaseUrl, flattenToAppURL } from '@plone/volto/helpers/Url/Url';
+import { getBaseUrl } from '@plone/volto/helpers/Url/Url';
 import config from '@plone/volto/registry';
 import { fetchTranslationInfoFor } from '../helpers/translateApi';
 import { languageName } from '../helpers/languages';
@@ -28,10 +28,6 @@ const messages = defineMessages({
     id: 'volto-translation-working-copy-notice',
     defaultMessage:
       'This is a working copy — translations are managed on the original.',
-  },
-  goToOriginal: {
-    id: 'volto-translation-go-to-original',
-    defaultMessage: 'Go to the original',
   },
   notTranslatable: {
     id: 'volto-translation-not-translatable',
@@ -99,11 +95,8 @@ const TranslationsMenu = (props: TranslationsMenuProps) => {
   });
 
   // the working copy actions are Volto's own, under "Manage content…" in the
-  // more menu; here only the way back to the original
-  const baselineUrl = content?.working_copy_of?.['@id'];
-
+  // more menu, and its toast leads back to the original
   const isWorkingCopy = Boolean(info?.is_working_copy);
-  const originalUrl = info?.baseline_url || baselineUrl;
 
   return (
     <div
@@ -122,14 +115,6 @@ const TranslationsMenu = (props: TranslationsMenuProps) => {
           {isWorkingCopy && (
             <li className="translations-menu-notice">
               <span>{intl.formatMessage(messages.workingCopyNotice)}</span>
-            </li>
-          )}
-          {isWorkingCopy && originalUrl && (
-            <li>
-              <Link to={flattenToAppURL(originalUrl)} onClick={close}>
-                {intl.formatMessage(messages.goToOriginal)}
-                <Icon name={rightArrowSVG} size="24px" />
-              </Link>
             </li>
           )}
 

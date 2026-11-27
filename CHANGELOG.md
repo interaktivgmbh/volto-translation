@@ -93,6 +93,8 @@
   more menu keeps its other entries there, the working copy actions among
   them. The whole list went with those links; now only the links go, and
   the list with its heading where it holds nothing else.
+- The Translations menu of a working copy no longer links to the original;
+  the hint stays. Volto's toast on a working copy already leads there.
 
 ## 1.0.0-alpha.1 (2026-10-15)
 
